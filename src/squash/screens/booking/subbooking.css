@@ -1,0 +1,205 @@
+.booking-area {
+  font-family: 'Poppins';
+    position: center;
+      margin-left: 5vw;
+      padding-top: 4vh;
+      margin-right: 5vw;
+      margin-top: 4vh;
+      overflow: hidden;
+      overflow-y: scroll;
+  
+      background: rgba(255, 255, 255, 0.33);
+      border-radius: 2vw;
+  }
+
+  .play-area{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .drop{
+    display: flex;
+    gap: 5vw;
+  }
+  
+  /* .labeels {
+    font-size: 25px;
+    font-weight: bold;
+    margin-left: 7vw;
+    color: #000000;
+  }
+  .labeels2 {
+    font-size: 25px;
+    font-weight: bold;
+    margin-left: 7vw;
+    color: #000000;
+  } */
+
+.labeeels {
+  font-size: 2.5vh;
+  font-weight: bold;
+  margin-left: 7vw;
+  color: #000000;
+}
+
+  
+
+  /* .check {
+    display: flex;
+    justify-content: space-evenly;
+  } */
+  
+  /* .labels {
+    font-size: 25vh;
+  font-weight: bold;
+  margin-left: 7vw;
+  color: #000000;
+  } */
+  
+
+  .search {
+    margin-left: 6vw;
+  }
+
+  .show_cont {
+    margin-left: 2vw;
+  }
+  
+  .inputContainer {
+    margin-left: -5vw;
+    display: flex;
+    align-items: center;
+    width:5vw;
+    height: fit-content;
+  }
+  
+  .searchInput {
+    width: 15vw;
+    height: 0.5vw;
+    padding: 0.8vw;
+    border-radius: 2.5vw;
+    font-size: 1.6vw;
+    background-color: #c4c4c4;
+    border: 1px solid #ccc;
+    margin-left: 20vw;
+  }
+  
+  .searchIcon {
+    margin-left: -2vw;
+    cursor: pointer;
+  }
+  
+  .buttonContainer {
+    display: flex;
+    gap: 2vw;
+    justify-content: center;
+    margin-bottom: 1vw;
+    margin-top: 5vw;
+    margin-left: 2vw;
+  }
+  
+  .orangeButtonnn {
+    background-color: orange;
+    cursor: pointer;
+    width: 10vw;
+    height: 3.3vw;
+    border-radius: 2.5vw;
+    color: white;
+    border: none;
+    font-size: 2vh;
+    font-weight: bold;
+  }
+  
+  .orangeButton:hover {
+    background-color: darkorange;
+  }
+  
+  .greenButtonnn {
+    width: 10vw;
+    height: 3.3vw;
+    border-radius: 2.5vw;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 2vh;
+    font-weight: bold;
+  }
+  
+  .greenButtonn:hover {
+    background-color: #45a049;
+  }
+  
+  .userSelector {
+    margin-bottom: 10px;
+  }
+  
+  .redButton {
+    width: 150px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    margin-left: 10px;
+    align-items: center;
+  }
+  
+  .redButton:hover {
+    background-color: #cc0000;
+  }
+  
+  .dropdownMenu1 {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 5px 0;
+    z-index: 999;
+    top: 27vw; /* Position the dropdown just below the lookup field */
+    left: 28vw; /* Align with the left side of the lookup field */
+    width: 12vw; /* Adjust the width of the dropdown menu if needed */
+  }
+
+  .dropdownMenu2 {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 5px 0;
+    z-index: 999;
+    top: 27vw; /* Position the dropdown just below the lookup field */
+    left: 28vw; /* Align with the left side of the lookup field */
+    width: 12vw; /* Adjust the width of the dropdown menu if needed */
+  }
+  
+  .dropdownMenu div {
+    padding: 8px 15px;
+    cursor: pointer;
+  }
+
+  .drop-down {
+    margin-bottom: 5px;
+    margin-left: 20px;
+  }
+  
+  .dropdownMenu div:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .printer{
+    width: 150px;
+  }
+  
+  .drop {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+  }
+  

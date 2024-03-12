@@ -1,0 +1,95 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 5%;
+}
+
+.center-text > h1 {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  color: #000000;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 1rem;
+}
+
+.center-text > h2 {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  color: #000000;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 2vw;
+}
+
+.profile-image img {
+  margin-top: 1vw;
+  border-radius: 50%;
+  width: 10vw;
+  height: 10vw;
+  overflow: hidden;
+}
+
+
+
+.cross{
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom:1vw;
+}
+.nav-menu.active{
+ left:0;
+ transition:350ms;
+
+
+}
+
+.nav-menu{
+  font-family:"Poppins";
+  font-size:25px;
+  font-weight:bold;
+  height: 100vh;
+  width: 25% ;
+  position:fixed;
+  top: 0;
+  left: -100%;
+  transition: 850ms;
+  min-width: 25vw;
+  background-color: rgb(43, 38, 38);
+  padding-left: 1px;
+  z-index:30;
+}
+.mainlist{
+  padding-left:20px;
+  padding-top:15px;
+}
+.section{
+  color:#9f9595;
+  list-style-type: none;
+}
+
+.SidebarList{
+  height: auto;
+  padding-left: 1vw;
+  color:white;
+  list-style-type: none;
+}
+.row:hover{
+  cursor:pointer;
+  background-color:  rgb(22, 17, 17);
+}
+
+.row{
+  border-radius: 10px;
+}

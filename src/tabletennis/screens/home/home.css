@@ -1,0 +1,101 @@
+.logo img {
+  width: 13vw;
+  height: 13vw;
+  position: absolute;
+  margin-top: 16.9vw;
+  margin-left: 34.45vw;
+  border-radius: 19.5vw;
+  box-shadow: rgba(0, 0, 0, 0.25);
+}
+
+.booknow-line1 {
+  color: rgb(255, 255, 255);
+  position: absolute;
+  margin-top: 1.95vw;
+  margin-left: 5.2vw;
+  font-size: 1.95vw;
+  font-weight: bold;
+  font-family: "Poppins";
+}
+
+.booknow-line2 {
+  color: rgb(255, 255, 255);
+  position: absolute;
+  margin-top: 3.25vw;
+  margin-left: 5.2vw;
+  font-size: 3.9vw;
+  font-weight: bold;
+  font-family: "Poppins";
+}
+
+.workshops-line1 {
+  color: rgb(255, 255, 255);
+  position: absolute;
+  text-align: right;
+  margin-top: 1.95vw;
+  margin-left: 60vw;
+  font-size: 1.95vw;
+  font-weight: bold;
+  font-family: "Poppins";
+}
+
+.workshops-line2 {
+  color: rgb(255, 255, 255);
+  position: absolute;
+  margin-top: 3.25vw;
+  margin-left: 54vw;
+  font-size: 3.9vw;
+  font-weight: bold;
+  font-family: "Poppins";
+}
+
+.tutorials-line1 {
+  color: rgb(255, 255, 255);
+  position: absolute;
+  text-align: right;
+  margin-top: 25vw;
+  margin-left: 67vw;
+  font-size: 1.95vw;
+  font-weight: bold;
+  font-family: "Poppins";
+}
+
+.tutorials-line2 {
+  color: rgb(255, 255, 255);
+  position: absolute;
+  margin-top: 27vw;
+  margin-left: 55vw;
+  font-size: 2.275vw;
+  font-weight: bold;
+  font-family: "Poppins";
+}
+
+.booknow img {
+  width: 37.62vw;
+  height: 36.3vw;
+  position: absolute;
+  margin-top: 1.32vw;
+  margin-left: 3.3vw;
+  border-radius: 1.65vw;
+  opacity: 0.7;
+}
+
+.tutorials img {
+  width: 34.32vw;
+  height: 13.2vw;
+  position: absolute;
+  margin-top: 24.42vw;
+  margin-left: 42.24vw;
+  border-radius: 1.65vw;
+  opacity: 0.7;
+}
+
+.workshops img {
+  width: 34.32vw;
+  height: 21.78vw;
+  position: absolute;
+  margin-top: 1.32vw;
+  margin-left: 42.24vw;
+  border-radius: 1.65vw;
+  opacity: 0.7;
+}
