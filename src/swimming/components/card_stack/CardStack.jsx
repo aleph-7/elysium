@@ -11,7 +11,7 @@ import "../Home/home.css";
 import Home from "../Home/Home";
 import Subscribe from "../Subscribe/Subscribe";
 import Viewshow from "../Viewshow/Viewshow";
-import Tutorial from "../Tutorials/Tutorials";
+import Tutorial from "../Tutorials/tutorial";
 
 /* THIS CODE CONTAINS THE SWAPPABLE CARDS AND THE NAVIGATION BAR, ALONG WITH ALL COMPONENTS CONNECTED */
 /* Enter the list of components in the CARD_INDICES array and the corresponding button labels in the BUTTON_LABELS array */

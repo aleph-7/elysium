@@ -5,7 +5,7 @@ import "./workshop.css";
 function Workshop() {
   const [message, setMessage] = useState("");
   const fetchInfo = async () => {
-    return await fetch("http://localhost:6300/workshops")
+    return await fetch("http://localhost:6300/badminton/workshops")
       .then((res) => res.json())
       .then((data) => setMessage(data.message));
   };

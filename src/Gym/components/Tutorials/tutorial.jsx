@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import Table from "./table.jsx";
-import "./workshop.css";
+import "./tutorial.css";
 
-function Workshop() {
+let rows = 0;
+let columns = 3;
+
+function Tutorial() {
   const [message, setMessage] = useState("");
   const fetchInfo = async () => {
-    return await fetch("http://localhost:6300/table_tennis/workshops")
+    return await fetch("http://localhost:6300/gym/tutorials")
       .then((res) => res.json())
       .then((data) => setMessage(data.message));
   };
@@ -15,10 +18,14 @@ function Workshop() {
   }, []);
 
   return (
-    <div className="workshop">
-      <Table noOfRows={message.length} noOfColumns={3} rowEntries={message} />
+    <div className="tutorial">
+      <Table
+        noOfRows={message.length}
+        noOfColumns={columns}
+        rowEntries={message}
+      />
     </div>
   );
 }
 
-export default Workshop;
+export default Tutorial;

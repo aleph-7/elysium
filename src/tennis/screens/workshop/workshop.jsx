@@ -1,22 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Table from "./table.jsx";
 import "./workshop.css";
 
-const rows = 7;
-const columns = 3;
-const dummyText = [
-  ["when?", "coach", "availibility"],
-  ["Row 2, Col 1", "Row 2, Col 2", "Row 2, Col 3"],
-  ["Row 3, Col 1", "Row 3, Col 2", "Row 3, Col 3"],
-  ["Row 2, Col 1", "Row 2, Col 2", "Row 2, Col 3"],
-  ["Row 3, Col 1", "Row 3, Col 2", "Row 3, Col 3"],
-  ["Row 2, Col 1", "Row 2, Col 2", "Row 2, Col 3"],
-  ["Row 3, Col 1", "Row 3, Col 2", "Row 3, Col 3"],
-];
 function Workshop() {
+  const [message, setMessage] = useState("");
+  const fetchInfo = async () => {
+    return await fetch("http://localhost:6300/tennis/workshops")
+      .then((res) => res.json())
+      .then((data) => setMessage(data.message));
+  };
+
+  useEffect(() => {
+    fetchInfo();
+  }, []);
+
   return (
     <div className="workshop">
-      <Table noOfRows={rows} noOfColumns={columns} rowEntries={dummyText} />
+      <Table noOfRows={message.length} noOfColumns={3} rowEntries={message} />
     </div>
   );
 }

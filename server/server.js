@@ -15,7 +15,39 @@ const Booking = DBs.bookingSchema;
 const Tutorial = DBs.tutorialSchema;
 const Workshop = DBs.workshopSchema;
 
-app.get("/tutorials", async (req, res) => {
+app.get("/badminton/tutorials", async (req, res) => {
+  let attributeList;
+  await Tutorial.find({ type_of_sport: "badminton" }).then((results) => {
+    attributeList = results.map((doc) => [doc.title, doc.source, doc.link]);
+  });
+  res.json({ message: attributeList });
+});
+
+app.get("/basketball/tutorials", async (req, res) => {
+  let attributeList;
+  await Tutorial.find({ type_of_sport: "basketball" }).then((results) => {
+    attributeList = results.map((doc) => [doc.title, doc.source, doc.link]);
+  });
+  res.json({ message: attributeList });
+});
+
+app.get("/cricket/tutorials", async (req, res) => {
+  let attributeList;
+  await Tutorial.find({ type_of_sport: "cricket" }).then((results) => {
+    attributeList = results.map((doc) => [doc.title, doc.source, doc.link]);
+  });
+  res.json({ message: attributeList });
+});
+
+app.get("/football/tutorials", async (req, res) => {
+  let attributeList;
+  await Tutorial.find({ type_of_sport: "football" }).then((results) => {
+    attributeList = results.map((doc) => [doc.title, doc.source, doc.link]);
+  });
+  res.json({ message: attributeList });
+});
+
+app.get("/gym/tutorials", async (req, res) => {
   let attributeList;
   await Tutorial.find({ type_of_sport: "gym" }).then((results) => {
     attributeList = results.map((doc) => [doc.title, doc.source, doc.link]);
@@ -23,7 +55,63 @@ app.get("/tutorials", async (req, res) => {
   res.json({ message: attributeList });
 });
 
-app.get("/workshops", async (req, res) => {
+app.get("/hockey/tutorials", async (req, res) => {
+  let attributeList;
+  await Tutorial.find({ type_of_sport: "hockey" }).then((results) => {
+    attributeList = results.map((doc) => [doc.title, doc.source, doc.link]);
+  });
+  res.json({ message: attributeList });
+});
+
+app.get("/squash/tutorials", async (req, res) => {
+  let attributeList;
+  await Tutorial.find({ type_of_sport: "squash" }).then((results) => {
+    attributeList = results.map((doc) => [doc.title, doc.source, doc.link]);
+  });
+  res.json({ message: attributeList });
+});
+
+app.get("/swimming/tutorials", async (req, res) => {
+  let attributeList;
+  await Tutorial.find({ type_of_sport: "swimming" }).then((results) => {
+    attributeList = results.map((doc) => [doc.title, doc.source, doc.link]);
+  });
+  res.json({ message: attributeList });
+});
+
+app.get("/table_tennis/tutorials", async (req, res) => {
+  let attributeList;
+  await Tutorial.find({ type_of_sport: "table_tennis" }).then((results) => {
+    attributeList = results.map((doc) => [doc.title, doc.source, doc.link]);
+  });
+  res.json({ message: attributeList });
+});
+
+app.get("/tennis/tutorials", async (req, res) => {
+  let attributeList;
+  await Tutorial.find({ type_of_sport: "tennis" }).then((results) => {
+    attributeList = results.map((doc) => [doc.title, doc.source, doc.link]);
+  });
+  res.json({ message: attributeList });
+});
+
+app.get("/volleyball/tutorials", async (req, res) => {
+  let attributeList;
+  await Tutorial.find({ type_of_sport: "volleyball" }).then((results) => {
+    attributeList = results.map((doc) => [doc.title, doc.source, doc.link]);
+  });
+  res.json({ message: attributeList });
+});
+
+
+
+
+
+
+
+
+//workshops
+app.get("/badminton/workshops", async (req, res) => {
   let attributeList;
   await Workshop.find({ type_of_sport: "badminton" }).then((results) => {
     attributeList = results.map((doc) => [
@@ -36,13 +124,153 @@ app.get("/workshops", async (req, res) => {
       doc.content,
       doc.max_strength.toString() + " slots",
     ]);
-    // console.log(attributeList); // Array containing the retrieved attribute values
   });
-  // res.json(attributeList);
   res.json({ message: attributeList });
-  // // console.log(tutorials);
+  
+});
 
-  console.log(attributeList);
+app.get("/basketball/workshops", async (req, res) => {
+  let attributeList;
+  await Workshop.find({ type_of_sport: "basketball" }).then((results) => {
+    attributeList = results.map((doc) => [
+      doc.date_slot +
+        "\n" +
+        doc.time_slot_start.toString() +
+        "hrs to " +
+        doc.time_slot_end.toString() +
+        "hrs",
+      doc.content,
+      doc.max_strength.toString() + " slots",
+    ]);
+  });
+  res.json({ message: attributeList });
+  
+});
+
+app.get("/cricket/workshops", async (req, res) => {
+  let attributeList;
+  await Workshop.find({ type_of_sport: "cricket" }).then((results) => {
+    attributeList = results.map((doc) => [
+      doc.date_slot +
+        "\n" +
+        doc.time_slot_start.toString() +
+        "hrs to " +
+        doc.time_slot_end.toString() +
+        "hrs",
+      doc.content,
+      doc.max_strength.toString() + " slots",
+    ]);
+  });
+  res.json({ message: attributeList });
+  
+});
+
+app.get("/football/workshops", async (req, res) => {
+  let attributeList;
+  await Workshop.find({ type_of_sport: "football" }).then((results) => {
+    attributeList = results.map((doc) => [
+      doc.date_slot +
+        "\n" +
+        doc.time_slot_start.toString() +
+        "hrs to " +
+        doc.time_slot_end.toString() +
+        "hrs",
+      doc.content,
+      doc.max_strength.toString() + " slots",
+    ]);
+  });
+  res.json({ message: attributeList });
+  
+});
+
+app.get("/hockey/workshops", async (req, res) => {
+  let attributeList;
+  await Workshop.find({ type_of_sport: "hockey" }).then((results) => {
+    attributeList = results.map((doc) => [
+      doc.date_slot +
+        "\n" +
+        doc.time_slot_start.toString() +
+        "hrs to " +
+        doc.time_slot_end.toString() +
+        "hrs",
+      doc.content,
+      doc.max_strength.toString() + " slots",
+    ]);
+  });
+  res.json({ message: attributeList });
+  
+});
+
+app.get("/squash/workshops", async (req, res) => {
+  let attributeList;
+  await Workshop.find({ type_of_sport: "squash" }).then((results) => {
+    attributeList = results.map((doc) => [
+      doc.date_slot +
+        "\n" +
+        doc.time_slot_start.toString() +
+        "hrs to " +
+        doc.time_slot_end.toString() +
+        "hrs",
+      doc.content,
+      doc.max_strength.toString() + " slots",
+    ]);
+  });
+  res.json({ message: attributeList });
+  
+});
+
+app.get("/table_tennis/workshops", async (req, res) => {
+  let attributeList;
+  await Workshop.find({ type_of_sport: "table_tennis" }).then((results) => {
+    attributeList = results.map((doc) => [
+      doc.date_slot +
+        "\n" +
+        doc.time_slot_start.toString() +
+        "hrs to " +
+        doc.time_slot_end.toString() +
+        "hrs",
+      doc.content,
+      doc.max_strength.toString() + " slots",
+    ]);
+  });
+  res.json({ message: attributeList });
+  
+});
+
+app.get("/tennis/workshops", async (req, res) => {
+  let attributeList;
+  await Workshop.find({ type_of_sport: "tennis" }).then((results) => {
+    attributeList = results.map((doc) => [
+      doc.date_slot +
+        "\n" +
+        doc.time_slot_start.toString() +
+        "hrs to " +
+        doc.time_slot_end.toString() +
+        "hrs",
+      doc.content,
+      doc.max_strength.toString() + " slots",
+    ]);
+  });
+  res.json({ message: attributeList });
+  
+});
+
+app.get("/volleyball/workshops", async (req, res) => {
+  let attributeList;
+  await Workshop.find({ type_of_sport: "volleyball" }).then((results) => {
+    attributeList = results.map((doc) => [
+      doc.date_slot +
+        "\n" +
+        doc.time_slot_start.toString() +
+        "hrs to " +
+        doc.time_slot_end.toString() +
+        "hrs",
+      doc.content,
+      doc.max_strength.toString() + " slots",
+    ]);
+  });
+  res.json({ message: attributeList });
+  
 });
 
 //Saving the data from frontend when a post request is posted

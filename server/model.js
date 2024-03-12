@@ -45,3 +45,4 @@ module.exports = {
   tutorialSchema: tutorialDB.model("tutorial", tutorialSchema),
   workshopSchema: tutorialDB.model("sport_workshop", workshopSchema),
 };
+

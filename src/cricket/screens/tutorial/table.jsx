@@ -2,6 +2,7 @@ import React from "react";
 import "./table.css";
 
 const Table = ({ noOfRows, noOfColumns, rowEntries }) => {
+  let rowEntries_withHeader = [["topic", "author", "link"], ...rowEntries];
   const generateTableHeader = () => {
     const rows = [];
     for (let i = 0; i < 1; i++) {
@@ -16,7 +17,7 @@ const Table = ({ noOfRows, noOfColumns, rowEntries }) => {
   };
   const generateRows = () => {
     const rows = [];
-    for (let i = 1; i < noOfRows; i++) {
+    for (let i = 1; i <= noOfRows; i++) {
       rows.push(<tr key={i}>{generateColumns(i)}</tr>);
     }
 
@@ -25,16 +26,31 @@ const Table = ({ noOfRows, noOfColumns, rowEntries }) => {
 
   const generateColumns = (rowIndex) => {
     const columns = [];
-
-    for (let j = 0; j < noOfColumns; j++) {
+    for (let j = 0; j < noOfColumns - 1; j++) {
       columns.push(
         <td key={j}>
-          {rowEntries[rowIndex] && rowEntries[rowIndex][j]
-            ? rowEntries[rowIndex][j]
+          {rowEntries_withHeader[rowIndex] && rowEntries_withHeader[rowIndex][j]
+            ? rowEntries_withHeader[rowIndex][j]
             : ""}
         </td>
       );
     }
+    columns.push(
+      <td key={noOfColumns - 1}>
+        {rowEntries_withHeader[rowIndex] &&
+        rowEntries_withHeader[rowIndex][noOfColumns - 1] ? (
+          rowEntries_withHeader[rowIndex][noOfColumns - 1] == "link" ? (
+            "link"
+          ) : (
+            <a href={rowEntries_withHeader[rowIndex][noOfColumns - 1]}>
+              <button>click here!</button>
+            </a>
+          )
+        ) : (
+          "welp"
+        )}
+      </td>
+    );
 
     return columns;
   };

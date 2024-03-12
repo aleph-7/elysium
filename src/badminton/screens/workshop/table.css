@@ -41,7 +41,7 @@
 }
 
 .websiteTableContent {
-  overflow-y: hidden;
+  overflow-y: scroll;
   max-height: 400px;
   margin-top: 40px;
   border: 1px solid #ff0000;
