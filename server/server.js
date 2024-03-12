@@ -8,46 +8,41 @@ const { ObjectId } = require("bson");
 const app = express();
 app.use(cors());
 app.use(parser.json());
-// mongoose.connect(process.env.MONGODB_User);
-// mongoose2.connect(process.env.MONGODB_Booking);
-
-// //Creating a schema for mongoDB database
-// const contactSchema = mongoose.Schema({
-//   username: String,
-//   email_id: String,
-//   user_category: Number,
-//   password: String,
-//   profile_pic: String,
-// });
-
-// const bookingSchema = mongoose.Schema({
-//   user_id: mongoose.ObjectId,
-//   time_slot: Number,
-//   date_slot: String,
-//   counsellor_user_id: mongoose.ObjectId,
-//   booking_status: Number,
-//   time_of_booking: Date,
-// });
-
-// const User = mongoose.model("user", contactSchema);
-// const Booking = mongoose2.model("sport_bookings", bookingSchema);
 
 const DBs = require("./model");
 const User = DBs.userSchema;
 const Booking = DBs.bookingSchema;
 const Tutorial = DBs.tutorialSchema;
+const Workshop = DBs.workshopSchema;
 
 app.get("/tutorials", async (req, res) => {
   let attributeList;
   await Tutorial.find({ type_of_sport: "gym" }).then((results) => {
     attributeList = results.map((doc) => [doc.title, doc.source, doc.link]);
+  });
+  res.json({ message: attributeList });
+});
+
+app.get("/workshops", async (req, res) => {
+  let attributeList;
+  await Workshop.find({ type_of_sport: "badminton" }).then((results) => {
+    attributeList = results.map((doc) => [
+      doc.date_slot +
+        "\n" +
+        doc.time_slot_start.toString() +
+        "hrs to " +
+        doc.time_slot_end.toString() +
+        "hrs",
+      doc.content,
+      doc.max_strength.toString() + " slots",
+    ]);
     // console.log(attributeList); // Array containing the retrieved attribute values
   });
   // res.json(attributeList);
   res.json({ message: attributeList });
   // // console.log(tutorials);
 
-  // console.log(attributeList);
+  console.log(attributeList);
 });
 
 //Saving the data from frontend when a post request is posted

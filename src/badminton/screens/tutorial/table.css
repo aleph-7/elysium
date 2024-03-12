@@ -41,6 +41,7 @@
 }
 
 .websiteTableContent {
+  overflow-y: scroll;
   margin-top: 40px;
   border: 1px solid #ff0000;
   border-radius: 25px;
