@@ -7,6 +7,7 @@ const userSchema = mongoose.Schema({
   user_category: Number,
   password: String,
   profile_pic: String,
+  type_of_sport: String,
 });
 
 const { userDB } = connectUserDB();

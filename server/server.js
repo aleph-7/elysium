@@ -12,12 +12,20 @@ const app = express();
 app.use(cors());
 app.use(parser.json());
 
-const DBs = require("./model");
 const User = require("./models/userDB").userSchema;
 const SportsBookings = require("./models/bookingsDB").sports_bookingsSchema;
-const Booking = DBs.bookingSchema;
-const Tutorial = DBs.tutorialSchema;
-const Workshop = DBs.workshopSchema;
+const Tutorial = require("./models/contentDB").tutorialSchema;
+const Workshop = require("./models/contentDB").workshopSchema;
+const Yoga_Sessions = require("./models/contentDB").yoga_sessionSchema;
+const Leaderboard = require("./models/leaderboardDB").leaderboardSchema;
+
+app.get("/badminton/leaderboard", async (req, res) => {
+  let attributeList;
+  await Leaderboard.find({}).then((results) => {
+    attributeList = results.map((doc) => [doc.position]);
+  });
+  res.json({ message: attributeList });
+});
 
 app.get("/badminton/tutorials", async (req, res) => {
   let attributeList;
@@ -273,6 +281,7 @@ app.post("/signup", async (req, res) => {
       user_category: 0,
       password: hashed_password,
       profile_pic: "",
+      type_of_sport: "",
     });
     //Saving the user to the database
     const doc = await new_user.save();
@@ -368,3 +377,29 @@ app.get("/profile", checkAuth, (req, res) => {
 //   console.log("yoyo");
 //   res.json({ message: "You are authenticated" });
 // });
+
+//// ARUSHU ///////
+
+app.post("/yoga/postSession", async (req, res) => {
+  try {
+    //Creating a new user
+    const new_yoga_session = new Yoga_Sessions({
+      max_strength: req.body.batch_size,
+      content: req.body.content,
+      date_slot: req.body.startDate,
+      participant_id: [],
+      // yoga_instructor_user_id: req.body.yoga_instructor_user_id,
+      time_slot_start: req.body.startTime,
+      time_slot_end: req.body.endTime,
+    });
+    //Saving the user to the database
+    console.log(req.body);
+    const doc = await new_yoga_session.save();
+    //Sending the response to the frontend
+    res.status(200).json({ message: "Post successful" });
+  } catch (err) {
+    //Sending the error message to the frontend
+    console.log(err);
+    res.status(500).json({ error: "Post failed" });
+  }
+});
