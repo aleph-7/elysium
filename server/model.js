@@ -1,14 +1,6 @@
 const { default: mongoose } = require("mongoose");
 const { connectDBs } = require("./db");
 
-const userSchema = mongoose.Schema({
-  username: String,
-  email_id: String,
-  user_category: Number,
-  password: String,
-  profile_pic: String,
-});
-
 const bookingSchema = mongoose.Schema({
   user_id: mongoose.ObjectId,
   time_slot: Number,
@@ -40,9 +32,7 @@ const workshopSchema = mongoose.Schema({
 
 const { userDB, bookingDB, tutorialDB } = connectDBs();
 module.exports = {
-  userSchema: userDB.model("user", userSchema),
   bookingSchema: bookingDB.model("sport_booking", bookingSchema),
   tutorialSchema: tutorialDB.model("tutorial", tutorialSchema),
   workshopSchema: tutorialDB.model("sport_workshop", workshopSchema),
 };
-

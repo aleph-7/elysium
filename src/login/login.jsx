@@ -64,16 +64,35 @@ const Login = () => {
           username: input.username,
           password: input.password,
         }),
-      });
-
-      if (response.ok) {
-        console.log("Signup successful!");
-        // Redirect or perform any other action upon successful signup
-      } else {
-        console.error("Signup failed.");
-      }
+      })
+        .then((response) => {
+          // Check status code
+          if (response.ok) {
+            return response.json(); // Parse JSON response on success
+          } else {
+            throw new Error("Login failed"); // Handle errors
+          }
+        })
+        .then((data) => {
+          // Success
+          console.log("Login successful:", data);
+          localStorage.setItem("token", data.token);
+          console.log("Token:", data.token);
+          localStorage.setItem("userId", data.userId);
+          console.log("userId:", data.userId);
+          console.log("User Category:", data.category);
+          console.log("User Email:", data.email);
+          console.log("User MongoID:", data.userMongoId);
+          // window.location.href = "/LP1";
+          // Store token and redirect or display success message
+        })
+        .catch((error) => {
+          // Handle errors (401, 400, 500, network errors, etc.)
+          console.error("Login error:", error);
+          // Display appropriate error message to the user
+        });
     } catch (error) {
-      console.error("Error during signup:", error);
+      console.error("Error during Login:", error);
     }
   };
 
