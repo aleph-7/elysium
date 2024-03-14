@@ -446,3 +446,25 @@ app.post("/coach/postWorkshop", async (req, res) => {
     res.status(500).json({ error: "Post failed" });
   }
 });
+
+app.post("/coach/reserveCourt", async (req, res) => {
+  try {
+    const new_reservation = new SportsBookings({
+      time_slot : req.body.time_slot,
+      date : req.body.date_slot,
+      court_id : req.body.court_id,
+      show_up_status : req.body.show_up_status,
+      type_of_sport : req.body.type_of_sport,
+      time_of_booking : req.body.time_of_booking,
+      booking_status : req.body.booking_status,
+      user_id : req.body.user_id
+    });
+    console.log(new_reservation);
+    const doc = await new_reservation.save();
+    //Sending the response to the frontend
+    res.status(200).json({ message: "Reservation successful" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Reservation failed" });
+  }
+});

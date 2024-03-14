@@ -1,10 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 import move from "lodash-move";
-//import CheckEnrolment from "./pages/Coach_Dashboard/checkEnrollment/checkEnrolment";
+import CheckEnrolment from "./pages/Coach_Dashboard/checkEnrollment/checkEnrolment";
 import PostWorkshop from "./pages/Coach_Dashboard/postWorkshop/postWorkshop";
-// import ReserveCourt from "./pages/Coach_Dashboard/reserveCourt/reserveCourt";
-// import Statistics from "./pages/Coach_Dashboard/statistics/stats";
+import ReserveCourt from "./pages/Coach_Dashboard/reserveCourt/reserveCourt";
+import Statistics from "./pages/Coach_Dashboard/statistics/stats";
 import "./CardStack.css";
 
 /* THIS CODE CONTAINS THE SWAPPABLE CARDS AND THE NAVIGATION BAR, ALONG WITH ALL COMPONENTS CONNECTED */
@@ -85,13 +85,13 @@ const CardStack = () => {
               >
                 {/* //CHANGE THE PAGES HERE */}
                 {color == "1" ? <PostWorkshop /> : null}
-                {color == "2" ? <PostWorkshop /> : null}
+                {/* {color == "2" ? <PostWorkshop /> : null}
                 {color == "3" ? <PostWorkshop /> : null}
-                {color == "4" ? <PostWorkshop /> : null}
-                {/* {color == "2" ? <CheckEnrolment /> : null}
+                {color == "4" ? <PostWorkshop /> : null} */}
+                {color == "2" ? <CheckEnrolment /> : null}
                 {color == "3" ? <ReserveCourt /> : null}
                 {color == "4" ? <Statistics /> : null}
-                {color == "5" ? <ValidateUsers /> : null} */}
+                {color == "5" ? <ValidateUsers /> : null}
                 {/* //CHANGE THE PAGES HERE */}
               </motion.li>
             );

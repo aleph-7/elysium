@@ -1,44 +1,129 @@
-import React from "react";
+import React, { useState } from "react";
 import "./reserveCourt.css";
-import Date_Time_Picker from "./../../../components/datetime/date_time_picker.jsx";
-import Button from "./../../../components/buttons/Button.jsx";
 
 const ReserveCourt = () => {
+  const [input, setInput] = useState({
+    user_id: localStorage.getItem("userMongoId"), //user id is the coach id
+    type_of_sport: localStorage.getItem("type_of_sport"),
+    show_up_status : "0",
+    time_of_booking : "",
+    booking_status : "0",
+    no_partners : "0",
+    court_id : "",
+    date_slot : "", // string storing the date
+    time_slot: "", // 1hr duration beginning at time_slot
+    partners_id : []
+  });
+
+  const [error, setError] = useState({
+    date_slot : "", // string storing the date
+    time_slot: "", // 1hr duration beginning at time_slot
+  });
+
+  const onInputChange = (e) => {
+    const { name, value } = e.target;
+    setInput((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+    validateInput(e);
+  };
+  const validateInput = (e) => {
+    let { name, value } = e.target;
+    setError((prev) => {
+      const stateObj = { ...prev, [name]: "" };
+
+      switch (name) {
+        case "date_slot":
+          if (!value) {
+            stateObj[name] = "";
+          }
+          if (isNaN(value)) {
+            stateObj[name] = "Please enter a valid date.";
+          }
+          break;
+
+        case "time_slot":
+          if (!value) {
+            stateObj[name] = "";
+          }
+          if (isNaN(value)) {
+            stateObj[name] = "Please enter a valid time.";
+          } else {
+            if (Number(value) < 5)
+              stateObj[name] = "Please enter a valid time.";
+            if (Number(value) > 20)
+              stateObj[name] = "Please enter a valid time, less than 21.";
+          }
+          break; 
+        default:
+          break;
+      }
+      return stateObj;
+    });
+  };
+
+  const onClickButton = async () => {
+    if (!input.date_slot) {
+      alert("Date is required.");
+      setError((prev) => ({
+        ...prev,
+        date_slot : "Date is required.",
+      }));
+    }
+    if (!input.time_slot) {
+      alert("Time is required.");
+      setError((prev) => ({ ...prev, time_slot: "Time is required." }));
+    }
+    try {
+      const currentTime = new Date(); // Get current time
+      input.time_of_booking = currentTime; // Set the current time as input.time_of_booking
+      const response = await fetch("http://localhost:6300/coach/reserveCourt", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(input),
+      });
+      const data = await response.json();
+      if (response.status === 200) {
+        alert("Court Reserved successfully.");
+      } else {
+        alert(data.message);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div>
       <div className="coach-reservecourt-container">
-        <input type="text" placeholder="No. of Courts" className="workshop" />
-        <Date_Time_Picker
-          input_image={"../assets/—Pngtree—vector clock icon_3782163.png"}
-          placeholderText={"from"}
-          left={"10vw"}
-          top={"210px"}
-          type={"date"}
+        <input
+          type="text"
+          placeholder="date of reservation"
+          className="coach_input_large"
+          name="date_slot"
+          value={input.date_slot}
+          onChange={onInputChange}
+          onBlur={validateInput}
         />
-        <p className="dash" style={{top:"14vh", left:"37vw"}}>-</p>
-        <Date_Time_Picker
-          input_image={"../assets/—Pngtree—vector clock icon_3782163.png"}
-          placeholderText={"to"}
-          left={"40vw"}
-          top={"210px"}
-          type={"date"}
+
+        <input
+          type="text"
+          placeholder="start time"
+          className="coach_input_large"
+          name="time_slot"
+          value={input.time_slot}
+          onChange={onInputChange}
+          onBlur={validateInput}
         />
-        <Date_Time_Picker
-          input_image={"../assets/—Pngtree—vector clock icon_3782163.png"}
-          placeholderText={"from"}
-          left={"25vw"}
-          top={"35vh"}
-        />
-        <div style={{position:"absolute", left: "32vw", top: "50vh"}}>
-          <Button
-            backgroundColor="#22992E"
-            textColor={1}
-            size={3}
-            text="post"
-          />
-        </div>
+        <button className="coach_reserve_court_button" onClick={onClickButton}>
+          reserve court
+        </button>
       </div>
     </div>
   );
 };
+// style={{ left: "33px", top: "93px" }}
 export default ReserveCourt;

@@ -31,5 +31,5 @@ const sports_bookingsSchema = mongoose.Schema({
 
 const { bookingDB } = connectBookingsDBs();
 module.exports = {
-  sports_bookingsSchema: bookingDB.model("user", sports_bookingsSchema),
+  sports_bookingsSchema: bookingDB.model("sport_booking", sports_bookingsSchema),
 };
