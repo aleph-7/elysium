@@ -1,10 +1,10 @@
 .wrapperStyle {
   display: flex;
+  flex-direction: column;
   position: relative;
   align-items: center;
   justify-content: center;
   height: 50vh;
-  margin-top: -30px;
 }
 .nav {
   margin-left: 10%;

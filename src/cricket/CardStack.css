@@ -1,17 +1,14 @@
 .wrapperStyle {
   display: flex;
+  flex-direction: column;
   position: relative;
   align-items: center;
   justify-content: center;
-  height: 50vh;
-  margin-top: -30px;
 }
 .nav {
   margin-left: 10%;
   margin-right: 10%;
-
-  margin-top: 5%;
-  position: flex;
+  position: relative;
   justify-content: space-between;
   align-items: center;
 }

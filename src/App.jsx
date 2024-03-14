@@ -27,6 +27,8 @@ import Yoga from "./yoga/Yoga.jsx";
 import Counsellor from "./counsellor/Counsellor.jsx";
 import Swim from "./swimming/Swim.jsx";
 import ProtectedRoute from "./protected_routes.jsx";
+import Yoga_Instructor from "./Dashboard/Yoga_Instructor/Yoga_Instructor.jsx";
+// import Coach from "./Dashboard/Coach/Coach.jsx";
 
 function App() {
   return (
@@ -57,6 +59,8 @@ function App() {
           <Route path="/gym" element={<Gym />} />
           <Route path="/counsellor" element={<Counsellor />} />
           <Route path="/swimming" element={<Swim />} />
+          <Route path="/admin/yoga" element={<Yoga_Instructor />} />
+          {/* <Route path="/admin/coach" element={<Coach />} /> */}
         </Routes>
       </BrowserRouter>
     </div>

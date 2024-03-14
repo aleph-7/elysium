@@ -146,7 +146,7 @@ const CardStack = () => {
 };
 
 const cardWrapStyle = {
-  position: "relative",
+  position: "inherit",
   width: "80vw",
   height: "220px",
 };
