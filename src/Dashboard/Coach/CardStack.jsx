@@ -5,7 +5,6 @@ import move from "lodash-move";
 import PostWorkshop from "./pages/Coach_Dashboard/postWorkshop/postWorkshop";
 // import ReserveCourt from "./pages/Coach_Dashboard/reserveCourt/reserveCourt";
 // import Statistics from "./pages/Coach_Dashboard/statistics/stats";
-// import ValidateUsers from "./pages/Coach_Dashboard/validateUser/validateUser";
 import "./CardStack.css";
 
 /* THIS CODE CONTAINS THE SWAPPABLE CARDS AND THE NAVIGATION BAR, ALONG WITH ALL COMPONENTS CONNECTED */
@@ -14,13 +13,12 @@ import "./CardStack.css";
 /* The linked pages in the function also need to be changed, that is, the pages that are to be displayed on the cards. Please do so only at the indicated spot.*/
 /* The rest of the code is not to be altered */
 
-const CARD_INDICES = ["1", "2", "3", "4", "5"];
+const CARD_INDICES = ["1", "2", "3", "4"];
 const BUTTON_LABELS = [
   "post workshop",
   "check enrolment",
   "reserve court",
   "statistics",
-  "validate user(s)",
 ];
 
 /*INTERNAL WORKING*/
@@ -90,7 +88,6 @@ const CardStack = () => {
                 {color == "2" ? <PostWorkshop /> : null}
                 {color == "3" ? <PostWorkshop /> : null}
                 {color == "4" ? <PostWorkshop /> : null}
-                {color == "5" ? <PostWorkshop /> : null}
                 {/* {color == "2" ? <CheckEnrolment /> : null}
                 {color == "3" ? <ReserveCourt /> : null}
                 {color == "4" ? <Statistics /> : null}
