@@ -5,8 +5,7 @@ require("dotenv").config();
 const jsw = require("jsonwebtoken");
 const secretKey =
   "a3e31fd2b7ed999b65ee2653024297b9f737e282afb9b686d8401e10c617a591";
-const bcrypt = require("bcrypt");
-const { ObjectId } = require("bson");
+const bcrypt = require("bcryptjs");
 
 const app = express();
 app.use(cors());
@@ -349,27 +348,27 @@ app.post("/login", async (req, res) => {
   }
 });
 
-//Bookings
-app.post("/user/sport_booking", async (req, res) => {
-  console.log(req.body);
-  const name = req.body.slot;
-  const hour = parseInt(name.split(":")[0], 10);
-  var date = new Date();
-  const current_date =
-    date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-  const booking = new Sportsbook({
-    user_id: new ObjectId("65eb03840d088803c56ed544"),
-    time_slot: hour,
-    type_of_sport: "badminton",
-    time_of_booking: new Date(),
-    date: current_date,
-  });
-  const doc = await booking.save();
-  res.json(doc);
-});
+// //Bookings
+// app.post("/user/sport_booking", async (req, res) => {
+//   console.log(req.body);
+//   const name = req.body.slot;
+//   const hour = parseInt(name.split(":")[0], 10);
+//   var date = new Date();
+//   const current_date =
+//     date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+//   const booking = new Sportsbook({
+//     user_id: new ObjectId("65eb03840d088803c56ed544"),
+//     time_slot: hour,
+//     type_of_sport: "badminton",
+//     time_of_booking: new Date(),
+//     date: current_date,
+//   });
+//   const doc = await booking.save();
+//   res.json(doc);
+// });
 
 //Listening to the server.
-app.listen(process.env.PORT || 5090, () => {
+app.listen(process.env.PORT || 6300, () => {
   console.log(`Server is running on port ${process.env.PORT}.`);
 });
 
