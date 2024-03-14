@@ -8,7 +8,7 @@ const tutorialSchema = mongoose.Schema({
   type_of_source: String,
 });
 
-const workshopSchema = mongoose.Schema({
+const sport_workshopSchema = mongoose.Schema({
   time_slot_start: Number,
   time_slot_end: Number,
   content: String,
@@ -34,6 +34,6 @@ const yoga_sessionSchema = mongoose.Schema({
 const { contentDB } = connectContentDBs();
 module.exports = {
   tutorialSchema: contentDB.model("tutorial", tutorialSchema),
-  workshopSchema: contentDB.model("sport_workshop", workshopSchema),
+  sport_workshopSchema: contentDB.model("sport_workshop", sport_workshopSchema),
   yoga_sessionSchema: contentDB.model("yoga_session", yoga_sessionSchema),
 };

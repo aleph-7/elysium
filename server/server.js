@@ -15,7 +15,7 @@ app.use(parser.json());
 const User = require("./models/userDB").userSchema;
 const SportsBookings = require("./models/bookingsDB").sports_bookingsSchema;
 const Tutorial = require("./models/contentDB").tutorialSchema;
-const Workshop = require("./models/contentDB").workshopSchema;
+const Workshop = require("./models/contentDB").sport_workshopSchema;
 const Yoga_Sessions = require("./models/contentDB").yoga_sessionSchema;
 const Leaderboard = require("./models/leaderboardDB").leaderboardSchema;
 
@@ -269,27 +269,41 @@ app.get("/volleyball/workshops", async (req, res) => {
   res.json({ message: attributeList });
 });
 
-//Saving the data from frontend when a post request is posted
 app.post("/signup", async (req, res) => {
   try {
-    //Hashing the passwords before saving them to the database
+    // Check if the username or email ID already exists in the database
+    const existingUser = await User.findOne({
+      $or: [{ username: req.body.username }, { email_id: req.body.email_id }],
+    });
+
+    // If user with the same username or email ID already exists, return an error
+    if (existingUser) {
+      return res
+        .status(400)
+        .json({ error: "Username or email ID already exists" });
+    }
+
+    // Hashing the passwords before saving them to the database
     const hashed_password = await bcrypt.hash(req.body.password, 10);
-    //Creating a new user
+
+    // Creating a new user
     const new_user = new User({
       username: req.body.username,
       email_id: req.body.email_id,
-      user_category: 0,
+      user_category: 1,
       password: hashed_password,
       profile_pic: "",
       type_of_sport: "",
     });
-    //Saving the user to the database
+
+    // Saving the user to the database
     const doc = await new_user.save();
-    //Sending the response to the frontend
+
+    // Sending the response to the frontend
     res.status(201).json({ message: "Registration successful" });
   } catch (err) {
-    //Sending the error message to the frontend
-    console.log(err);
+    // Sending the error message to the frontend
+    console.error(err);
     res.status(500).json({ error: "Registration failed" });
   }
 });
@@ -311,6 +325,7 @@ app.post("/login", async (req, res) => {
           expiresIn: "1 hour",
         });
         console.log(token);
+        console.log(user.type_of_sport);
         res.status(200).json({
           token,
           userMongoId: user._id,
@@ -318,6 +333,7 @@ app.post("/login", async (req, res) => {
           email: user.email_id,
           category: user.user_category,
           profile_pic: user.profile_pic,
+          type_of_sport: user.type_of_sport,
         });
       } else {
         console.log("Password Mismatch");
@@ -399,6 +415,34 @@ app.post("/yoga/postSession", async (req, res) => {
     res.status(200).json({ message: "Post successful" });
   } catch (err) {
     //Sending the error message to the frontend
+    console.log(err);
+    res.status(500).json({ error: "Post failed" });
+  }
+});
+
+app.post("/coach/postWorkshop", async (req, res) => {
+  try {
+    const new_workshop = new Workshop({
+      time_slot_start: req.body.start_time,
+      time_slot_end: req.body.end_time,
+      content: req.body.description,
+      // equipment: req.body.equipment,
+      equipment: {
+        raquet: Number(req.body.raquet),
+        cork: Number(req.body.cork),
+        shoe: Number(req.body.shoe),
+      },
+      coach_user_id: req.body.coach_user_id,
+      max_strength: req.body.max_participants,
+      date_slot: req.body.date,
+      participant_id: [],
+      type_of_sport: req.body.type_of_sport,
+    });
+    console.log(new_workshop);
+    const doc = await new_workshop.save();
+    //Sending the response to the frontend
+    res.status(200).json({ message: "Post successful" });
+  } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Post failed" });
   }

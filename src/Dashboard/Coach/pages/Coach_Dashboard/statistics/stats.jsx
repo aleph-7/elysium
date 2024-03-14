@@ -12,7 +12,7 @@ function Statistics() {
     ["Its all about stamina", "1:00am-2:00am", "10"],
   ];
   return (
-    <div className="coach-container">
+    <div className="coach-stats-container">
       <Table
         noOfRows={data.length}
         noOfColumns={data[0].length}

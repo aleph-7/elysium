@@ -6,7 +6,7 @@ import Button from "../../../components/buttons/Button.jsx";
 
 function CheckEnrolment() {
   return (
-      <div className="container">
+      <div className="coach-check-enrollment-container">
         <div className="dropdown">
           <button className="dropbtn">Spring Camp</button>
           <div class="dropdown-content">
@@ -63,7 +63,7 @@ function CheckEnrolment() {
           <p style={{ lineHeight: "1" }}>
             <strong>Status</strong>
           </p>
-          <div style={{ left: "0px", top: "32px", position: "absolute"}}>
+          <div style={{ left: "-4vw", top: "10vh", position: "absolute"}}>
             <Button
               backgroundColor="#FF820E"
               size={2}
@@ -71,7 +71,7 @@ function CheckEnrolment() {
               text="accept"
             />
           </div>
-          <div style={{ left: "0px", top: "70px", position: "absolute" }}>
+          <div style={{ left: "-4vw", top: "6vh", position: "absolute" }}>
             <Button
               backgroundColor="#22992E"
               size={2}

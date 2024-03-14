@@ -1,4 +1,4 @@
-.container {
+.coach-reservecourt-container {
     position: relative;
     height: 540px;
     width: 74vw;
@@ -13,7 +13,7 @@
     padding-top: 10px;
   }
   
-  .workshop {
+  .coach-reservecourt-container .workshop {
     position: absolute;
     width: 28vw;
     height: 35px;
@@ -27,7 +27,7 @@
     /* Rectangle 188 */
   }
   
-.dash{
+.coach-reservecourt-container .dash{
   position: absolute;
 
   font-family: 'Quicksand';

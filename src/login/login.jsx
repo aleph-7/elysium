@@ -76,16 +76,22 @@ const Login = () => {
         .then((data) => {
           // Success
           console.log("Login successful:", data);
+
           localStorage.setItem("token", data.token);
-          console.log("Token:", data.token);
           localStorage.setItem("userId", data.userId);
+          localStorage.setItem("category", data.category);
+          localStorage.setItem("user_email:", data.email);
+          localStorage.setItem("userMongoId", data.userMongoId);
+          localStorage.setItem("type_of_sport", data.type_of_sport);
+
+          console.log("token:", data.token);
+          console.log("category:", data.category);
           console.log("userId:", data.userId);
-          console.log("User Category:", data.category);
           console.log("User Email:", data.email);
           console.log("User MongoID:", data.userMongoId);
-          // window.location.href = "/LP1";
-          // Store token and redirect or display success message
+          console.log("Type of Sport:", data.type_of_sport);
         })
+
         .catch((error) => {
           // Handle errors (401, 400, 500, network errors, etc.)
           console.error("Login error:", error);
@@ -113,19 +119,15 @@ const Login = () => {
               {error.username && <span className="err">{error.username}</span>}
             </div>
             <div className="login-input2">
-              <form>
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="password"
-                  value={input.password}
-                  onChange={onInputChange}
-                  onBlur={validateInput}
-                />
-                {error.password && (
-                  <span className="err">{error.password}</span>
-                )}
-              </form>
+              <input
+                type="password"
+                name="password"
+                placeholder="password"
+                value={input.password}
+                onChange={onInputChange}
+                onBlur={validateInput}
+              />
+              {error.password && <span className="err">{error.password}</span>}
             </div>
           </div>
           <div className="login-submit-container">

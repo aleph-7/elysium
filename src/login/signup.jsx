@@ -98,8 +98,17 @@ const Signup = () => {
         confirmPassword: "Password and Confirm Password does not match.",
       }));
     }
+    if (
+      error.username ||
+      error.password ||
+      error.confirmPassword ||
+      error.email_id
+    ) {
+      alert("Please enter valid details.");
+      return;
+    }
     try {
-      const response = await fetch("http://localhost:6300/signup", {
+      const response = await fetch("http://172.17.73.60:6300/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -111,11 +120,12 @@ const Signup = () => {
         }),
       });
 
-      if (response.ok) {
-        console.log("Signup successful!");
-        // Redirect or perform any other action upon successful signup
+      if (response.status === 400) {
+        alert("Username or email ID already exists");
+      } else if (response.status === 201) {
+        alert("Registered successfully!");
       } else {
-        console.error("Signup failed.");
+        alert("Error in registering");
       }
     } catch (error) {
       console.error("Error during signup:", error);

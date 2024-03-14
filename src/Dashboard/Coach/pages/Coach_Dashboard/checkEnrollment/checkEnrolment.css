@@ -1,4 +1,4 @@
-.container {
+.coach-check-enrollment-container {
   position: relative;
   height: 540px;
   width: 74vw;
@@ -14,7 +14,7 @@
 }
 
 /* Dropdown button */
-.dropbtn {
+.coach-check-enrollment-container .dropbtn {
   position: absolute;
   background-color: #ee6d6d;
   color: black;
@@ -31,7 +31,7 @@
 }
 
 /* Dropdown content (hidden by default) */
-.dropdown-content {
+.coach-check-enrollment-container .dropdown-content {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
@@ -45,12 +45,12 @@
 }
 
 /* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
+.coach-check-enrollment-container .dropdown:hover .dropdown-content {
   display: block;
 }
 
 /* Style links inside the dropdown */
-.dropdown-content a {
+.coach-check-enrollment-container .dropdown-content a {
   background-color: #f9f9f9;
   color: black;
   padding: 12px 16px;
@@ -59,11 +59,11 @@
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {
+.coach-check-enrollment-container .dropdown-content a:hover {
   background-color: #f1f1f1;
 }
 /* number of enrolled players : 2 */
-.text {
+.coach-check-enrollment-container .text {
   position: absolute;
   width: 37vw;
   height: 48.5px;
@@ -79,7 +79,7 @@
   color: #030303;
 }
 
-.info {
+.coach-check-enrollment-container .info {
   /* Name Akanksha Sankalp */
 
   position: absolute;

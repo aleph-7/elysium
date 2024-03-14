@@ -13,7 +13,7 @@ function ValidateUsers() {
     ["Rahul", "210967", "1:00am-2:00am", "present"],
   ];
   return (
-    <div className="coach-container">
+    <div className="coach-validateuser-container">
       <Table
         noOfRows={data.length}
         noOfColumns={data[0].length}
