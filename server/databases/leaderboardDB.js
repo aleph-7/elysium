@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+mongoose.pluralize(null);
 require("dotenv").config();
 
 const connectLeaderboardDBs = () => {

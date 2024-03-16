@@ -1,15 +1,11 @@
 import { useEffect, useState } from "react";
-import Table from "./table.jsx";
+import Table_Tutorial from "../../../components/tutorials/table.jsx";
 import "./tutorial.css";
-import SERVER_ROOT_PATH from "../../../../../config.js";
-
-let rows = 0;
-let columns = 3;
 
 function Tutorial() {
   const [message, setMessage] = useState("");
   const fetchInfo = async () => {
-    return await fetch(SERVER_ROOT_PATH + "/basketball/tutorials")
+    return await fetch("http://localhost:6300/tutorials/basketball")
       .then((res) => res.json())
       .then((data) => setMessage(data.message));
   };
@@ -20,9 +16,9 @@ function Tutorial() {
 
   return (
     <div className="tutorial">
-      <Table
+      <Table_Tutorial
         noOfRows={message.length}
-        noOfColumns={columns}
+        noOfColumns={3}
         rowEntries={message}
       />
     </div>

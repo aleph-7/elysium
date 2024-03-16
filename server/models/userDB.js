@@ -1,4 +1,5 @@
 const { default: mongoose } = require("mongoose");
+mongoose.pluralize(null);
 const { connectUserDB } = require("../databases/userDB");
 
 const userSchema = mongoose.Schema({
@@ -10,7 +11,14 @@ const userSchema = mongoose.Schema({
   type_of_sport: String,
 });
 
+const recordSchema = mongoose.Schema({
+  user_id: mongoose.ObjectId,
+  acceptances: Number,
+  rejections: Number,
+});
+
 const { userDB } = connectUserDB();
 module.exports = {
-  userSchema: userDB.model("user", userSchema),
+  userSchema: userDB.model("users", userSchema),
+  recordSchema: userDB.model("records", recordSchema),
 };

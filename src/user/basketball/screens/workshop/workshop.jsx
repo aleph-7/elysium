@@ -6,7 +6,7 @@ import SERVER_ROOT_PATH from "../../../../../config.js";
 function Workshop() {
   const [message, setMessage] = useState("");
   const fetchInfo = async () => {
-    return await fetch(SERVER_ROOT_PATH + "/basketball/workshops")
+    return await fetch(SERVER_ROOT_PATH + "/workshops/basketball")
       .then((res) => res.json())
       .then((data) => setMessage(data.message));
   };

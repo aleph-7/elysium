@@ -1,35 +1,26 @@
 const { default: mongoose } = require("mongoose");
+mongoose.pluralize(null);
 const { connectBookingsDBs } = require("../databases/bookingsDB");
 
-const sports_bookingsSchema = mongoose.Schema({
+const sportBookingSchema = mongoose.Schema({
+  _id: mongoose.ObjectId,
   show_up_status: Number,
-  court_id: {
-    type: Number,
-  },
-  user_id: {
-    type: mongoose.ObjectId,
-    required: true,
-  },
-  time_slot: {
-    type: Number,
-    required: true,
-  },
-  type_of_sport: {
-    type: String,
-    required: true,
-  },
-  time_of_booking: {
-    type: Date,
-    required: true,
-  },
+  user_id: mongoose.ObjectId,
+  time_slot: Number,
+  type_of_sport: String,
+  time_of_booking: Date,
   booking_status: Number,
-  date: {
-    type: String,
-    required: true,
-  },
+  type_of_booking: Number,
+  date_slot: String,
+  partners_id: [mongoose.ObjectId],
+  no_partners: Number,
+  court_id: mongoose.ObjectId,
 });
 
 const { bookingDB } = connectBookingsDBs();
 module.exports = {
-  sports_bookingsSchema: bookingDB.model("sport_booking", sports_bookingsSchema),
+  sportBookingsSchema: bookingDB.model(
+    "temp_sport_bookings",
+    sportBookingSchema
+  ),
 };

@@ -8,7 +8,7 @@
   justify-content: center;
   gap: 40px;
   font-family: Poppins;
-  margin-top: 5vh;
+  margin-top: 2vh;
   align-items: center;
 }
 
@@ -43,14 +43,14 @@
 .websiteTableContent-workshop {
   overflow-y: scroll;
   max-height: 400px;
-  margin-top: 40px;
+  margin-top: 20px;
   border: 1px solid #ff0000;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
   border-radius: 25px;
   text-align: center;
   justify-content: space-between;
   display: flex;
-  padding-top: 10px;
+  padding-top: 5px;
 }
 .websiteTableContent-workshop td {
   line-height: 1.6rem;

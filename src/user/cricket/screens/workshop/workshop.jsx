@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import Table from "./table.jsx";
+import Table_Workshops from "../../../components/workshops/table";
 import "./workshop.css";
+import SERVER_ROOT_PATH from "../../../../../config.js";
 
 function Workshop() {
   const [message, setMessage] = useState("");
   const fetchInfo = async () => {
-    return await fetch("http://localhost:6300/cricket/workshops")
+    return await fetch(SERVER_ROOT_PATH + "/workshops/cricket")
       .then((res) => res.json())
       .then((data) => setMessage(data.message));
   };
@@ -16,7 +17,11 @@ function Workshop() {
 
   return (
     <div className="workshop">
-      <Table noOfRows={message.length} noOfColumns={3} rowEntries={message} />
+      <Table_Workshops
+        noOfRows={message.length}
+        noOfColumns={3}
+        rowEntries={message}
+      />
     </div>
   );
 }
