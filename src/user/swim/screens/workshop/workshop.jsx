@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import Table_Workshops from "../../../components/workshops/table.jsx";
 import "./workshop.css";
-import SERVER_ROOT_PATH from "../../../../../config.js";
+import Table_Workshop from "../../../components/workshops/table_workshop.jsx";
 
 function Workshop() {
   const [message, setMessage] = useState("");
   const fetchInfo = async () => {
-    return await fetch(SERVER_ROOT_PATH + "/workshops/badminton")
+    return await fetch("http://localhost:6300/workshops/swimming")
       .then((res) => res.json())
       .then((data) => setMessage(data.message));
   };
@@ -17,7 +16,8 @@ function Workshop() {
 
   return (
     <div className="workshop">
-      <Table_Workshops
+      <Table_Workshop
+        sport="badminton"
         noOfRows={message.length}
         noOfColumns={3}
         rowEntries={message}
