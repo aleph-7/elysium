@@ -1,6 +1,5 @@
 const express = require("express");
 const SportsBookings = require("../models/bookingsDB").sports_bookingsSchema;
-
 const router = express.Router();
 
 router.get("/get_booking_history", async (req, res) => {

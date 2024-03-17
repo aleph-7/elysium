@@ -15,6 +15,9 @@ router.get("/badminton", async (req, res) => {
         "hrs",
       doc.content,
       doc.max_strength.toString() + " slots",
+      doc.id,
+      doc.participants_id,
+      doc.max_strength,
     ]);
   });
   res.json({ message: attributeList });
@@ -32,6 +35,9 @@ router.get("/basketball", async (req, res) => {
         "hrs",
       doc.content,
       doc.max_strength.toString() + " slots",
+      doc.id,
+      doc.participants_id,
+      doc.max_strength,
     ]);
   });
   res.json({ message: attributeList });
@@ -49,6 +55,9 @@ router.get("/cricket", async (req, res) => {
         "hrs",
       doc.content,
       doc.max_strength.toString() + " slots",
+      doc.id,
+      doc.participants_id,
+      doc.max_strength,
     ]);
   });
   res.json({ message: attributeList });
@@ -66,6 +75,9 @@ router.get("/football", async (req, res) => {
         "hrs",
       doc.content,
       doc.max_strength.toString() + " slots",
+      doc.id,
+      doc.participants_id,
+      doc.max_strength,
     ]);
   });
   res.json({ message: attributeList });
@@ -83,6 +95,9 @@ router.get("/hockey", async (req, res) => {
         "hrs",
       doc.content,
       doc.max_strength.toString() + " slots",
+      doc.id,
+      doc.participants_id,
+      doc.max_strength,
     ]);
   });
   res.json({ message: attributeList });
@@ -100,6 +115,9 @@ router.get("/squash", async (req, res) => {
         "hrs",
       doc.content,
       doc.max_strength.toString() + " slots",
+      doc.id,
+      doc.participants_id,
+      doc.max_strength,
     ]);
   });
   res.json({ message: attributeList });
@@ -117,6 +135,9 @@ router.get("/table_tennis", async (req, res) => {
         "hrs",
       doc.content,
       doc.max_strength.toString() + " slots",
+      doc.id,
+      doc.participants_id,
+      doc.max_strength,
     ]);
   });
   res.json({ message: attributeList });
@@ -134,6 +155,9 @@ router.get("/tennis", async (req, res) => {
         "hrs",
       doc.content,
       doc.max_strength.toString() + " slots",
+      doc.id,
+      doc.participants_id,
+      doc.max_strength,
     ]);
   });
   res.json({ message: attributeList });
@@ -151,6 +175,9 @@ router.get("/volleyball", async (req, res) => {
         "hrs",
       doc.content,
       doc.max_strength.toString() + " slots",
+      doc.id,
+      doc.participants_id,
+      doc.max_strength,
     ]);
   });
   res.json({ message: attributeList });
@@ -168,6 +195,9 @@ router.get("/yoga", async (req, res) => {
         "hrs",
       doc.content,
       doc.max_strength.toString() + " slots",
+      doc.id,
+      doc.participants_id,
+      doc.max_strength,
     ]);
   });
   res.json({ message: attributeList });

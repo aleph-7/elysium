@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import user_profile_picture from "./assets/user_profile_picture.jpeg";
 import "./Header.css";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { SidebarData } from "./SidebarData";
+import { SidebarData_PhysicalWellness } from "./SidebarData_PhysicalWellness";
+import { SidebarData_MentalWellness } from "./SidebarData_MentalWellness";
 import counsellor from "./assets/counsellor.png";
 import { FaPenNib } from "react-icons/fa";
 
@@ -35,9 +36,13 @@ function Header() {
           />
 
           <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
-            <div className="cross" onClick={()=>{showSidebar;
-            window.location.pathname = "/";
-            }}>
+            <div
+              className="cross"
+              onClick={() => {
+                showSidebar;
+                window.location.pathname = "/";
+              }}
+            >
               <FaTimes
                 size={40}
                 style={{
@@ -51,7 +56,27 @@ function Header() {
               <li className="section">
                 physical wellness
                 <ul className="SidebarList">
-                  {SidebarData.map((val, key) => {
+                  {SidebarData_PhysicalWellness.map((val, key) => {
+                    return (
+                      <li
+                        key={key}
+                        className="row"
+                        onClick={() => {
+                          window.location.pathname = val.link;
+                        }}
+                      >
+                        <div className="row">
+                          {val.icon} {val.title}
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </li>
+              <li className="section">
+                mental wellness
+                <ul className="SidebarList">
+                  {SidebarData_MentalWellness.map((val, key) => {
                     return (
                       <li
                         key={key}
@@ -75,7 +100,7 @@ function Header() {
                   <li
                     className="row"
                     onClick={() => {
-                      window.location.pathname = "/counsellor";
+                      window.location.pathname = "/self-help";
                     }}
                   >
                     <div>
@@ -90,7 +115,7 @@ function Header() {
                   <li
                     className="row"
                     onClick={() => {
-                      window.location.pathname = "/";
+                      window.location.pathname = "/self-help";
                     }}
                   >
                     <div>
@@ -123,9 +148,13 @@ function Header() {
           </h2>
         </div>
         <div className="profile-image">
-          <img src={user_profile_picture} alt="user_profile_picture" onClick={() => {
-                      window.location.pathname = "/History";
-                    }}/>
+          <img
+            src={user_profile_picture}
+            alt="user_profile_picture"
+            onClick={() => {
+              window.location.pathname = "/History";
+            }}
+          />
         </div>
       </div>
     </div>

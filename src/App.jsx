@@ -14,14 +14,13 @@ import Volleyball from "./user/volleyball/Volleyball.jsx";
 import Badminton from "./user/badminton/Badminton";
 import Tennis from "./user/tennis/Tennis";
 import TableTennis from "./user/tabletennis/TableTennis.jsx";
-// import Swim from "./user/swimming/Swim.jsx";
+import Swim from "./user/swimming/Swim.jsx";
 import Squash from "./user/squash/Squash";
 import Football from "./user/football/Football";
 import Hockey from "./user/hockey/Hockey";
 
 import Gym from "./Gym/Gym.jsx";
 
-// import Volleyball from "./volleyball/Volleyball";
 // import LP1 from "./Landing_Page1/LP1.jsx";
 // import LP2 from "./Landing_Page2/LP2.jsx";
 import Signup from "./login/signup.jsx";
@@ -34,6 +33,9 @@ import History from "./user/history/History.jsx";
 import Coach_Dashboard from "./Dashboard/Coach/Coach_Dashboard.jsx";
 import SERVER_ROOT_PATH from "../config.js";
 import Yogaa from "./user/yoga/Yogaa.jsx";
+import Swimming from "./user/swim/Badminton.jsx";
+
+import Self_help from "./user/self-help/self_help.jsx";
 // import Coach from "./Dashboard/Coach/Coach.jsx";
 
 function App() {
@@ -74,15 +76,16 @@ function App() {
           {/* /* Sport Pages */}
           <Route path="/basketball" element={<Basketball />} />
           <Route path="/cricket" element={<Cricket />} />
-          <Route path="/volleyball" element={<Badminton />} />
+          <Route path="/volleyball" element={<Volleyball />} />
           <Route path="/badminton" element={<Badminton />} />
           <Route path="/tennis" element={<Tennis />} />
           <Route path="/tabletennis" element={<TableTennis />} />
-          {/* <Route path="/swimming" element={<Swim />} /> */}
+          <Route path="/swimming" element={<Swimming />} />
           <Route path="/squash" element={<Squash />} />
           <Route path="/football" element={<Football />} />
           <Route path="/hockey" element={<Hockey />} />
           <Route path="/yoga" element={<Yogaa />} />
+          <Route path="/self-help" element={<Self_help />} />
           {/* <Route path="/gym" element={<Gym />} />
            */}
         </Routes>

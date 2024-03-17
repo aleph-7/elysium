@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import Table_Tutorial from "../../../components/tutorials/table.jsx";
-import "./tutorial.css";
+import Table_Workshops from "../../../components/workshops/table.jsx";
+import "./workshop.css";
 import SERVER_ROOT_PATH from "../../../../../config.js";
 
-function Tutorial() {
+function Workshop() {
   const [message, setMessage] = useState("");
   const fetchInfo = async () => {
-    return await fetch(SERVER_ROOT_PATH + "/tutorials/basketball")
+    return await fetch(SERVER_ROOT_PATH + "/workshops/badminton")
       .then((res) => res.json())
       .then((data) => setMessage(data.message));
   };
@@ -16,8 +16,8 @@ function Tutorial() {
   }, []);
 
   return (
-    <div className="tutorial">
-      <Table_Tutorial
+    <div className="workshop">
+      <Table_Workshops
         noOfRows={message.length}
         noOfColumns={3}
         rowEntries={message}
@@ -26,4 +26,4 @@ function Tutorial() {
   );
 }
 
-export default Tutorial;
+export default Workshop;

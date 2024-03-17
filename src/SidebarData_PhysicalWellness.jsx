@@ -12,7 +12,7 @@ import { CgGym } from "react-icons/cg";
 import badminton from "./assets/badminton.png";
 import squash from "./assets/squash.png";
 
-export const SidebarData = [
+export const SidebarData_PhysicalWellness = [
   {
     title: "basketball",
     icon: <MdOutlineSportsBasketball size={14} />,

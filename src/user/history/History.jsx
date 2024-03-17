@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom/client";
 import "./History.css";
 import Table_History from "./components/table.jsx";
 import Greeting from "./components/greeting.jsx";
-import Heading from "./components/heading.jsx";
-import Info from "./components/info.jsx";
 import Header from "../../Header.jsx";
 const Name = "kushagra";
 const Message = "YOUR BOOKING HISTORY";

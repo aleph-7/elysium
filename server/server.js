@@ -14,11 +14,13 @@ app.use(parser.json());
 const User = require("./models/userDB").userSchema;
 const SportsBookings = require("./models/bookingsDB").sports_bookingsSchema;
 const Yoga_Sessions = require("./models/contentDB").yoga_sessionSchema;
+const Workshop = require("./models/contentDB").sport_workshopSchema;
 const Leaderboard = require("./models/leaderboardDB").leaderboardSchema;
 const Blog = require("./models/contentDB").blog_counsellorSchema;
 const Court = require("./models/courtDB").courtsSchema;
 const Availability =
   require("./models/contentDB").counsellor_availabilitySchema;
+const Gymbook = require("./models/bookingsDB").gym_bookingsSchema;
 
 app.get("/badminton/leaderboard", async (req, res) => {
   let attributeList;
@@ -34,6 +36,8 @@ app.use("/tutorials", tutorialsRoutes);
 //WORKSHOPS
 const workshopRoutes = require("./routes/workshop");
 app.use("/workshops", workshopRoutes);
+const applyWorkshopRoutes = require("./routes/apply_workshop");
+app.use("/apply_workshop", applyWorkshopRoutes);
 
 const userRoutes = require("./routes/user");
 app.use("/user", userRoutes);
@@ -41,6 +45,9 @@ app.use("/user", userRoutes);
 //Animesh dump imported..
 const bookingRoutes = require("./routes/algorithms/booking");
 app.use("/booking", bookingRoutes);
+
+const leaderboardRoutes = require("./routes/leaderboard");
+app.use("/leaderboard", leaderboardRoutes);
 
 //workshops
 
@@ -360,3 +367,44 @@ app.post("/coach/reserveCourt", async (req, res) => {
     res.status(500).json({ error: "Reservation failed" });
   }
 });
+
+//Apply functionality
+
+const Blogs_Posted_By_Counsellors =
+  require("./models/contentDB").blog_counsellorSchema;
+
+app.get("/self_help", async (req, res) => {
+  let attributeList;
+  await Blogs_Posted_By_Counsellors.find({}).then((results) => {
+    attributeList = results;
+    // .map((doc) => [doc.title]);
+  });
+  let len = attributeList.length;
+  let randomIndex = Math.floor(Math.random() * len);
+  res.json({ message: attributeList[randomIndex] });
+});
+
+const cron = require("node-cron");
+const request = require("request");
+
+// Define the URL of your endpoint
+const endpointUrl = "http://localhost:6300/booking/sport_booking";
+
+// Define the cron schedule (runs every day at 12:01 AM)
+cron.schedule(
+  "01 0 * * *",
+  () => {
+    // Make an HTTP GET request to your endpoint
+    request.get(endpointUrl, (error, response, body) => {
+      if (error) {
+        console.error("Error:", error);
+      } else {
+        console.log("Request sent successfully.");
+      }
+    });
+  },
+  {
+    scheduled: true,
+    timezone: "Asia/Kolkata",
+  }
+);

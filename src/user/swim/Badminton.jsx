@@ -1,8 +1,8 @@
 import React from "react";
-import Header from "../Header";
+import Header from "../../Header";
 import CardStack_sport from "./CardStack";
 
-function Cricket() {
+function Swimming() {
   return (
     <>
       <Header></Header>
@@ -11,4 +11,4 @@ function Cricket() {
   );
 }
 
-export default Cricket;
+export default Swimming;

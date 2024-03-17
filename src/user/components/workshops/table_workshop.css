@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+#mainTableDiv {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 40px;
+  font-family: Poppins;
+  margin-top: 2vh;
+  align-items: center;
+}
+
+#websiteTable {
+  width: 90%;
+  text-align: center;
+  gap: 40px;
+}
+
+#websiteTable td {
+  width: 30vw;
+}
+
+.websiteTableHeader {
+  font-size: 20px;
+  background-color: rgba(237, 186, 186, 0.68);
+  border-radius: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  justify-content: space-between;
+  display: flex;
+}
+
+.websiteTableHeader thead {
+  position: center;
+  width: 100%;
+  font-weight: bold;
+  line-height: 3rem;
+  font-family: "Poppins";
+}
+
+.websiteTableContent {
+  overflow-y: scroll;
+  max-height: 400px;
+  margin-top: 40px;
+  border: 1px solid #ff0000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  border-radius: 25px;
+  text-align: center;
+  justify-content: space-between;
+  display: flex;
+}
+.websiteTableContent td {
+  line-height: 1.6rem;
+  width: auto;
+}
+
+.book_workshop_tableentry {
+  display: flex;
+  flex-direction: row;
+  gap: 1vw;
+  justify-content: center;
+}
+
+.book_workshop_tableentry button {
+  position: relative;
+  border: none;
+  background: #22992e;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 21px;
+  color: #ffffff;
+  width: 10vw;
+  height: 40px;
+  border-radius: 25px;
+}
+
+.book_workshop_tableentry h2 {
+  margin-top: 0px;
+  line-height: 0.8rem;
+}
+
+.book_workshop_tableentry button:hover {
+  position: relative;
+  border: none;
+  background: #448e4c;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 21px;
+  color: #000000;
+  width: 15vh;
+  height: 40px;
+  border-radius: 25px;
+}
+
+/*KS*/

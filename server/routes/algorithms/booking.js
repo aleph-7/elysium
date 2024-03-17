@@ -28,22 +28,24 @@ router.get("/sport_booking", async (req, res) => {
   let formattedDate = currentDate.split("/").join("-");
   console.log(formattedDate);
 
-  await sportBooking.find({ booking_status: 0 }).then((results) => {
-    attributeList = results.map((doc) => [
-      doc._id,
-      doc.show_up_status,
-      doc.court_id,
-      doc.user_id,
-      doc.time_slot,
-      doc.type_of_sport,
-      doc.time_of_booking,
-      doc.booking_status,
-      doc.type_of_booking,
-      doc.date_slot,
-      doc.partners_id,
-      doc.no_partners,
-    ]);
-  });
+  await sportBooking
+    .find({ booking_status: 0, type_of_booking: 0 })
+    .then((results) => {
+      attributeList = results.map((doc) => [
+        doc._id,
+        doc.show_up_status,
+        doc.court_id,
+        doc.user_id,
+        doc.time_slot,
+        doc.type_of_sport,
+        doc.time_of_booking,
+        doc.booking_status,
+        doc.type_of_booking,
+        doc.date_slot,
+        doc.partners_id,
+        doc.no_partners,
+      ]);
+    });
 
   //add coach as well with record as 1
   for (let i = 0; i < attributeList.length; i++) {
@@ -89,17 +91,12 @@ router.get("/sport_booking", async (req, res) => {
         console.log(A);
         await badmintonLeaderboard.findOne({ user_id: b[3] }).then((B) => {
           console.log(B);
-          if (A != null && B != null) {
-            a_pos = A.position;
-            b_pos = B.position;
-            return a_pos - b_pos;
-          } else if (A == null && B != null) {
-            return -100000;
-          } else if (A != null && B == null) {
-            return 100000;
-          } else {
-            return 0;
-          }
+
+          if (A === null) a_pos = 1000000;
+          else a_pos = A.position;
+          if (B === null) b_pos = 1000000;
+          else b_pos = B.position;
+          return a_pos - b_pos;
           //   a_pos = A.position;
           //   b_pos = B.position;
           //   return a_pos - b_pos;
