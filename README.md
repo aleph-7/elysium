@@ -17,7 +17,7 @@ npm install
 ```bash
 cd server 
 npm install
-npm run dev
+node server.js
 ```
 - Head back to the main directory
 ```bash
