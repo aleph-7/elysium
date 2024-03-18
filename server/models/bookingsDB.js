@@ -25,7 +25,7 @@ const counsellor_appointmentsSchema = mongoose.Schema({
   program: String,
   department: String,
   hall: Number,
-  contact_number: Number,
+  contact_number: String,
 });
 
 const swim_gym_membershipsSchema = mongoose.Schema({
@@ -40,10 +40,7 @@ const swim_gym_membershipsSchema = mongoose.Schema({
 
 const { bookingDB } = connectBookingsDBs();
 module.exports = {
-  sportBookingsSchema: bookingDB.model(
-    "temp_sport_bookings",
-    sportBookingSchema
-  ),
+  sportBookingsSchema: bookingDB.model("sport_bookings", sportBookingSchema),
   counsellorAppointmentsSchema: bookingDB.model(
     "counsellor_appointments",
     counsellor_appointmentsSchema

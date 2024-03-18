@@ -26,7 +26,7 @@ const yoga_sessionSchema = mongoose.Schema({
   max_strength: Number,
   content: String,
   date_slot: String,
-  participant_id: [mongoose.ObjectId],
+  participants_id: [mongoose.ObjectId],
   yoga_instructor_user_id: mongoose.ObjectId,
   time_slot_start: Number,
   time_slot_end: Number,

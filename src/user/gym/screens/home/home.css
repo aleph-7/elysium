@@ -1,0 +1,90 @@
+.home-swimming .logo img {
+  width: 13vw;
+  height: 13vw;
+  position: absolute;
+  margin-top: 16.9vw;
+  margin-left: 34.45vw;
+  border-radius: 19.5vw;
+  box-shadow: rgba(0, 0, 0, 0.25);
+}
+
+.home-swimming .booknow-line1 {
+  color: rgb(255, 255, 255);
+  position: absolute;
+  margin-top: 1.95vw;
+  margin-left: 5.2vw;
+  font-size: 1.95vw;
+  font-weight: bold;
+  font-family: "Poppins";
+}
+
+.home-swimming .booknow-line2 {
+  color: rgb(255, 255, 255);
+  position: absolute;
+  margin-top: 3.25vw;
+  margin-left: 5.2vw;
+  font-size: 3.9vw;
+  font-weight: bold;
+  font-family: "Poppins";
+}
+
+.home-swimming .workshops-line1 {
+  color: rgb(255, 255, 255);
+  position: absolute;
+  text-align: right;
+  margin-top: 1.95vw;
+  margin-left: 60vw;
+  font-size: 1.95vw;
+  font-weight: bold;
+  font-family: "Poppins";
+}
+
+.home-swimming .workshops-line2 {
+  color: rgb(255, 255, 255);
+  position: absolute;
+  margin-top: 3.25vw;
+  margin-left: 54vw;
+  font-size: 3.9vw;
+  font-weight: bold;
+  font-family: "Poppins";
+}
+
+.home-swimming .tutorials-line1 {
+  color: rgb(255, 255, 255);
+  position: absolute;
+  text-align: right;
+  margin-top: 3.25vw;
+  margin-left: 58vw;
+  font-size: 3.9vw;
+  font-weight: bold;
+  font-family: "Poppins";
+}
+
+.home-swimming .tutorials-line2 {
+  color: rgb(255, 255, 255);
+  position: absolute;
+  margin-top: 1.95vw;
+  margin-left: 54vw;
+  font-size: 2.275vw;
+  font-weight: bold;
+  font-family: "Poppins";
+}
+
+.home-swimming .booknow img {
+  width: 37.62vw;
+  height: 36.3vw;
+  position: absolute;
+  margin-top: 1.32vw;
+  margin-left: 3.3vw;
+  border-radius: 1.65vw;
+  opacity: 0.7;
+}
+
+.home-swimming .tutorials img {
+  width: 34.32vw;
+  height: 36.3vw;
+  margin-left: 42.24vw;
+  border-radius: 1.65vw;
+  opacity: 0.7;
+  margin-top: 1.32vw;
+}

@@ -86,6 +86,8 @@ router.post("/court_name_entry", async (req, res) => {
 
 router.post("/fill_entries", async (req, res) => {
   const { court_name, type_of_sport } = req.body;
+  console.log(court_name);
+  console.log(type_of_sport);
   let doc;
   if (type_of_sport === "badminton") {
     doc = await BadmintonCourt.findOne({ court_name: court_name });

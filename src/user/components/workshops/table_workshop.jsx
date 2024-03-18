@@ -98,11 +98,14 @@ const Table_Workshop = ({ sport, noOfRows, noOfColumns, rowEntries }) => {
       const participantsIdArray = rowEntries_withHeader[rowIndex][4];
 
       // Check if participantsIdArray is defined and not null
-      if (participantsIdArray && participantsIdArray.length > 0) {
+      if (participantsIdArray && participantsIdArray.length >= 0) {
         // Check if the user's ID exists in the participants_id array
         const isUserApplied = participantsIdArray.includes(
           localStorage.getItem("userMongoId")
         );
+        if (isUserApplied == null) {
+          isUserApplied = false;
+        }
 
         for (let j = 0; j < noOfColumns - 1; j++) {
           columns.push(

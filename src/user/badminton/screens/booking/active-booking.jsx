@@ -14,40 +14,67 @@ function ActiveBooking() {
 
   const userid = localStorage.getItem("userMongoId");
   const sport = localStorage.getItem("type_of_sport");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     // Check if users list is empty
     if (users.length === 0) {
       alert("Please add at least one playmate!");
       return;
     }
 
-    const res = await fetch(SERVER_ROOT_PATH + "/badminton/active_booking", {
+    const res = await fetch(`${SERVER_ROOT_PATH}/checkAppliedTimeslots`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        slot: selectedTime,
-        type: "active",
-        players: users,
-        user_id: userid,
-        sport_type: "badminton",
+        user_id: localStorage.getItem("userMongoId"),
+        selectedTime: selectedTime,
       }),
     });
-    setSelectedTime("");
-    setUsers([]);
-    setInputValue("");
-    setAllowPlayerSelection(false);
-    setShowWarning(false);
 
-    if (res.ok) {
-      // Reset form after successful submission
+    const data = await res.json();
+
+    if (data.alreadyApplied) {
+      alert("You have already applied for this timeslot!");
+      return;
+    }
+
+    const bookingRes = await fetch(
+      SERVER_ROOT_PATH + "/badminton/active_booking",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          slot: selectedTime,
+          type: "active",
+          players: users,
+          user_id: userid,
+          sport_type: "badminton",
+        }),
+      }
+    );
+
+    if (bookingRes.ok) {
       e.target.reset();
-      // Show alert for successful booking
       alert("Booking successful!");
+      setSelectedTime("");
+      setUsers([]);
+      setInputValue("");
+      setAllowPlayerSelection(false);
+      setShowWarning(false);
+      // Reset form after successful submission
+
+      // Show alert for successful booking
     } else {
+      setSelectedTime("");
+      setUsers([]);
+      setInputValue("");
+      setAllowPlayerSelection(false);
+      setShowWarning(false);
       // Handle error case
       alert("Booking failed. Please try again.");
     }
@@ -68,6 +95,15 @@ function ActiveBooking() {
   };
 
   const handleAddUser = async () => {
+    const loggedInUsername = localStorage.getItem("userId");
+
+    if (inputValue === loggedInUsername) {
+      // Alert the user that they cannot add themselves
+      alert("You cannot add yourself to the list.");
+      setInputValue("");
+      return;
+    }
+
     if (inputValue.trim() !== "") {
       const response = await fetch(
         `${SERVER_ROOT_PATH}/checkUser/${inputValue}`

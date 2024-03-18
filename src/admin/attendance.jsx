@@ -24,6 +24,7 @@ const Attendance = (type_of_sport) => {
     position_4: "",
     type_of_sport: type_of_sport,
   });
+  console.log(input.type_of_sport);
 
   const [error, setError] = useState({
     court_name: "",

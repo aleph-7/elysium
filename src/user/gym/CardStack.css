@@ -6,7 +6,7 @@
   height: 50vh;
   margin-top: -30px;
 }
-.nav-swimming {
+.nav-gym {
   margin-left: 10%;
   margin-right: 10%;
   margin-top: 2%;
@@ -15,16 +15,16 @@
   align-items: center;
 }
 
-.nav-swimming ul {
+.nav-gym ul {
   display: flex;
   justify-content: space-between;
 }
 
-.nav-swimming ul li {
+.nav-gym ul li {
   list-style: none;
 }
 
-.nav-swimming ul li:last-child {
+.nav-gym ul li:last-child {
   margin-right: 0;
   .wrapperStyle {
     display: flex;
@@ -34,7 +34,7 @@
     height: 50vh;
     margin-top: -30px;
   }
-  .nav-swimming {
+  .nav-gym {
     margin-left: 10%;
     margin-right: 10%;
     margin-top: 2%;
@@ -43,20 +43,20 @@
     align-items: center;
   }
 
-  .nav-swimming ul {
+  .nav-gym ul {
     display: flex;
     justify-content: space-between;
   }
 
-  .nav-swimming ul li {
+  .nav-gym ul li {
     list-style: none;
   }
 
-  .nav-swimming ul li:last-child {
+  .nav-gym ul li:last-child {
     margin-right: 0;
   }
 
-  .nav-swimming ul li a {
+  .nav-gym ul li a {
     display: block;
     text-decoration: none;
     color: black;
@@ -65,7 +65,7 @@
     border-radius: 0.5rem;
   }
 
-  .nav-swimming ul li button {
+  .nav-gym ul li button {
     height: 40px;
     width: 25vw;
     background: rgba(237, 186, 186, 0.33);
@@ -77,12 +77,12 @@
     font-family: "Poppins";
   }
 
-  .nav-swimming ul li button:hover {
+  .nav-gym ul li button:hover {
     background: rgba(237, 186, 186, 0.5);
   }
 }
 
-.nav-swimming ul li a {
+.nav-gym ul li a {
   display: block;
   text-decoration: none;
   color: black;
@@ -91,9 +91,9 @@
   border-radius: 0.5rem;
 }
 
-.nav-swimming ul li button {
+.nav-gym ul li button {
   height: 40px;
-  width: 18vw;
+  width: 12vw;
   background: rgba(237, 186, 186, 0.33);
   border-radius: 10px;
   border: none;
@@ -103,6 +103,6 @@
   font-family: "Poppins";
 }
 
-.nav-swimming ul li button:hover {
+.nav-gym ul li button:hover {
   background: rgba(237, 186, 186, 0.5);
 }

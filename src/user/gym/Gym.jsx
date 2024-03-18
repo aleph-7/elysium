@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../Header";
 import CardStack_sport from "./CardStack";
 
-function Yogaa() {
+function Gym() {
   return (
     <>
       <Header></Header>
@@ -11,4 +11,4 @@ function Yogaa() {
   );
 }
 
-export default Yogaa;
+export default Gym;

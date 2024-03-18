@@ -22,12 +22,14 @@ import TableTennis from "./user/tabletennis/TableTennis.jsx";
 import Squash from "./user/squash/Squash";
 import Football from "./user/football/Football";
 import Hockey from "./user/hockey/Hockey";
+import Yoga from "./user/yoga/Yoga.jsx";
+import Swimming from "./user/swimming/Swimming.jsx";
+import Gym from "./user/gym/Gym.jsx";
 
 // import Counsellor from "./counsellor/Counsellor.jsx";
 // import Yoga_Instructor from "./Dashboard/Yoga_Instructor/Yoga_Instructor.jsx";
 import Coach_Dashboard from "./Dashboard/Coach/Coach_Dashboard.jsx";
-import Yogaa from "./user/yoga/Yogaa.jsx";
-import Swimming from "./user/swimming/Swimming.jsx";
+
 import Self_help from "./user/self-help/self_help.jsx";
 import History from "./user/history/History.jsx";
 
@@ -35,8 +37,6 @@ import History from "./user/history/History.jsx";
 import ProtectedRoute_Admin from "./protected_routes_admin.jsx";
 import Attendance from "./admin/attendance.jsx";
 // import Gym_Instructor from "./Dashboard/Gym_Instructor/Gym_Instructor.jsx";
-
-import SERVER_ROOT_PATH from "../config.js";
 
 // import Coach from "./Dashboard/Coach/Coach.jsx";
 
@@ -72,12 +72,16 @@ function App() {
             <Route path="/squash" element={<Squash />} />
             <Route path="/football" element={<Football />} />
             <Route path="/hockey" element={<Hockey />} />
-            <Route path="/yoga" element={<Yogaa />} />
+            <Route path="/yoga" element={<Yoga />} />
+            <Route path="/gym" element={<Gym />} />
             <Route path="/self-help" element={<Self_help />} />
           </Route>
 
           <Route element={<ProtectedRoute_Admin />}>
-            <Route path="/admin/attendance" element={<Attendance />} />
+            <Route
+              path="/admin/attendance"
+              element={<Attendance type_of_sport={"tennis"} />}
+            />
           </Route>
 
           <Route path="/admin/coach" element={<Coach_Dashboard />} />

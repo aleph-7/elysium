@@ -1,38 +1,32 @@
 import React from "react";
 import { motion } from "framer-motion";
-import booknow from "../assets/badminton/booknow.png";
-import tutorials from "../assets/badminton/tutorials.png";
-import workshops from "../assets/badminton/workshops.png";
-import logo from "../assets/badminton/logo.png";
+import booknow from "../assets/swimming/booknow.jpeg";
+import tutorials from "../assets/swimming/tutorials.jpeg";
+//import workshops from "../assets/badminton/workshops.png";
+import logo from "../assets/swimming/logo.png";
 import move from "lodash-move";
 import BookingApp from "./screens/booking/booking";
 import Workshop from "./screens/workshop/workshop";
 import Tutorial from "./screens/tutorial/tutorial";
+import Equipment from "./screens/equipment/equipment";
 import Leaderboard from "./screens/leaderboard/leaderboard";
 import "./CardStack.css";
 import "./screens/home/home.css";
 
-/* THIS CODE CONTAINS THE SWAPPABLE CARDS AND THE nav-badmintonIGATION BAR, ALONG WITH ALL COMPONENTS CONNECTED */
+/* THIS CODE CONTAINS THE SWAPPABLE CARDS AND THE nav-gymIGATION BAR, ALONG WITH ALL COMPONENTS CONNECTED */
 /* Enter the list of components in the CARD_INDICES array and the corresponding button labels in the BUTTON_LABELS array */
 /* Do not alter the internal working of the code */
 /* The linked pages in the function also need to be changed, that is, the pages that are to be displayed on the cards. Please do so only at the indicated spot.*/
 /* The rest of the code is not to be altered */
 
-const CARD_INDICES = ["1", "2", "3", "4", "5"];
-const BUTTON_LABELS = [
-  "home",
-  "booknow",
-  "workshops",
-  "tutorials",
-  "leaderboard",
-];
+const CARD_INDICES = ["1", "2", "3", "4"];
+const BUTTON_LABELS = ["home", "get slot", "tutorials", "show pass"];
 
 /*INTERNAL WORKING*/
 const CARD_OFFSET = 6;
 const SCALE_FACTOR = 0.06;
 let variable = "1";
 const CardStack = () => {
-  var globalindex = 1;
   const [cards, setCards] = React.useState(CARD_INDICES);
   const bringToFront = (from) => {
     setCards(move(cards, from, 0));
@@ -70,7 +64,7 @@ const CardStack = () => {
 
   return (
     <div>
-      <div className="nav-badminton">
+      <div className="nav-gym">
         <ul>{renderButtons()}</ul>
       </div>
       <div className="wrapperStyle">
@@ -91,7 +85,7 @@ const CardStack = () => {
               >
                 {/* //CHANGE THE PAGES HERE */}
                 {color == "1" ? (
-                  <div className="home">
+                  <div className="home-swimming">
                     <div className="booknow">
                       <img
                         src={booknow}
@@ -108,30 +102,21 @@ const CardStack = () => {
                       />
                       {/* click image functionality */}
                     </div>
-                    <div className="workshops">
-                      <img
-                        src={workshops}
-                        alt="workshops"
-                        onClick={() => bringToFront(setIndex(3))}
-                      />
-                      {/* click image functionality */}
-                    </div>
                     <div className="logo">
                       <img src={logo} alt="logo" />
                       {/* click image functionality */}
                     </div>
                     <div class="booknow-line1">avail all facilities!</div>
                     <div class="booknow-line2">book now!</div>
-                    <div class="workshops-line1">coaches teach!</div>
-                    <div class="workshops-line2">workshops</div>
                     <div class="tutorials-line1">tutorials</div>
                     <div class="tutorials-line2">you can learn too!</div>
                   </div>
                 ) : null}
                 {color == "2" ? <BookingApp /> : null}
-                {color == "3" ? <Workshop /> : null}
-                {color == "4" ? <Tutorial /> : null}
-                {color == "5" ? <Leaderboard /> : null}
+                {color == "3" ? <Tutorial /> : null}
+                {color == "4" ? <Equipment /> : null}
+                {color == "6" ? <Leaderboard /> : null}
+                {/* //CHANGE THE PAGES HERE */}
               </motion.li>
             );
           })}
