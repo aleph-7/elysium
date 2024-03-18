@@ -12,10 +12,21 @@ git clone https://github.com/aleph-7/elysium
 - Install the dependenicies using the following commands
 ```bash
 npm install 
+```
+- Head to the server directory , install the dependencies and run the server
+```bash
 cd server 
 npm install
+npm run dev
+```
+- Head back to the main directory
+```bash
+cd ..
 ```
 - Navigate to the directory of the repository
-- Run the following command in the terminal npm run dev
+- Run the following command in the terminal 
+```bash
+npm run dev
+```
 - This will give the local host port on which the website will run
-- Copy the link and then paste it on a browser
+- Copy the link and then paste it on the browser
