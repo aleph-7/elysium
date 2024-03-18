@@ -356,7 +356,7 @@ app.post("/badminton/active_booking", async (req, res) => {
     const hour = parseInt(name.split(":")[0], 10);
     var date = new Date();
     const current_date =
-      date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+     date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
     const booking = new SportsBookings({
       user_id: req.body.user_id,
       time_slot: hour,
@@ -422,7 +422,7 @@ app.post("/badminton/pre_booking", async (req, res) => {
     const hour = parseInt(name.split(":")[0], 10);
     var date = new Date();
     const current_date =
-      date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+      date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
     const booking = new SportsBookings({
       user_id: req.body.user_id,
       time_slot: hour,
