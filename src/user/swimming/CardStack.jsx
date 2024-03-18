@@ -1,9 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
-import booknow from "../assets/badminton/booknow.png";
-import tutorials from "../assets/badminton/tutorials.png";
-import workshops from "../assets/badminton/workshops.png";
-import logo from "../assets/badminton/logo.png";
+import booknow from "../assets/swimming/booknow.jpeg";
+import tutorials from "../assets/swimming/tutorials.jpeg";
+//import workshops from "../assets/badminton/workshops.png";
+import logo from "../assets/swimming/logo.png";
 import move from "lodash-move";
 import BookingApp from "./screens/booking/booking";
 import Workshop from "./screens/workshop/workshop";
