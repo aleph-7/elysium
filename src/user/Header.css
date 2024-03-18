@@ -1,12 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
 
-.header {
+.header-user {
   display: flex;
   justify-content: space-between;
   padding-right: 5%;
 }
 
-.center-text > h1 {
+.center-text .h1 {
   display: flex;
   justify-content: center;
   text-align: center;
@@ -19,7 +19,7 @@
   line-height: 1rem;
 }
 
-.center-text > h2 {
+.center-text .h2 {
   display: flex;
   justify-content: center;
   text-align: center;
@@ -32,7 +32,7 @@
   line-height: 18px;
 }
 
-.profile-image img {
+.profile-image .img {
   margin-top: 10px;
   border-radius: 50%;
   width: 100px;
@@ -72,6 +72,7 @@
   padding-top: 15px;
 }
 .section {
+  text-align: left;
   color: #9f9595;
   list-style-type: none;
 }
@@ -80,6 +81,7 @@
   height: auto;
   padding-left: 10px;
   color: white;
+  text-align: left;
   list-style-type: none;
 }
 .row:hover {

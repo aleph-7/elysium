@@ -17,7 +17,7 @@ import Basketball from "./user/basketball/Basketball";
 import Cricket from "./user/cricket/Cricket";
 import Volleyball from "./user/volleyball/Volleyball.jsx";
 import Badminton from "./user/badminton/Badminton";
-// import Tennis from "./user/tennis/Tennis";
+import Tennis from "./user/tennis/Tennis";
 // import TableTennis from "./user/tabletennis/TableTennis.jsx";
 // import Squash from "./user/squash/Squash";
 import Football from "./user/football/Football";
@@ -28,10 +28,12 @@ import Coach_Dashboard from "./Dashboard/Coach/Coach_Dashboard.jsx";
 import Yogaa from "./user/yoga/Yogaa.jsx";
 import Swimming from "./user/swimming/Swimming.jsx";
 import Self_help from "./user/self-help/self_help.jsx";
+import History from "./user/history/History.jsx";
 
-// import LP1 from "./Landing_Page1/LP1.jsx";
-// import LP2 from "./Landing_Page2/LP2.jsx";
-// import History from "./user/history/History.jsx";
+//Admin-Attendance Pages
+import ProtectedRoute_Admin from "./protected_routes_admin.jsx";
+import Attendance from "./admin/attendance.jsx";
+// import Gym_Instructor from "./Dashboard/Gym_Instructor/Gym_Instructor.jsx";
 
 import SERVER_ROOT_PATH from "../config.js";
 
@@ -44,16 +46,27 @@ function App() {
       {/* <LP1 /> */}
       <BrowserRouter>
         <Routes>
+          {/* <Route path="/sjs" element={<Gym_Instructor />} /> */}
+          <Route
+            path="/ss"
+            element={
+              <Attendance
+                type_of_sport={localStorage.getItem("type_of_sport")}
+              />
+            }
+          />
           <Route index element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route element={<ProtectedRoute_User />}>
+            <Route path="/history" element={<History />} />
             <Route path="/home" element={<Badminton />} />
             <Route path="/basketball" element={<Basketball />} />
             <Route path="/cricket" element={<Cricket />} />
             <Route path="/volleyball" element={<Volleyball />} />
             <Route path="/badminton" element={<Badminton />} />
-            {/* <Route path="/tennis" element={<Tennis />} />
+            <Route path="/tennis" element={<Tennis />} />
+            {/* 
             <Route path="/tabletennis" element={<TableTennis />} /> */}
             <Route path="/swimming" element={<Swimming />} />
             {/* <Route path="/squash" element={<Squash />} /> */}
@@ -62,6 +75,11 @@ function App() {
             <Route path="/yoga" element={<Yogaa />} />
             <Route path="/self-help" element={<Self_help />} />
           </Route>
+
+          <Route element={<ProtectedRoute_Admin />}>
+            <Route path="/admin/attendance" element={<Attendance />} />
+          </Route>
+
           <Route path="/admin/coach" element={<Coach_Dashboard />} />
         </Routes>
       </BrowserRouter>

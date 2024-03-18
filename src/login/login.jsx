@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./login.css";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import SERVER_ROOT_PATH from "../../config";
 
 const Login = () => {
@@ -95,7 +94,11 @@ const Login = () => {
           console.log("User MongoID:", data.userMongoId);
           console.log("Type of Sport:", data.type_of_sport);
           // Redirect to home page
-          window.location.href = "/home";
+          if (data.category == "6") {
+            window.location.href = "/admin/attendance";
+          } else {
+            window.location.href = "/home";
+          }
         })
         .catch((error) => {
           // Handle errors (401, 400, 500, network errors, etc.)

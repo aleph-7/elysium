@@ -35,10 +35,10 @@ function PreBooking() {
       },
       body: JSON.stringify({
         slot: selectedTime,
-        type: "",
+        type: "pre",
         players: users,
         user_id: userid,
-        sport_type: sport,
+        sport_type: "badminton",
       }),
     });
 
@@ -47,6 +47,16 @@ function PreBooking() {
     setInputValue("");
     setAllowPlayerSelection(false);
     setShowWarning(false);
+
+    if (res.ok) {
+      // Reset form after successful submission
+      e.target.reset();
+      // Show alert for successful booking
+      alert("Booking successful!");
+    } else {
+      // Handle error case
+      alert("Booking failed. Please try again.");
+    }
   };
 
   const handleSelectChange = (event) => {
@@ -60,7 +70,7 @@ function PreBooking() {
   const handleAddUser = async () => {
     if (inputValue.trim() !== "") {
       const response = await fetch(
-        SERVER_ROOT_PATH + "/checkUser/${inputValue}"
+        SERVER_ROOT_PATH + "/checkUser/" + `${inputValue}`
       );
       const data = await response.json();
 
@@ -84,7 +94,7 @@ function PreBooking() {
 
   return (
     <form
-      className="active-booking-form"
+      className="active-booking-form-badminton"
       onSubmit={(e) => {
         handleSubmit(e);
         e.target.reset();

@@ -4,6 +4,15 @@ import "./Header.css";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { FaPenNib } from "react-icons/fa";
 
+function logout() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("userId");
+  localStorage.removeItem("category");
+  localStorage.removeItem("user_email");
+  localStorage.removeItem("userMongoId");
+  localStorage.removeItem("type_of_sport");
+  window.location.pathname = "/";
+}
 function Header() {
   const currentTime = new Date().getHours();
   let greeting;
@@ -19,7 +28,9 @@ function Header() {
   return (
     <div className="Header">
       <div className="header">
-        <div className="navbar"></div>
+        <div className="navbar">
+          <button onClick={logout}>log out</button>
+        </div>
 
         <div className="center-text">
           <h1>{greeting}</h1>

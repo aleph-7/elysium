@@ -3,7 +3,6 @@ mongoose.pluralize(null);
 const { connectBookingsDBs } = require("../databases/bookingsDB");
 
 const sportBookingSchema = mongoose.Schema({
-  _id: mongoose.ObjectId,
   show_up_status: Number,
   user_id: mongoose.ObjectId,
   time_slot: Number,
@@ -16,33 +15,27 @@ const sportBookingSchema = mongoose.Schema({
   no_partners: Number,
   court_id: mongoose.ObjectId,
 });
-
-const gymSchema = new mongoose.Schema({
-  month: {
-    type: Number,
-    required: true,
-  },
-  time_slot: {
-    type: Number,
-    required: true,
-  },
-  user_id: {
-    type: mongoose.ObjectId,
-    required: true,
-  },
-  type: {
-    type: Number,
-    required: true,
-  }, //0-gym and 1-pool
-  year: {
-    type: Number,
-    required: true,
-  },
+const counsellor_appointmentsSchema = mongoose.Schema({
+  user_id: mongoose.ObjectId,
+  time_slot: Number,
+  date_slot: String,
+  counsellor_user_id: mongoose.ObjectId,
   booking_status: Number,
-  time_of_booking: {
-    type: Date,
-    required: true,
-  },
+  time_of_booking: Date,
+  program: String,
+  department: String,
+  hall: Number,
+  contact_number: Number,
+});
+
+const swim_gym_membershipsSchema = mongoose.Schema({
+  user_id: mongoose.ObjectId,
+  time_slot: Number,
+  type: Number,
+  year: Number,
+  month: Number,
+  booking_status: Number,
+  time_of_booking: Date,
 });
 
 const { bookingDB } = connectBookingsDBs();
@@ -51,5 +44,12 @@ module.exports = {
     "temp_sport_bookings",
     sportBookingSchema
   ),
-  gymBookingsSchema: bookingDB.model("swim_gym_memberships", gymSchema),
+  counsellorAppointmentsSchema: bookingDB.model(
+    "counsellor_appointments",
+    counsellor_appointmentsSchema
+  ),
+  swimGymMembershipsSchema: bookingDB.model(
+    "swim_gym_memberships",
+    swim_gym_membershipsSchema
+  ),
 };

@@ -8,7 +8,6 @@ import move from "lodash-move";
 import BookingApp from "./screens/booking/booking";
 import Workshop from "./screens/workshop/workshop";
 import Tutorial from "./screens/tutorial/tutorial";
-import Equipment from "./screens/equipment/equipment";
 import Leaderboard from "./screens/leaderboard/leaderboard";
 import "./CardStack.css";
 import "./screens/home/home.css";
@@ -19,13 +18,12 @@ import "./screens/home/home.css";
 /* The linked pages in the function also need to be changed, that is, the pages that are to be displayed on the cards. Please do so only at the indicated spot.*/
 /* The rest of the code is not to be altered */
 
-const CARD_INDICES = ["1", "2", "3", "4", "5", "6"];
+const CARD_INDICES = ["1", "2", "3", "4", "5"];
 const BUTTON_LABELS = [
   "home",
   "booknow",
   "workshops",
   "tutorials",
-  "equipment",
   "leaderboard",
 ];
 
@@ -133,9 +131,7 @@ const CardStack = () => {
                 {color == "2" ? <BookingApp /> : null}
                 {color == "3" ? <Workshop /> : null}
                 {color == "4" ? <Tutorial /> : null}
-                {color == "5" ? <Equipment /> : null}
-                {color == "6" ? <Leaderboard /> : null}
-                {/* //CHANGE THE PAGES HERE */}
+                {color == "5" ? <Leaderboard /> : null}
               </motion.li>
             );
           })}

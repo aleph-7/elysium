@@ -1,0 +1,5 @@
+.gymstatistics-container Table {
+    width: 100%;
+    color: black;
+    overflow-y:scroll;
+}

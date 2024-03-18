@@ -43,7 +43,7 @@ const Table_Tutorial = ({ noOfRows, noOfColumns, rowEntries }) => {
             "link"
           ) : (
             <a href={rowEntries_withHeader[rowIndex][noOfColumns - 1]}>
-              <button>click here!</button>
+              <button className="click-button">click here!</button>
             </a>
           )
         ) : (

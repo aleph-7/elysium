@@ -1,0 +1,157 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap");
+/* @font-face {
+  font-family: "Daydream";
+  src: url(src/assets/fonts/daydream.ttf) format("ttf");
+} */
+body {
+  font-family: "Poppins", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #faf0f8;
+  color: #000000;
+}
+
+.container-master_ad {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  width: 60vw;
+  background-color: #faf0f8;
+  height: 60vh;
+}
+.container-master_ad .container_ad {
+  background-color: #faf0f8;
+  height: 100%;
+  background: url("assets/attendance_image.png");
+  background-size: cover;
+  /* background-position: right;
+  background-repeat: no-repeat; */
+}
+
+.container-master_ad .text_ad {
+  font-weight: 100;
+}
+
+.container-master_ad .inputs_ad {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  opacity: 50%;
+  text-align: left;
+  margin-left: 5%;
+}
+.container-master_ad .content_ad {
+  margin-top: 10vh;
+}
+
+.container-master_ad .username_div_ad {
+  background-color: #d9d9d9;
+  border-radius: 25px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 15px;
+  height: 5vh;
+  width: 90%;
+  border: none;
+  padding-left: 20px;
+  color: #000000;
+}
+.container-master_ad .inputs_ad select {
+  background-color: #d9d9d9;
+  border-radius: 25px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 15px;
+  height: 5vh;
+  width: 73%;
+  border: none;
+  padding-left: 20px;
+  color: #000000;
+}
+.container-master_ad .input2_ad {
+  display: flex;
+  width: 72%;
+  gap: 5%;
+}
+.container-master_ad .input2_ad form {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 100%;
+}
+
+.container-master_ad .input2_ad input[type="password"] {
+  padding-left: 20px;
+  width: 70%;
+}
+
+.container-master_ad .inputs_ad input::placeholder {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 15px;
+  color: #000000;
+}
+
+.container-master_ad .submit-container_ad {
+  display: flex;
+  width: 30vw;
+  height: 5vh;
+  cursor: pointer;
+  border-radius: 25px;
+  margin-top: 20px;
+  margin-left: 5%;
+  overflow: hidden;
+  gap: 5%;
+}
+
+.container-master_ad .submit-container_ad :hover {
+  color: #faf0f8;
+}
+
+.container-master_ad .submit-container_ad button {
+  background-color: #d292e2;
+  border: none;
+  font-weight: 700;
+  font-family: "Poppins";
+  font-style: normal;
+  font-size: 20px;
+  border-radius: 25px;
+  width: 40%;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin-top: -2%;
+}
+.container-master_ad .attendanceDropDown_ad {
+  background-color: rgb(146, 197, 226, 1) !important;
+  width: 50% !important;
+}
+.container-master_ad .positionDropDown_ad {
+  background-color: rgb(146, 197, 226, 1) !important;
+  width: 50% !important;
+}
+.container-master_ad .courtNameDropDown_ad {
+  width: 50% !important;
+}
+
+.container-master_ad .username_div_ad {
+  background-color: #d9d9d9;
+  border-radius: 25px;
+  font-weight: 500;
+  font-size: 20px;
+}
+/* color: aqua;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: "Poppins";
+  font-style: normal;
+  font-size: 20px;
+  display: flex;
+  align-self: center;
+  line-height: 18px; */

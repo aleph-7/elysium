@@ -32,7 +32,6 @@
   line-height: 18px;
 }
 
-
 .profile-image img {
   margin-top: 10px;
   border-radius: 50%;
@@ -40,7 +39,6 @@
   height: 100px;
   overflow: hidden;
 }
-
 
 .cross {
   display: flex;
@@ -91,4 +89,34 @@
 
 .row {
   border-radius: 10px;
+}
+
+.navbar button {
+  background-color: #ff9898;
+  color: #000000;
+  border: none;
+  font-weight: 700;
+  font-family: "Poppins";
+  font-style: normal;
+  font-size: 20px;
+  border-radius: 25px;
+  width: 8vw;
+  height: 4vh;
+  transition: 0.5s;
+  margin-top: 4vh;
+  margin-left: 3vw;
+  cursor: pointer;
+}
+
+.navbar button:hover {
+  background-color: #ff0000;
+  color: #ffffff;
+  border: none;
+  font-weight: 700;
+  font-family: "Poppins";
+  font-style: normal;
+  font-size: 20px;
+  border-radius: 25px;
+  transition: 0.5s;
+  cursor: pointer;
 }

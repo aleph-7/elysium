@@ -36,4 +36,82 @@ router.get("/badminton", async (req, res) => {
   res.json({ message: finalattributeList });
 });
 
+router.get("/tennis", async (req, res) => {
+  let attributeList;
+  var finalattributeList = [];
+  await Leaderboard_Tennis.find({}).then((results) => {
+    attributeList = results.map((doc) => [doc.user_id, doc.position]);
+  });
+  for (let i = 0; i < attributeList.length; i++) {
+    let user_id = attributeList[i][0];
+    console.log(user_id);
+    try {
+      let user_name = await user.findOne({ _id: user_id });
+      if (!user_name) {
+        console.log("Anonymous");
+        finalattributeList.push(["Anonymous", attributeList[i][1]]);
+      } else {
+        console.log(user_name.username);
+        finalattributeList.push([user_name.username, attributeList[i][1]]);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  finalattributeList.sort((a, b) => a[1] - b[1]);
+  res.json({ message: finalattributeList });
+});
+
+router.get("/squash", async (req, res) => {
+  let attributeList;
+  var finalattributeList = [];
+  await Leaderboard_Squash.find({}).then((results) => {
+    attributeList = results.map((doc) => [doc.user_id, doc.position]);
+  });
+  for (let i = 0; i < attributeList.length; i++) {
+    let user_id = attributeList[i][0];
+    console.log(user_id);
+    try {
+      let user_name = await user.findOne({ _id: user_id });
+      if (!user_name) {
+        console.log("Anonymous");
+        finalattributeList.push(["Anonymous", attributeList[i][1]]);
+      } else {
+        console.log(user_name.username);
+        finalattributeList.push([user_name.username, attributeList[i][1]]);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  finalattributeList.sort((a, b) => a[1] - b[1]);
+  res.json({ message: finalattributeList });
+});
+
+router.get("/table_tennis", async (req, res) => {
+  let attributeList;
+  var finalattributeList = [];
+  await Leaderboard_TableTennis.find({}).then((results) => {
+    attributeList = results.map((doc) => [doc.user_id, doc.position]);
+  });
+  for (let i = 0; i < attributeList.length; i++) {
+    let user_id = attributeList[i][0];
+    console.log(user_id);
+    try {
+      let user_name = await user.findOne({ _id: user_id });
+      if (!user_name) {
+        console.log("Anonymous");
+        finalattributeList.push(["Anonymous", attributeList[i][1]]);
+      } else {
+        console.log(user_name.username);
+        finalattributeList.push([user_name.username, attributeList[i][1]]);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  finalattributeList.sort((a, b) => a[1] - b[1]);
+  res.json({ message: finalattributeList });
+});
+
 module.exports = router;

@@ -36,8 +36,8 @@ function Header() {
 
   return (
     <div className="Header">
-      <div className="header">
-        <div className="navbar">
+      <div className="header-user">
+        <div className="navbar-header">
           <FaBars
             onClick={showSidebar}
             size={60}

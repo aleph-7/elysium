@@ -12,7 +12,7 @@ app.use(cors());
 app.use(parser.json());
 
 const User = require("./models/userDB").userSchema;
-const SportsBookings = require("./models/bookingsDB").sports_bookingsSchema;
+const SportsBookings = require("./models/bookingsDB").sportBookingsSchema;
 const Yoga_Sessions = require("./models/contentDB").yoga_sessionSchema;
 const Workshop = require("./models/contentDB").sport_workshopSchema;
 const Leaderboard = require("./models/leaderboardDB").leaderboardSchema;
@@ -48,11 +48,12 @@ const bookingRoutes = require("./routes/algorithms/booking");
 app.use("/booking", bookingRoutes);
 const leaderboardRoutes = require("./routes/leaderboard");
 app.use("/leaderboard", leaderboardRoutes);
-
 //Listening to the server.
 app.listen(process.env.PORT || 6300, () => {
   console.log(`Server is running on port ${process.env.PORT}.`);
 });
+adminRoutes = require("./routes/admin");
+app.use("", adminRoutes);
 
 app.get("/message", (req, res) => {
   res.json({ message: "Hello from server!" });
@@ -443,3 +444,141 @@ app.post("/badminton/pre_booking", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
+// const Swim_Gym_Memberships =
+//   require("./models/bookingsDB").swimGymMembershipsSchema;
+
+// app.get("/get_statistics", async (req, res) => {
+//   let attributeList = [];
+//   let bookingJanuary = 0;
+//   let bookingFebruary = 0;
+//   let bookingMarch = 0;
+//   let bookingApril = 0;
+//   let bookingMay = 0;
+//   let bookingJune = 0;
+//   let bookingJuly = 0;
+//   let bookingAugust = 0;
+//   let bookingSeptember = 0;
+//   let bookingOctober = 0;
+//   let bookingNovember = 0;
+//   let bookingDecember = 0;
+
+//   let totalApplied = 0;
+//   let totalAccepted = 0;
+//   let totalRejected = 0;
+//   let totalPending = 0;
+
+//   await Swim_Gym_Memberships.find({ type: 0 })
+//     .then((results) => {
+//       attributeList.push(
+//         ...results.map((doc) => [doc.user_id, doc.month, doc.booking_status])
+//       );
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+
+//   finalAttributeList = [];
+//   let header = [];
+//   header.push("Metric");
+//   header.push("Value");
+//   finalAttributeList.push(header);
+//   let headerMonth_1 = [];
+//   headerMonth_1.push("January");
+//   finalAttributeList.push(headerMonth_1);
+//   let headerMonth_2 = [];
+//   headerMonth_2.push("February");
+//   finalAttributeList.push(headerMonth_2);
+//   let headerMonth_3 = [];
+//   headerMonth_3.push("March");
+//   finalAttributeList.push(headerMonth_3);
+//   let headerMonth_4 = [];
+//   headerMonth_4.push("April");
+//   finalAttributeList.push(headerMonth_4);
+//   let headerMonth_5 = [];
+//   headerMonth_5.push("May");
+//   finalAttributeList.push(headerMonth_5);
+//   let headerMonth_6 = [];
+//   headerMonth_6.push("June");
+//   finalAttributeList.push(headerMonth_6);
+//   let headerMonth_7 = [];
+//   headerMonth_7.push("July");
+//   finalAttributeList.push(headerMonth_7);
+//   let headerMonth_8 = [];
+//   headerMonth_8.push("August");
+//   finalAttributeList.push(headerMonth_8);
+//   let headerMonth_9 = [];
+//   headerMonth_9.push("September");
+//   finalAttributeList.push(headerMonth_9);
+//   let headerMonth_10 = [];
+//   headerMonth_10.push("October");
+//   finalAttributeList.push(headerMonth_10);
+//   let headerMonth_11 = [];
+//   headerMonth_11.push("November");
+//   finalAttributeList.push(headerMonth_11);
+//   let headerMonth_12 = [];
+//   headerMonth_12.push("December");
+//   finalAttributeList.push(headerMonth_12);
+//   let headerTotalApplied = [];
+//   headerTotalApplied.push("Total Applied");
+//   finalAttributeList.push(headerTotalApplied);
+//   let headerTotalAccepted = [];
+//   headerTotalAccepted.push("Total Accepted");
+//   finalAttributeList.push(headerTotalAccepted);
+//   let headerTotalRejected = [];
+//   headerTotalRejected.push("Total Rejected");
+//   finalAttributeList.push(headerTotalRejected);
+//   let headerTotalPending = [];
+//   headerTotalPending.push("Total Pending");
+//   finalAttributeList.push(headerTotalPending);
+
+//   for (i = 0; i < attributeList.length; i++) {
+//     if (attributeList[i][1] == 1) {
+//       bookingJanuary++;
+//     } else if (attributeList[i][1] == 2) {
+//       bookingFebruary++;
+//     } else if (attributeList[i][1] == 3) {
+//       bookingMarch++;
+//     } else if (attributeList[i][1] == 4) {
+//       bookingApril++;
+//     } else if (attributeList[i][1] == 5) {
+//       bookingMay++;
+//     } else if (attributeList[i][1] == 6) {
+//       bookingJune++;
+//     } else if (attributeList[i][1] == 7) {
+//       bookingJuly++;
+//     } else if (attributeList[i][1] == 8) {
+//       bookingAugust++;
+//     } else if (attributeList[i][1] == 9) {
+//       bookingSeptember++;
+//     } else if (attributeList[i][1] == 10) {
+//       bookingOctober++;
+//     } else if (attributeList[i][1] == 11) {
+//       bookingNovember++;
+//     } else if (attributeList[i][1] == 12) {
+//       bookingDecember++;
+//     }
+//     if (attributeList[i][2] == 0) totalPending++;
+//     else if (attributeList[i][2] == 1) totalAccepted++;
+//     else totalRejected++;
+//     totalApplied++;
+//   }
+//   finalAttributeList[1].push(bookingJanuary);
+//   finalAttributeList[2].push(bookingFebruary);
+//   finalAttributeList[3].push(bookingMarch);
+//   finalAttributeList[4].push(bookingApril);
+//   finalAttributeList[5].push(bookingMay);
+//   finalAttributeList[6].push(bookingJune);
+//   finalAttributeList[7].push(bookingJuly);
+//   finalAttributeList[8].push(bookingAugust);
+//   finalAttributeList[9].push(bookingSeptember);
+//   finalAttributeList[10].push(bookingOctober);
+//   finalAttributeList[11].push(bookingNovember);
+//   finalAttributeList[12].push(bookingDecember);
+//   finalAttributeList[13].push(totalApplied);
+//   finalAttributeList[14].push(totalAccepted);
+//   finalAttributeList[15].push(totalRejected);
+//   finalAttributeList[1].push(totalPending);
+
+//   res.json({ message: finalAttributeList });
+// });

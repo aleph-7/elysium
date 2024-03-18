@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { AiOutlineSearch } from "react-icons/ai";
 import "./subbooking.css";
 import SERVER_ROOT_PATH from "../../../../../config";
 
@@ -34,12 +33,24 @@ function ActiveBooking() {
         type: "active",
         players: users,
         user_id: userid,
-        sport_type: sport,
+        sport_type: "badminton",
       }),
     });
+    setSelectedTime("");
+    setUsers([]);
+    setInputValue("");
+    setAllowPlayerSelection(false);
+    setShowWarning(false);
 
-    // Reset form after submission
-    e.target.reset();
+    if (res.ok) {
+      // Reset form after successful submission
+      e.target.reset();
+      // Show alert for successful booking
+      alert("Booking successful!");
+    } else {
+      // Handle error case
+      alert("Booking failed. Please try again.");
+    }
   };
 
   const [selectedTime, setSelectedTime] = useState("");
@@ -59,7 +70,7 @@ function ActiveBooking() {
   const handleAddUser = async () => {
     if (inputValue.trim() !== "") {
       const response = await fetch(
-        SERVER_ROOT_PATH + "checkUser/${inputValue}"
+        `${SERVER_ROOT_PATH}/checkUser/${inputValue}`
       );
       const data = await response.json();
 
@@ -71,6 +82,7 @@ function ActiveBooking() {
           setShowWarning(true);
         }
       } else {
+        setInputValue("");
         alert("User doesn't exist!");
       }
     }
