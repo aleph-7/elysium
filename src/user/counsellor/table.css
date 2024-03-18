@@ -56,22 +56,18 @@
   font-size: 15px;
 }
 
-.accepted
-{
-  background-color: #22992E;
+.accepted {
+  background-color: #22992e;
   border-radius: 25px;
   color: #ffffff;
 }
-.rejected
-{
+.rejected {
   background-color: #ff0000;
   border-radius: 25px;
   color: #ffffff;
 }
-.pending
-{
-  background-color: #FF820E;
+.pending {
+  background-color: #ff820e;
   border-radius: 25px;
   color: #ffffff;
 }
-

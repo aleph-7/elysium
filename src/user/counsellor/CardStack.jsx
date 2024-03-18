@@ -14,11 +14,7 @@ import "./CardStack.css";
 /* The rest of the code is not to be altered */
 
 const CARD_INDICES = ["1", "2", "3"];
-const BUTTON_LABELS = [
-  "counsellors",
-  "book appointments",
-  "status",
-];
+const BUTTON_LABELS = ["counsellors", "book appointments", "status"];
 
 /*INTERNAL WORKING*/
 const CARD_OFFSET = 6;
@@ -107,6 +103,7 @@ const cardStyle = {
   position: "absolute",
   width: "80vw",
   height: "600px",
+  overflow: "scroll",
   borderRadius: "25px",
   transformOrigin: "top center",
   listStyle: "none",

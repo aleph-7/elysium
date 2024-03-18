@@ -593,15 +593,34 @@ app.post("/badminton/pre_booking", async (req, res) => {
     const type_book = req.body.type;
     let book = 1;
     const hour = parseInt(name.split(":")[0], 10);
-    var date = new Date();
-    const current_date =
-      date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
+    // var date = new Date();
+
+    // Get the current date
+    let currentDate = new Date();
+
+    // Get the next date
+    let nextDate = new Date(currentDate);
+    nextDate.setDate(currentDate.getDate() + 1); // Adding 1 day
+
+    // Format the next date as DD-MM-YYYY
+    let day = nextDate.getDate();
+    let month = nextDate.getMonth() + 1; // Month is zero-based, so add 1
+    let year = nextDate.getFullYear();
+
+    // Pad the day and month with leading zeros if needed
+    day = day < 10 ? "0" + day : day;
+    month = month < 10 ? "0" + month : month;
+
+    let nextDateFormatted = day + "-" + month + "-" + year;
+
+    // console.log("Next Date:", nextDateFormatted);
+
     const booking = new SportsBookings({
       user_id: req.body.user_id,
       time_slot: hour,
       type_of_sport: req.body.sport_type,
       time_of_booking: new Date(),
-      date_slot: current_date,
+      date_slot: nextDateFormatted,
       type_of_booking: book,
       show_up_status: 0,
       court_id: null,
@@ -641,7 +660,14 @@ app.post("/squash/active_booking", async (req, res) => {
     const hour = parseInt(name.split(":")[0], 10);
     var date = new Date();
     const current_date =
-      date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
+      (date.getDate() < 10 ? "0" : "") +
+      date.getDate() +
+      "-" +
+      (date.getMonth() < 9 ? "0" : "") +
+      (date.getMonth() + 1) +
+      "-" +
+      date.getFullYear(); // Format the month as two digits
+
     const booking = new SportsBookings({
       user_id: req.body.user_id,
       time_slot: hour,
@@ -705,15 +731,30 @@ app.post("/squash/pre_booking", async (req, res) => {
     const type_book = req.body.type;
     let book = 1;
     const hour = parseInt(name.split(":")[0], 10);
-    var date = new Date();
-    const current_date =
-      date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
+    // Get the current date
+    let currentDate = new Date();
+
+    // Get the next date
+    let nextDate = new Date(currentDate);
+    nextDate.setDate(currentDate.getDate() + 1); // Adding 1 day
+
+    // Format the next date as DD-MM-YYYY
+    let day = nextDate.getDate();
+    let month = nextDate.getMonth() + 1; // Month is zero-based, so add 1
+    let year = nextDate.getFullYear();
+
+    // Pad the day and month with leading zeros if needed
+    day = day < 10 ? "0" + day : day;
+    month = month < 10 ? "0" + month : month;
+
+    let nextDateFormatted = day + "-" + month + "-" + year;
+
     const booking = new SportsBookings({
       user_id: req.body.user_id,
       time_slot: hour,
       type_of_sport: req.body.sport_type,
       time_of_booking: new Date(),
-      date_slot: current_date,
+      date_slot: nextDateFormatted,
       type_of_booking: book,
       show_up_status: 0,
       court_id: null,
@@ -779,7 +820,14 @@ app.post("/tennis/active_booking", async (req, res) => {
     const hour = parseInt(name.split(":")[0], 10);
     var date = new Date();
     const current_date =
-      date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
+      (date.getDate() < 10 ? "0" : "") +
+      date.getDate() +
+      "-" +
+      (date.getMonth() < 9 ? "0" : "") +
+      (date.getMonth() + 1) +
+      "-" +
+      date.getFullYear(); // Format the month as two digits
+
     const booking = new SportsBookings({
       user_id: req.body.user_id,
       time_slot: hour,
@@ -843,15 +891,30 @@ app.post("/tennis/pre_booking", async (req, res) => {
     const type_book = req.body.type;
     let book = 1;
     const hour = parseInt(name.split(":")[0], 10);
-    var date = new Date();
-    const current_date =
-      date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
+    // Get the current date
+    let currentDate = new Date();
+
+    // Get the next date
+    let nextDate = new Date(currentDate);
+    nextDate.setDate(currentDate.getDate() + 1); // Adding 1 day
+
+    // Format the next date as DD-MM-YYYY
+    let day = nextDate.getDate();
+    let month = nextDate.getMonth() + 1; // Month is zero-based, so add 1
+    let year = nextDate.getFullYear();
+
+    // Pad the day and month with leading zeros if needed
+    day = day < 10 ? "0" + day : day;
+    month = month < 10 ? "0" + month : month;
+
+    let nextDateFormatted = day + "-" + month + "-" + year;
+
     const booking = new SportsBookings({
       user_id: req.body.user_id,
       time_slot: hour,
       type_of_sport: req.body.sport_type,
       time_of_booking: new Date(),
-      date_slot: current_date,
+      date_slot: nextDateFormatted,
       type_of_booking: book,
       show_up_status: 0,
       court_id: null,
@@ -983,7 +1046,14 @@ app.post("/table_tennis/active_booking", async (req, res) => {
     const hour = parseInt(name.split(":")[0], 10);
     var date = new Date();
     const current_date =
-      date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
+      (date.getDate() < 10 ? "0" : "") +
+      date.getDate() +
+      "-" +
+      (date.getMonth() < 9 ? "0" : "") +
+      (date.getMonth() + 1) +
+      "-" +
+      date.getFullYear(); // Format the month as two digits
+
     const booking = new SportsBookings({
       user_id: req.body.user_id,
       time_slot: hour,
@@ -1047,15 +1117,30 @@ app.post("/table_tennis/pre_booking", async (req, res) => {
     const type_book = req.body.type;
     let book = 1;
     const hour = parseInt(name.split(":")[0], 10);
-    var date = new Date();
-    const current_date =
-      date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
+    // Get the current date
+    let currentDate = new Date();
+
+    // Get the next date
+    let nextDate = new Date(currentDate);
+    nextDate.setDate(currentDate.getDate() + 1); // Adding 1 day
+
+    // Format the next date as DD-MM-YYYY
+    let day = nextDate.getDate();
+    let month = nextDate.getMonth() + 1; // Month is zero-based, so add 1
+    let year = nextDate.getFullYear();
+
+    // Pad the day and month with leading zeros if needed
+    day = day < 10 ? "0" + day : day;
+    month = month < 10 ? "0" + month : month;
+
+    let nextDateFormatted = day + "-" + month + "-" + year;
+
     const booking = new SportsBookings({
       user_id: req.body.user_id,
       time_slot: hour,
       type_of_sport: req.body.sport_type,
       time_of_booking: new Date(),
-      date_slot: current_date,
+      date_slot: nextDateFormatted,
       type_of_booking: book,
       show_up_status: 0,
       court_id: null,

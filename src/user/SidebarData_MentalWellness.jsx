@@ -6,7 +6,7 @@ export const SidebarData_MentalWellness = [
   {
     title: "counsellors",
     icon: <img src={counsellor} style={{ width: "15px", height: "auto" }} />,
-    link: "/consellor",
+    link: "/counsellor",
   },
   {
     title: "self-help blogs",
