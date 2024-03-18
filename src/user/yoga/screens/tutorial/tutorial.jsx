@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Table_Tutorial from "../../../components/tutorials/table.jsx";
 import "./tutorial.css";
+import SERVER_ROOT_PATH from "../../../../../config.js";
 
 function Tutorial() {
   const [message, setMessage] = useState("");

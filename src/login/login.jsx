@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./login.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import SERVER_ROOT_PATH from "../../config";
 
 const Login = () => {
   const [input, setInput] = useState({
@@ -55,7 +57,7 @@ const Login = () => {
       setError((prev) => ({ ...prev, password: "Password is required." }));
     }
     try {
-      const response = await fetch("http://localhost:6300/login", {
+      const response = await fetch(SERVER_ROOT_PATH + "/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -67,8 +69,10 @@ const Login = () => {
       })
         .then((response) => {
           // Check status code
-          if (response.ok) {
+          if (response.status == 200) {
             return response.json(); // Parse JSON response on success
+          } else if (response.status == 401) {
+            alert("Invalid username or password");
           } else {
             throw new Error("Login failed"); // Handle errors
           }
@@ -82,7 +86,7 @@ const Login = () => {
           localStorage.setItem("category", data.category);
           localStorage.setItem("user_email:", data.email);
           localStorage.setItem("userMongoId", data.userMongoId);
-          localStorage.setItem("type_of_sport", data.type_of_sport);
+          localStorage.setItem("userMongoId", data.type_of_sport);
 
           console.log("token:", data.token);
           console.log("category:", data.category);
@@ -90,8 +94,9 @@ const Login = () => {
           console.log("User Email:", data.email);
           console.log("User MongoID:", data.userMongoId);
           console.log("Type of Sport:", data.type_of_sport);
+          // Redirect to home page
+          window.location.href = "/home";
         })
-
         .catch((error) => {
           // Handle errors (401, 400, 500, network errors, etc.)
           console.error("Login error:", error);
@@ -118,7 +123,7 @@ const Login = () => {
               />
               {error.username && <span className="err">{error.username}</span>}
             </div>
-            <div className="login-input2">
+            <div className="login-input3">
               <input
                 type="password"
                 name="password"
@@ -134,9 +139,14 @@ const Login = () => {
             <button className="login-submit" onClick={onClickLogin}>
               login
             </button>
-            {/*}
-            <button className="confirmEmail" onClick={verifyEmail}>verify email!
-            </button> */}
+            <button className="login-submit">
+              <Link
+                to="/signup "
+                style={{ color: "inherit", textDecoration: "inherit" }}
+              >
+                signup?
+              </Link>
+            </button>
           </div>
         </div>
       </div>

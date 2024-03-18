@@ -20,15 +20,20 @@ router.get("/badminton", async (req, res) => {
     let user_id = attributeList[i][0];
     console.log(user_id);
     try {
-      let user_name = (await user.findOne({ _id: user_id })).username;
-      console.log(user_name);
-      finalattributeList.push([user_name, attributeList[i][1]]);
+      let user_name = await user.findOne({ _id: user_id });
+      if (!user_name) {
+        console.log("Anonymous");
+        finalattributeList.push(["Anonymous", attributeList[i][1]]);
+      } else {
+        console.log(user_name.username);
+        finalattributeList.push([user_name.username, attributeList[i][1]]);
+      }
     } catch (err) {
       console.log(err);
     }
   }
   finalattributeList.sort((a, b) => a[1] - b[1]);
-  res.json(finalattributeList);
+  res.json({ message: finalattributeList });
 });
 
 module.exports = router;

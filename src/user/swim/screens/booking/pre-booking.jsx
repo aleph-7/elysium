@@ -1,22 +1,22 @@
 import React, { useState } from "react";
-import { AiOutlineSearch } from 'react-icons/ai';
-import "./subbooking.css";
+import { AiOutlineSearch } from "react-icons/ai";
+// import "./subbooking.css";
 
 function SearchInput({ onSearch }) {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
 
   const handleInputChange = (event) => {
     setQuery(event.target.value);
   };
 
   const handleKeyPress = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       onSearch(query);
     }
   };
 
   return (
-    <div className = "search">
+    <div className="search">
       <input
         type="text"
         value={query}
@@ -37,9 +37,9 @@ function Prebooking() {
   const handleSearch = (query) => {
     // Example: Perform search operation, and set search results
     setSearchResults([
-      { id: 1, name: 'User 1' },
-      { id: 2, name: 'User 2' },
-      { id: 3, name: 'User 3' },
+      { id: 1, name: "User 1" },
+      { id: 2, name: "User 2" },
+      { id: 3, name: "User 3" },
     ]);
   };
 
@@ -49,32 +49,33 @@ function Prebooking() {
 
   return (
     <div className="booking-area">
-      <div className = "play-area">
-      <div className="drop">
-        <p className="labeeels">Time-Slot</p>
-        <select className="drop-down" style={{ width: '200px' }}>
+      <div className="play-area">
+        <div className="drop">
+          <p className="labeeels">Time-Slot</p>
+          <select className="drop-down" style={{ width: "200px" }}>
             <option>5:30pm</option>
-        </select>
-        <p className="labeeels"> Playmate(s)? </p>
-        <input type="checkbox" />
-        
+          </select>
+          <p className="labeeels"> Playmate(s)? </p>
+          <input type="checkbox" />
         </div>
-        </div>
+      </div>
       <div className="select">
-          <p className="labeeels">Select Playmate(s)</p>
-           <div className="show_cont">
-            <UserPrinter users={selectedUsers} />
-          </div>
+        <p className="labeeels">Select Playmate(s)</p>
+        <div className="show_cont">
+          <UserPrinter users={selectedUsers} />
         </div>
-       
-        <div className="inputContainer">
-            <SearchInput onSearch={handleSearch} />
-            <UserSelector onSelect={handleAddItem} />
-          </div>
-        <div className="buttonContainer">
-          <button className="orangeButtonnn" onClick={() => setSelectedUsers([])}>Clear</button>
-          <button className="greenButtonnn">Apply</button>
-          <br/>
+      </div>
+
+      <div className="inputContainer">
+        <SearchInput onSearch={handleSearch} />
+        <UserSelector onSelect={handleAddItem} />
+      </div>
+      <div className="buttonContainer">
+        <button className="orangeButtonnn" onClick={() => setSelectedUsers([])}>
+          Clear
+        </button>
+        <button className="greenButtonnn">Apply</button>
+        <br />
       </div>
     </div>
   );
@@ -113,9 +114,7 @@ function UserPrinter({ users }) {
   return (
     <div className="printer">
       {users.map((user, index) => (
-        <div key={index}>
-          {user}
-        </div>
+        <div key={index}>{user}</div>
       ))}
     </div>
   );

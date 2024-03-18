@@ -108,7 +108,7 @@ const Signup = () => {
       return;
     }
     try {
-      const response = await fetch("http://172.17.73.60:6300/signup", {
+      const response = await fetch("http://localhost:6300/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -124,6 +124,7 @@ const Signup = () => {
         alert("Username or email ID already exists");
       } else if (response.status === 201) {
         alert("Registered successfully!");
+        window.location.href = "/login";
       } else {
         alert("Error in registering");
       }
@@ -188,13 +189,13 @@ const Signup = () => {
             <button className="login-submit" onClick={onClickSignUp}>
               sign up!
             </button>
-            {/*}
-            <button className="confirmEmail" onClick={verifyEmail}>verify email!
-            </button> */}
             <button className="login-login">
               <Link
                 to="/login "
-                style={{ color: "inherit", textDecoration: "inherit" }}
+                style={{
+                  color: "inherit",
+                  textDecoration: "inherit",
+                }}
               >
                 login!
               </Link>

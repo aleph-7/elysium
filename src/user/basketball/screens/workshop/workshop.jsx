@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import "./workshop.css";
 import Table_Workshop from "../../../components/workshops/table_workshop.jsx";
+import SERVER_ROOT_PATH from "../../../../../config";
 
 function Workshop() {
   const [message, setMessage] = useState("");
   const fetchInfo = async () => {
-    return await fetch("http://localhost:6300/workshops/basketball")
+    return await fetch(SERVER_ROOT_PATH + "/workshops/basketball")
       .then((res) => res.json())
       .then((data) => setMessage(data.message));
   };

@@ -1,94 +1,9 @@
 import React, { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import "./subbooking.css";
-
-// function SearchInput({ onSearch }) {
-//   const [query, setQuery] = useState('');
-
-//   const handleInputChange = (event) => {
-//     setQuery(event.target.value);
-//   };
-
-//   const handleKeyPress = (event) => {
-//     if (event.key === 'Enter') {
-//       onSearch(query);
-//     }
-//   };
-
-//   return (
-//     <div className = "search">
-//       <input
-//         type="text"
-//         value={query}
-//         onChange={handleInputChange}
-//         onKeyPress={handleKeyPress}
-//         placeholder="lookup"
-//         className="searchInput"
-//       />
-//       <AiOutlineSearch onClick={() => onSearch(query)} className="searchIcon" />
-//     </div>
-//   );
-// }
-
-function UserList() {
-  const [users, setUsers] = useState([]);
-  const [inputValue, setInputValue] = useState("");
-
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
-  };
-
-  const handleAddUser = () => {
-    if (inputValue.trim() !== "") {
-      setUsers([...users, inputValue]);
-      setInputValue("");
-    }
-  };
-
-  return (
-    <>
-      <div className="players-list">
-        <div>
-          <input
-            className="show_cont"
-            type="text"
-            value={inputValue}
-            onChange={handleInputChange}
-            placeholder="Enter username"
-          />
-        </div>
-        <div>
-          <button onClick={handleAddUser} className="redButton">
-            Add User
-          </button>
-        </div>
-      </div>
-      <ul>
-        {users.map((user, index) => (
-          <li key={index}>{user}</li>
-        ))}
-      </ul>
-    </>
-  );
-}
+import SERVER_ROOT_PATH from "../../../../../config";
 
 function ActiveBooking() {
-  const [searchResults, setSearchResults] = useState([]);
-  const [selectedUsers, setSelectedUsers] = useState([]);
-
-  const handleSearch = (query) => {
-    // Example: Perform search operation, and set search results
-    setSearchResults([
-      { id: 1, name: "User 1" },
-      { id: 2, name: "User 2" },
-      { id: 3, name: "User 3" },
-    ]);
-  };
-
-  const handleAddItem = (user) => {
-    setSelectedUsers([...selectedUsers, user]);
-  };
-
   const [data, setData] = useState({});
 
   const handleChange = (e) => {
@@ -102,7 +17,14 @@ function ActiveBooking() {
   const sport = localStorage.getItem("type_of_sport");
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:6300/badminton/booking", {
+
+    // Check if users list is empty
+    if (users.length === 0) {
+      alert("Please add at least one playmate!");
+      return;
+    }
+
+    const res = await fetch(SERVER_ROOT_PATH + "/badminton/active_booking", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -115,6 +37,9 @@ function ActiveBooking() {
         sport_type: sport,
       }),
     });
+
+    // Reset form after submission
+    e.target.reset();
   };
 
   const [selectedTime, setSelectedTime] = useState("");
@@ -131,13 +56,22 @@ function ActiveBooking() {
     setInputValue(e.target.value);
   };
 
-  const handleAddUser = () => {
+  const handleAddUser = async () => {
     if (inputValue.trim() !== "") {
-      if (users.length < 4) {
-        setUsers([...users, inputValue]);
-        setInputValue("");
+      const response = await fetch(
+        SERVER_ROOT_PATH + "checkUser/${inputValue}"
+      );
+      const data = await response.json();
+
+      if (data.exists) {
+        if (users.length < 4) {
+          setUsers([...users, inputValue]);
+          setInputValue("");
+        } else {
+          setShowWarning(true);
+        }
       } else {
-        setShowWarning(true);
+        alert("User doesn't exist!");
       }
     }
   };
@@ -148,7 +82,7 @@ function ActiveBooking() {
 
   return (
     <form
-      className="active-booking-form"
+      className="active-booking-form-badminton"
       onSubmit={(e) => {
         handleSubmit(e);
         e.target.reset();
@@ -190,7 +124,11 @@ function ActiveBooking() {
                 />
               </div>
               <div>
-                <button onClick={handleAddUser} className="redButton">
+                <button
+                  onClick={handleAddUser}
+                  className="redButton"
+                  type="button"
+                >
                   Add User
                 </button>
               </div>
@@ -216,7 +154,8 @@ function ActiveBooking() {
         <div className="buttonContainer">
           <button
             className="orangeButtonnn"
-            onClick={() => setSelectedUsers([])}
+            onClick={() => setUsers([])}
+            type="button"
           >
             Clear
           </button>
@@ -227,46 +166,5 @@ function ActiveBooking() {
     </form>
   );
 }
-
-// function UserSelector({ onSelect }) {
-//   const [showDropdown, setShowDropdown] = useState(false);
-
-//   const handleButtonClick = () => {
-//     setShowDropdown(!showDropdown);
-//   };
-
-//   const handleUserSelection = (user) => {
-//     onSelect(user);
-//     setShowDropdown(false);
-//   };
-
-//   return (
-//     <div className="userSelector">
-//       <button className="redButton" onClick={handleButtonClick}>
-//         Add User
-//       </button>
-//       {showDropdown && (
-//         <div className="dropdownMenu2">
-//           {/* Replace with your user list */}
-//           <div onClick={() => handleUserSelection("User 1")}>User 1</div>
-//           <div onClick={() => handleUserSelection("User 2")}>User 2</div>
-//           <div onClick={() => handleUserSelection("User 3")}>User 3</div>
-//         </div>
-//       )}
-//     </div>
-//   );
-// }
-
-// function UserPrinter({ users }) {
-//   return (
-//     <div className="printer">
-//       {users.map((user, index) => (
-//         <div key={index}>
-//           {user}
-//         </div>
-//       ))}
-//     </div>
-//   );
-// }
 
 export default ActiveBooking;

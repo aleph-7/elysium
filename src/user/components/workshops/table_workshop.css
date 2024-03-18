@@ -76,6 +76,7 @@
   width: 10vw;
   height: 40px;
   border-radius: 25px;
+  transition: 0.2s;
 }
 
 .book_workshop_tableentry h2 {
@@ -86,14 +87,14 @@
 .book_workshop_tableentry button:hover {
   position: relative;
   border: none;
-  background: #448e4c;
+  background: #d46060;
   font-family: "Poppins";
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
   line-height: 21px;
   color: #000000;
-  width: 15vh;
+  width: 10vw;
   height: 40px;
   border-radius: 25px;
 }

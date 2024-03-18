@@ -2,12 +2,19 @@ import React, { useState } from "react";
 import user_profile_picture from "./assets/user_profile_picture.jpeg";
 import "./Header.css";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { SidebarData } from "./SidebarData";
 import { SidebarData_PhysicalWellness } from "./SidebarData_PhysicalWellness";
 import { SidebarData_MentalWellness } from "./SidebarData_MentalWellness";
+import { Link } from "react-router-dom";
 
-import counsellor from "./assets/counsellor.png";
-import { FaPenNib } from "react-icons/fa";
+function logout() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("userId");
+  localStorage.removeItem("category");
+  localStorage.removeItem("user_email");
+  localStorage.removeItem("userMongoId");
+  localStorage.removeItem("type_of_sport");
+  window.location.pathname = "/";
+}
 
 function Header() {
   const currentTime = new Date().getHours();
@@ -42,7 +49,7 @@ function Header() {
               className="cross"
               onClick={() => {
                 showSidebar;
-                window.location.pathname = "/";
+                window.location.pathname = window.location.pathname;
               }}
             >
               <FaTimes
@@ -95,6 +102,9 @@ function Header() {
                     );
                   })}
                 </ul>
+              </li>
+              <li className="section">
+                <button onClick={logout}>logout</button>
               </li>
             </ul>
           </nav>

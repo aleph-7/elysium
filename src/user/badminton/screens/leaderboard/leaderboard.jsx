@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import leaderboard from "../../../assets/leaderboard.png";
 import "./leaderboard.css";
-const leaders = [
-  ["kushagra srivastava", "1400"],
-  ["kushagra srivastava", "1400"],
-  ["kushagra srivastava", "1400"],
-  ["kushagra srivastava", "1400"],
-  ["kushagra srivastava", "1400"],
-  ["kushagra srivastava", "1400"],
-  ["kushagra srivastava", "1400"],
-];
+import SERVER_ROOT_PATH from "../../../../../config";
 
 function Leaderboard() {
+  const [message, setMessage] = useState("");
+  const fetchInfo = async () => {
+    return await fetch(SERVER_ROOT_PATH + "/leaderboard/badminton")
+      .then((res) => res.json())
+      .then((data) => setMessage(data.message))
+      .then(() => console.log(message));
+  };
+
+  useEffect(() => {
+    fetchInfo();
+  }, []);
   return (
     <div className="leaderboard">
       <table>
@@ -19,11 +22,10 @@ function Leaderboard() {
           <tr>
             <th>Position</th>
             <th>Name</th>
-            <th>Score</th>
           </tr>
         </thead>
         <tbody>
-          {Object.entries(leaders).map(([name, score], index) => (
+          {Object.entries(message).map(([name], index) => (
             <tr key={name}>
               {index < 3 ? (
                 <td className="head-text">
@@ -37,8 +39,7 @@ function Leaderboard() {
               ) : (
                 <td>{index + 1}</td>
               )}
-              <td>{name}</td>
-              <td>{score}</td>
+              <td>{message[index][0]}</td>
             </tr>
           ))}
         </tbody>

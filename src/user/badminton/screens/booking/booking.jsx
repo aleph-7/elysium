@@ -37,7 +37,7 @@ function BookingApp() {
         </li>
       </ul>
       <div className="booking_form">
-        {!activeBooking ? <Prebooking /> : <ActiveBooking/>}
+        {!activeBooking ? <Prebooking /> : <ActiveBooking />}
       </div>
     </div>
   );

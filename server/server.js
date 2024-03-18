@@ -30,6 +30,9 @@ app.get("/badminton/leaderboard", async (req, res) => {
   res.json({ message: attributeList });
 });
 
+//Authentication
+const authRoutes = require("./routes/auth");
+app.use("", authRoutes);
 //TUTORIALS
 const tutorialsRoutes = require("./routes/tutorials");
 app.use("/tutorials", tutorialsRoutes);
@@ -38,117 +41,13 @@ const workshopRoutes = require("./routes/workshop");
 app.use("/workshops", workshopRoutes);
 const applyWorkshopRoutes = require("./routes/apply_workshop");
 app.use("/apply_workshop", applyWorkshopRoutes);
-
 const userRoutes = require("./routes/user");
 app.use("/user", userRoutes);
-
 //Animesh dump imported..
 const bookingRoutes = require("./routes/algorithms/booking");
 app.use("/booking", bookingRoutes);
-
 const leaderboardRoutes = require("./routes/leaderboard");
 app.use("/leaderboard", leaderboardRoutes);
-
-//workshops
-
-app.post("/signup", async (req, res) => {
-  try {
-    // Check if the username or email ID already exists in the database
-    const existingUser = await User.findOne({
-      $or: [{ username: req.body.username }, { email_id: req.body.email_id }],
-    });
-
-    // If user with the same username or email ID already exists, return an error
-    if (existingUser) {
-      return res
-        .status(400)
-        .json({ error: "Username or email ID already exists" });
-    }
-
-    // Hashing the passwords before saving them to the database
-    const hashed_password = await bcrypt.hash(req.body.password, 10);
-
-    // Creating a new user
-    const new_user = new User({
-      username: req.body.username,
-      email_id: req.body.email_id,
-      user_category: 1,
-      password: hashed_password,
-      profile_pic: "",
-      type_of_sport: "",
-    });
-
-    // Saving the user to the database
-    const doc = await new_user.save();
-
-    // Sending the response to the frontend
-    res.status(201).json({ message: "Registration successful" });
-  } catch (err) {
-    // Sending the error message to the frontend
-    console.error(err);
-    res.status(500).json({ error: "Registration failed" });
-  }
-});
-
-app.post("/login", async (req, res) => {
-  console.log("Login Pressed");
-  console.log(req.body.username);
-  try {
-    user = await User.findOne({ username: req.body.username });
-    if (user) {
-      const passwordMatch = await bcrypt.compare(
-        req.body.password,
-        user.password
-      );
-      console.log("Koi Mil Gaya");
-      if (passwordMatch) {
-        console.log("Password Matched");
-        const token = jsw.sign({ username: user.username }, secretKey, {
-          expiresIn: "1 hour",
-        });
-        console.log(token);
-        console.log(user.type_of_sport);
-        res.status(200).json({
-          token,
-          userMongoId: user._id,
-          userId: user.username,
-          email: user.email_id,
-          category: user.user_category,
-          profile_pic: user.profile_pic,
-          type_of_sport: user.type_of_sport,
-        });
-      } else {
-        console.log("Password Mismatch");
-        return res.status(401).json({ error: "Authentication failed" });
-      }
-    } else {
-      console.log("Koi Nahi Mila");
-      return res.status(401).json({ error: "Authentication failed" });
-    }
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ error: "Authentication failed" });
-  }
-});
-
-// //Bookings
-// app.post("/user/sport_booking", async (req, res) => {
-//   console.log(req.body);
-//   const name = req.body.slot;
-//   const hour = parseInt(name.split(":")[0], 10);
-//   var date = new Date();
-//   const current_date =
-//     date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-//   const booking = new Sportsbook({
-//     user_id: new ObjectId("65eb03840d088803c56ed544"),
-//     time_slot: hour,
-//     type_of_sport: "badminton",
-//     time_of_booking: new Date(),
-//     date: current_date,
-//   });
-//   const doc = await booking.save();
-//   res.json(doc);
-// });
 
 //Listening to the server.
 app.listen(process.env.PORT || 6300, () => {
@@ -408,3 +307,139 @@ cron.schedule(
     timezone: "Asia/Kolkata",
   }
 );
+
+// Protected route
+app.get("/protected", verifyToken, (req, res) => {
+  res.json({ message: req.user });
+});
+
+// Middleware to verify JWT token
+function verifyToken(req, res, next) {
+  const token = req.headers["authorization"];
+
+  if (!token) {
+    return res.status(403).json({ error: "Token is required" });
+  }
+
+  jsw.verify(token, secretKey, (err, decoded) => {
+    if (err) {
+      return res.status(401).json({ error: "Invalid token" });
+    }
+    req.user = decoded;
+    console.log(decoded);
+    next();
+  });
+}
+
+//Active-Booking
+app.post("/badminton/active_booking", async (req, res) => {
+  console.log(req.body);
+
+  //Searching for players mongoDB Ids
+  const mongodbIds = [];
+  try {
+    const players = await User.find(
+      { username: { $in: req.body.players } },
+      "_id username"
+    );
+    players.forEach((player) => {
+      mongodbIds.push(player._id.toString());
+    });
+    // Log MongoDB IDs
+    console.log("MongoDB IDs:", mongodbIds);
+    console.log(mongodbIds.length);
+
+    const name = req.body.slot;
+    const type_book = req.body.type;
+    let book = 1;
+    if (type_book == "active") book = 0;
+    const hour = parseInt(name.split(":")[0], 10);
+    var date = new Date();
+    const current_date =
+      date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+    const booking = new SportsBookings({
+      user_id: req.body.user_id,
+      time_slot: hour,
+      type_of_sport: req.body.sport_type,
+      time_of_booking: new Date(),
+      date_slot: current_date,
+      type_of_booking: book,
+      show_up_status: 0,
+      court_id: null,
+      partners_id: mongodbIds,
+      no_partners: mongodbIds.length,
+      booking_status: 0,
+    });
+    const doc = await booking.save();
+    res.json(doc);
+  } catch (err) {
+    console.error("Error:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.get("/checkUser/:username", async (req, res) => {
+  // console.log(req.body);
+  try {
+    const username = req.params.username;
+    const user = await User.findOne({ username }); // Assuming username is the field in your database that stores usernames
+
+    if (user) {
+      // User exists
+      res.json({ exists: true });
+    } else {
+      // User doesn't exist
+      res.json({ exists: false });
+    }
+  } catch (error) {
+    console.error("Error checking user:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+//////Pre-booking
+
+app.post("/badminton/pre_booking", async (req, res) => {
+  console.log(req.body);
+
+  //Searching for players mongoDB Ids
+  const mongodbIds = [];
+  try {
+    const players = await User.find(
+      { username: { $in: req.body.players } },
+      "_id username"
+    );
+    players.forEach((player) => {
+      mongodbIds.push(player._id.toString());
+    });
+    // Log MongoDB IDs
+    console.log("MongoDB IDs:", mongodbIds);
+    console.log(mongodbIds.length);
+
+    const name = req.body.slot;
+    const type_book = req.body.type;
+    let book = 1;
+    const hour = parseInt(name.split(":")[0], 10);
+    var date = new Date();
+    const current_date =
+      date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+    const booking = new SportsBookings({
+      user_id: req.body.user_id,
+      time_slot: hour,
+      type_of_sport: req.body.sport_type,
+      time_of_booking: new Date(),
+      date_slot: current_date,
+      type_of_booking: book,
+      show_up_status: 0,
+      court_id: null,
+      partners_id: mongodbIds,
+      no_partners: mongodbIds.length,
+      booking_status: 0,
+    });
+    const doc = await booking.save();
+    res.json(doc);
+  } catch (err) {
+    console.error("Error:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});

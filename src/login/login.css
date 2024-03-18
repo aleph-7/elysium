@@ -73,6 +73,12 @@ form {
   width: 50%;
 }
 
+.login-input3 input[type="password"] {
+  display: flex;
+  width: 50%;
+  gap: 5%;
+}
+
 .login-inputs input::placeholder {
   font-family: "Poppins";
   font-style: normal;
@@ -96,6 +102,7 @@ form {
 
 .login-submit-container :hover {
   color: #faf0f8;
+  /* background-color: #c14ede; */
 }
 
 .login-submit-container button {
@@ -108,16 +115,11 @@ form {
   border-radius: 25px;
   width: 40%;
   padding-left: 5%;
+  transition: 0.5s;
+  cursor: pointer;
   padding-right: 5%;
 }
 
-/* color: aqua;
-  border: none;
-  font-weight: 700;
-  cursor: pointer;
-  font-family: "Poppins";
-  font-style: normal;
+.login-submit-container .login-submit-2 button {
   font-size: 20px;
-  display: flex;
-  align-self: center;
-  line-height: 18px; */
+}
