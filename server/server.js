@@ -12,7 +12,7 @@ app.use(cors());
 app.use(parser.json());
 
 const User = require("./models/userDB").userSchema;
-const SportsBookings = require("./models/bookingsDB").sports_bookingsSchema;
+const SportsBookings = require("./models/bookingsDB").sportBookingsSchema;
 const Yoga_Sessions = require("./models/contentDB").yoga_sessionSchema;
 const Workshop = require("./models/contentDB").sport_workshopSchema;
 const Leaderboard = require("./models/leaderboardDB").leaderboardSchema;
