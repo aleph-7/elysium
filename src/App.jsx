@@ -25,17 +25,28 @@ import Hockey from "./user/hockey/Hockey";
 import Yoga from "./user/yoga/Yoga.jsx";
 import Swimming from "./user/swimming/Swimming.jsx";
 import Gym from "./user/gym/Gym.jsx";
-
-// import Counsellor from "./counsellor/Counsellor.jsx";
-// import Yoga_Instructor from "./Dashboard/Yoga_Instructor/Yoga_Instructor.jsx";
-import Coach_Dashboard from "./Dashboard/Coach/Coach_Dashboard.jsx";
-
+import Counsellor from "./user/counsellor/Counsellor.jsx";
 import Self_help from "./user/self-help/self_help.jsx";
 import History from "./user/history/History.jsx";
+
+//Coach Pages
+import ProtectedRoute_Coach from "./protected_routes_coach.jsx";
+import Coach_Dashboard from "./Dashboard/Coach/Coach_Dashboard.jsx";
 
 //Admin-Attendance Pages
 import ProtectedRoute_Admin from "./protected_routes_admin.jsx";
 import Attendance from "./admin/attendance.jsx";
+
+//Yoga Instructor
+
+//Gym/Swimiming Instructor
+
+//Counsellor page
+import ProtectedRoute_Counsellor from "./protected_routes_counsellor.jsx";
+import Counsellor_Dashboard from "./Dashboard/Counsellor/Counsellor_Dashboard.jsx";
+
+import Error from "./error/Error.jsx";
+
 // import Gym_Instructor from "./Dashboard/Gym_Instructor/Gym_Instructor.jsx";
 
 // import Coach from "./Dashboard/Coach/Coach.jsx";
@@ -43,20 +54,10 @@ import Attendance from "./admin/attendance.jsx";
 function App() {
   return (
     <div className="App">
-      {/* <RouterProvider router={router} /> */}
-      {/* <LP1 /> */}
       <BrowserRouter>
         <Routes>
-          {/* <Route path="/sjs" element={<Gym_Instructor />} /> */}
-          <Route
-            path="/ss"
-            element={
-              <Attendance
-                type_of_sport={localStorage.getItem("type_of_sport")}
-              />
-            }
-          />
           <Route index element={<Login />} />
+          <Route path="*" element={<Error />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route element={<ProtectedRoute_User />}>
@@ -75,16 +76,30 @@ function App() {
             <Route path="/yoga" element={<Yoga />} />
             <Route path="/gym" element={<Gym />} />
             <Route path="/self-help" element={<Self_help />} />
+            <Route path="/counsellor" element={<Counsellor />} />
+          </Route>
+
+          <Route element={<ProtectedRoute_Coach />}>
+            <Route path="/admin/coach" element={<Coach_Dashboard />} />
+          </Route>
+
+          <Route element={<ProtectedRoute_Counsellor />}>
+            <Route
+              path="/admin/counsellor"
+              element={<Counsellor_Dashboard />}
+            />
           </Route>
 
           <Route element={<ProtectedRoute_Admin />}>
             <Route
               path="/admin/attendance"
-              element={<Attendance type_of_sport={"tennis"} />}
+              element={
+                <Attendance
+                  type_of_sport={localStorage.getItem("type_of_sport")}
+                />
+              }
             />
           </Route>
-
-          <Route path="/admin/coach" element={<Coach_Dashboard />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -52,13 +52,7 @@ function Header() {
           </h2>
         </div>
         <div className="profile-image">
-          <img
-            src={user_profile_picture}
-            alt="user_profile_picture"
-            onClick={() => {
-              window.location.pathname = "/History";
-            }}
-          />
+          <img src={user_profile_picture} alt="user_profile_picture" />
         </div>
       </div>
     </div>

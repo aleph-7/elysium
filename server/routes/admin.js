@@ -146,7 +146,6 @@ router.post("/fill_entries", async (req, res) => {
 // ======================================
 // UPDATE LEADERBOARD
 // ======================================
-
 router.post("/match_metric_marking", async (req, res) => {
   let user_1,
     user_2,
@@ -277,19 +276,14 @@ router.post("/match_metric_marking", async (req, res) => {
     attributeList[bad_player_position - 1][2] = good_player_position;
   }
 
-  //update database
+  //update databases
   for (let i = 0; i < attributeList.length; i++) {
-    const conditions = {
-      _id: attributeList[i][1],
-    };
-    const update = {
-      $inc: { position: attributeList[i][2] },
-    };
-    const options = {
-      new: true, // Return the modified document rather than the original
-    };
     if (type_of_sport === "badminton") {
-      BadmintonLeaderboard.findOneAndUpdate(conditions, update, options)
+      BadmintonLeaderboard.findOneAndUpdate(
+        { _id: attributeList[i][0] },
+        { position: attributeList[i][2] },
+        { new: true }
+      )
         .then((updatedDocument) => {
           if (updatedDocument) {
             console.log("Updated document:", updatedDocument);
@@ -301,7 +295,11 @@ router.post("/match_metric_marking", async (req, res) => {
           console.error("Error updating document:", error);
         });
     } else if (type_of_sport === "squash") {
-      SquashLeaderboard.findOneAndUpdate(conditions, update, options)
+      SquashLeaderboard.findOneAndUpdate(
+        { _id: attributeList[i][0] },
+        { position: attributeList[i][2] },
+        { new: true }
+      )
         .then((updatedDocument) => {
           if (updatedDocument) {
             console.log("Updated document:", updatedDocument);
@@ -313,7 +311,11 @@ router.post("/match_metric_marking", async (req, res) => {
           console.error("Error updating document:", error);
         });
     } else if (type_of_sport === "table_tennis") {
-      TableTennisLeaderboard.findOneAndUpdate(conditions, update, options)
+      TableTennisLeaderboard.findOneAndUpdate(
+        { _id: attributeList[i][0] },
+        { position: attributeList[i][2] },
+        { new: true }
+      )
         .then((updatedDocument) => {
           if (updatedDocument) {
             console.log("Updated document:", updatedDocument);
@@ -325,7 +327,11 @@ router.post("/match_metric_marking", async (req, res) => {
           console.error("Error updating document:", error);
         });
     } else if (type_of_sport === "tennis") {
-      TennisLeaderboard.findOneAndUpdate(conditions, update, options)
+      TennisLeaderboard.findOneAndUpdate(
+        { _id: attributeList[i][0] },
+        { position: attributeList[i][2] },
+        { new: true }
+      )
         .then((updatedDocument) => {
           if (updatedDocument) {
             console.log("Updated document:", updatedDocument);

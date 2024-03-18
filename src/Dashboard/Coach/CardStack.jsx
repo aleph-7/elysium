@@ -13,13 +13,8 @@ import "./CardStack.css";
 /* The linked pages in the function also need to be changed, that is, the pages that are to be displayed on the cards. Please do so only at the indicated spot.*/
 /* The rest of the code is not to be altered */
 
-const CARD_INDICES = ["1", "2", "3", "4"];
-const BUTTON_LABELS = [
-  "post workshop",
-  "check enrolment",
-  "reserve court",
-  "statistics",
-];
+const CARD_INDICES = ["1", "2", "3"];
+const BUTTON_LABELS = ["post workshop", "check enrolment", "reserve court"];
 
 /*INTERNAL WORKING*/
 const CARD_OFFSET = 6;
@@ -87,7 +82,7 @@ const CardStack = () => {
                 {color == "1" ? <PostWorkshop /> : null}
                 {color == "2" ? <CheckEnrolment /> : null}
                 {color == "3" ? <ReserveCourt /> : null}
-                {color == "4" ? <PostWorkshop /> : null}
+                {/* {color == "4" ? <PostWorkshop /> : null} */}
                 {/* 
                 {color == "3" ? <ReserveCourt /> : null}
                 {color == "4" ? <Statistics /> : null}

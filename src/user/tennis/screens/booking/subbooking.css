@@ -1,4 +1,6 @@
-.active-booking-form-badminton {
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+.active-booking-form-tennis {
   width: auto;
   overflow: hidden;
   overflow-y: scroll;
@@ -14,37 +16,37 @@
   border-radius: 2vw;
 }
 
-.active-booking-form-badminton .booking-area {
+.active-booking-form-tennis .booking-area {
   width: 80%;
 }
 
-.active-booking-form-badminton .play-area {
+.active-booking-form-tennis .play-area {
   display: flex;
   justify-content: space-between;
 }
 
-.active-booking-form-badminton .drop {
+.active-booking-form-tennis .drop {
   display: flex;
   gap: 5vw;
 }
 
-.active-booking-form-badminton .labeeels {
+.active-booking-form-tennis .labeeels {
   font-size: 2.5vh;
   font-weight: bold;
   margin-left: 7vw;
   color: #000000;
 }
 
-.active-booking-form-badminton .players-list {
+.active-booking-form-tennis .players-list {
   display: flex;
   flex-direction: row;
 }
 
-.active-booking-form-badminton .show_cont {
+.active-booking-form-tennis .show_cont {
   margin-left: 2vw;
 }
 
-.active-booking-form-badminton .buttonContainer {
+.active-booking-form-tennis .buttonContainer {
   display: flex;
   gap: 2vw;
   justify-content: center;
@@ -53,7 +55,7 @@
   margin-left: 2vw;
 }
 
-.active-booking-form-badminton .orangeButtonnn {
+.active-booking-form-tennis .orangeButtonnn {
   background-color: orange;
   cursor: pointer;
   width: 10vw;
@@ -65,11 +67,11 @@
   font-weight: bold;
 }
 
-.active-booking-form-badminton .orangeButton:hover {
+.active-booking-form-tennis .orangeButton:hover {
   background-color: darkorange;
 }
 
-.active-booking-form-badminton .greenButtonnn {
+.active-booking-form-tennis .greenButtonnn {
   width: 10vw;
   height: 3.3vw;
   border-radius: 2.5vw;
@@ -81,11 +83,11 @@
   font-weight: bold;
 }
 
-.active-booking-form-badminton .greenButtonn:hover {
+.active-booking-form-tennis .greenButtonn:hover {
   background-color: #45a049;
 }
 
-.active-booking-form-badminton .redButton {
+.active-booking-form-tennis .redButton {
   width: 10vw;
   height: 3.3vw;
   border-radius: 2.5vw;
@@ -100,12 +102,12 @@
   align-items: center;
 }
 
-.active-booking-form-badminton .redButton:hover {
+.active-booking-form-tennis .redButton:hover {
   background-color: #cc0000;
 }
 
-.active-booking-form-badminton .drop-down {
+.active-booking-form-tennis .drop-down {
   margin-bottom: 3vw;
-  margin-left: 4vw; 
+  margin-left: 4vw;
   height: fit-content;
 }

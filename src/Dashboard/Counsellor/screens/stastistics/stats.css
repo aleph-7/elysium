@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+.counsellor-stats .heading1 {
+  display: flex;
+  /* justify-content: space-between; */
+  background: rgba(237, 186, 186, 0.68);
+  /* border-radius: 40px; */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  /* padding: 10px; */
+  font-size: 20px;
+  font-weight: bold;
+  height: 40px;
+  width: 100%;
+  align-items: center;
+  text-align: start;
+  border-radius: 25px;
+  padding: 0px;
+  margin: 0px;
+  gap: 40%;
+}
+
+.counsellor-stats {
+  font-family: 'Poppins';
+}
+
+.counsellor-stats .overall {
+  text-align: center;
+  width: 30%;
+}
+
+.counsellor-stats .statistics {
+  text-align: center;
+  width: 30%;
+}
+
+.counsellor-stats .data {
+  width: 100%;
+  font-size: 20px;
+}
+
+.counsellor-stats .text {
+  float: left;
+  
+  margin-left: 5%;
+}
+
+.counsellor-stats .numbers {
+  float: right;
+  margin-right: 10%;
+  /* background: rgb(232, 224, 224); */
+  border-radius: 10px;
+  /* text-align: start; */
+}
+
+.counsellor-stats .numbers p {
+  background: rgb(232, 224, 224);
+  padding-left: 25px;
+  padding-right: 25px;
+  border-radius: 15px;
+  width: 40px;
+  text-align: center;
+}
+
+.counsellor-stats .box {
+  height: 5px;
+  width: 5px;
+}
+
+.counsellor-stats .heading2 {
+  display: flex;
+  /* justify-content: space-between; */
+  background: rgba(237, 186, 186, 0.68);
+  /* border-radius: 40px; */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  /* padding: 10px; */
+  font-size: 20px;
+  font-weight: bold;
+  height: 40px;
+  width: 100%;
+  align-items: center;
+  text-align: start;
+  border-radius: 25px;
+  padding: 0px;
+  margin: 0px;
+  gap: 40%;
+  height: 0px;
+}
+
+.counsellor-stats {
+  padding: 20px;
+  color: black;
+  margin-left: 5vw;
+  margin-right: 5vw;
+  margin-top: 10vh;
+}
+
+.counsellor-stats img {
+  height: 300px;
+  width: 300px;
+  padding-left: 50px;
+}

@@ -1,0 +1,25 @@
+.Notify-anta-regular .Notify p {
+  background: pink;
+  font-family: "Poppins", sans-serif;
+  padding: 7px;
+  font-weight: bold;
+  border: solid 0px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 4px gray;
+  padding-left: 20px;
+  padding-right: 15px;
+  color: black;
+}
+
+.Notify-anta-regular .Notify button {
+  background: pink;
+  font-family: "Poppins", sans-serif;
+  padding: 7px;
+  font-weight: bold;
+  border: solid 0px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 4px gray;
+  padding-left: 20px;
+  padding-right: 15px;
+  color: black;
+}

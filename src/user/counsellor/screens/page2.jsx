@@ -1,0 +1,173 @@
+import { useState , useEffect } from 'react';
+import React from 'react';
+import './page2.css'; // Import the CSS file
+import Button from './button';
+
+function page2() {
+  let user_id="65eb03840d088803c56ed542";
+  let [counsellorUsername, setCounsellorUsername] = useState("");
+  let [counsellorOptions, setCounsellorOptions] = useState([]);
+  let [selectedDate, setSelectedDate] = useState("");
+  let [daysDates, setDaysDates] = useState([]);
+  let [selectedTime, setSelectedTime] = useState();
+  let [timeSlots, setTimeSlots] = useState([]);
+  let [selectedProgram, setSelectedProgram] = useState("");
+  let [selectedHall, setSelectedHall] = useState();
+  let [department, setDepartment] = useState("");
+  let [contactNumber, setContactNumber] = useState();
+
+  
+  selectedProgram = "Btech";
+  selectedHall = 1;
+  department = "CSE";
+  contactNumber = 0;
+
+   useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch("http://localhost:6300/institute_counsellors");
+        const data = await response.json();
+        const options = data.message.map(counsellor => counsellor[0]);
+        setCounsellorOptions(options);
+      } catch (error) {
+        console.error('Error fetching counsellors:', error);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  const fillDaysDates = async (counsellorUsername) => {
+    try {
+      const response = await fetch('http://localhost:6300/get_available_days', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ counsellor_username: counsellorUsername })
+      });
+      const data = await response.json();
+      console.log(data);
+      const daysDatesOptions = data.message.map(dayDate => dayDate);
+      setDaysDates(daysDatesOptions);
+    } catch (error) {
+      console.error('Error occurred:', error);
+      throw error; 
+    }
+  };
+
+  const fillTimeSlots = async (counsellorUsername, selectedDate) => {
+    try {
+      const response = await fetch('http://localhost:6300/get_available_time_slots', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ counsellor_username: counsellorUsername, date: selectedDate})
+      });
+      const data = await response.json();
+      console.log(data);
+      const timeSlotsOptions = data.message.map(timeSlot => timeSlot);
+      setTimeSlots(timeSlotsOptions);
+    } catch (error) {
+      console.error('Error occurred:', error);
+      throw error; 
+  }};
+
+  const bookAppointment = async () => {
+    console.log("hi");
+    try {
+      const response = await fetch('http://localhost:6300/book_counsellor_appointment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ user_id: user_id, counsellor_username: counsellorUsername, date: selectedDate, time: selectedTime, program: selectedProgram, department: department, hall: selectedHall, contact_number: contactNumber })
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error('Error occurred:', error);
+      throw error; 
+    }};
+
+
+  return (
+    <div id="page" className="page-container">
+      {/* Counsellor sec */}
+      <div className="sec">
+        <p className="labels">counsellor</p>
+        <select value={counsellorUsername} onChange={(e) => {setCounsellorUsername(e.target.value); fillDaysDates(e.target.value); }} className="input" style={{ width: '500px' }}>
+          {counsellorOptions.map((counsellor) => (
+            <option key={counsellor}>{counsellor}</option>
+          ))}
+        </select>
+      </div>
+
+      {/* Date of appointment sec */}
+      <div className="sec">
+        <p className="labels">date/day of appointment</p>
+        <select value={selectedDate} onChange={(e) => {setSelectedDate(e.target.value); fillTimeSlots(counsellorUsername,e.target.value); } } className="input" style={{ width: '200px' }}>
+        {daysDates.map((dayDate) => (
+            <option key={dayDate}>{dayDate}</option>
+          ))}
+        </select>
+      </div>
+
+      {/* Preferred time sec */}
+      <div className="sec">
+        <p className="labels">preferred time</p>
+        <select value={selectedTime} onChange={(e) => {setSelectedTime(e.target.value)}} className="input" style={{ width: '200px' }} defaultValue="3pm" >
+        {timeSlots.map((timeSlot) => (
+            <option key={timeSlot}>{timeSlot}</option>
+          ))}
+        </select>
+        
+      </div>
+
+      {/* Program, Department, Hall sec */}
+      <div className="sec">
+        <p className="labels">program:</p>
+        <select value={selectedProgram} onChange={(e) => {setSelectedProgram(e.target.value)}} className="input" style={{ width: '200px' }} defaultValue="B Tech" >
+          <option key="BTech">BTech</option>
+          <option key="MTech">MTech</option>
+          <option key="PhD">PhD</option>
+          <option key="MSc">MSc</option>
+          <option key="BSc">BSc</option>
+        </select>
+        <p className="labels" style={{ marginLeft: '100px' }}>department:</p>
+        <input type="text" className="input" style={{ width: '200px' }} defaultValue="CSE" onChange={(e) => {setDepartment(e.target.value)}}/>
+        <p className="labels" style={{ marginLeft: '100px' }}>hall:</p>
+        <select value={selectedHall} onChange={(e) => {setSelectedHall(e.target.value)}} className="input" style={{ width: '100px' }} defaultValue="5" >
+          <option key="1">1</option>
+          <option key="2">2</option>
+          <option key="3">3</option>
+          <option key="4">4</option>
+          <option key="5">5</option>
+          <option key="6">6</option>
+          <option key="7">7</option>
+          <option key="8">8</option>
+          <option key="9">9</option>
+          <option key="10">10</option>
+          <option key="11">11</option>
+          <option key="12">12</option>
+          <option key="13">13</option>
+          <option key="14">14</option>
+        </select>
+      </div>
+
+      {/* Contact number sec */}
+      <div className="sec">
+        <p className="labels">contact number</p>
+        <input type="text" className="input"  onChange={(e) => {setContactNumber(e.target.value)}}/>
+      </div>
+
+      {/* Save button */}
+      <div className="button-container">
+        <button backgroundColor={"#22992E"} size={3} value="book" textColor={1} onClick={bookAppointment} className="counsellor_page_user_button">book</button>
+      </div>
+    </div>
+  );
+}
+
+export default page2;

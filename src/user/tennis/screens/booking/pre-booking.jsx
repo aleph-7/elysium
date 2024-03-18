@@ -28,7 +28,25 @@ function PreBooking() {
       return;
     }
 
-    const res = await fetch(SERVER_ROOT_PATH + "/badminton/pre_booking", {
+    const res = await fetch(`${SERVER_ROOT_PATH}/checkAppliedTimeslots`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_id: localStorage.getItem("userMongoId"),
+        selectedTime: selectedTime,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (data.alreadyApplied) {
+      alert("You have already applied for this timeslot!");
+      return;
+    }
+
+    const bookingRes = await fetch(SERVER_ROOT_PATH + "/tennis/pre_booking", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -38,22 +56,27 @@ function PreBooking() {
         type: "pre",
         players: users,
         user_id: userid,
-        sport_type: "badminton",
+        sport_type: "tennis",
       }),
     });
 
-    setSelectedTime("");
-    setUsers([]);
-    setInputValue("");
-    setAllowPlayerSelection(false);
-    setShowWarning(false);
-
-    if (res.ok) {
-      // Reset form after successful submission
+    if (bookingRes.ok) {
       e.target.reset();
-      // Show alert for successful booking
       alert("Booking successful!");
+      setSelectedTime("");
+      setUsers([]);
+      setInputValue("");
+      setAllowPlayerSelection(false);
+      setShowWarning(false);
+      // Reset form after successful submission
+
+      // Show alert for successful booking
     } else {
+      setSelectedTime("");
+      setUsers([]);
+      setInputValue("");
+      setAllowPlayerSelection(false);
+      setShowWarning(false);
       // Handle error case
       alert("Booking failed. Please try again.");
     }
@@ -68,6 +91,15 @@ function PreBooking() {
   };
 
   const handleAddUser = async () => {
+    const loggedInUsername = localStorage.getItem("userId");
+
+    if (inputValue === loggedInUsername) {
+      // Alert the user that they cannot add themselves
+      alert("You cannot add yourself to the list.");
+      setInputValue("");
+      return;
+    }
+
     if (inputValue.trim() !== "") {
       const response = await fetch(
         SERVER_ROOT_PATH + "/checkUser/" + `${inputValue}`
@@ -94,7 +126,7 @@ function PreBooking() {
 
   return (
     <form
-      className="active-booking-form-badminton"
+      className="active-booking-form-tennis"
       onSubmit={(e) => {
         handleSubmit(e);
         e.target.reset();

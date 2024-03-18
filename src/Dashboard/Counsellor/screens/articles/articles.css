@@ -1,0 +1,33 @@
+.articles {
+  display: flex;
+  justify-content: space-between;
+  color: black;
+}
+
+.articles .buttons2 {
+  display: flex;
+  width: 30%;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.articles .content {
+  padding-left: 20px;
+}
+
+.articles .buttons2 button {
+  width: 40%;
+  text-align: center;
+}
+
+.articles .buttons2 .edit {
+  background: green;
+  color: white;
+  font-weight: 300;
+}
+
+.articles .buttons2 .remove {
+  background: red;
+  color: white;
+  font-weight: 300;
+}

@@ -40,9 +40,9 @@ const blog_counsellorSchema = mongoose.Schema({
 const cousellor_availabilitySchema = mongoose.Schema({
   day_vector: [Number],
   hour_vector: [Number],
+  counsellor_user_id: mongoose.ObjectId,
   date_slot: String,
   date_slot_time_vector: [Number],
-  counsellor_user_id: mongoose.ObjectId,
 });
 
 const { contentDB } = connectContentDBs();
@@ -58,7 +58,7 @@ module.exports = {
     blog_counsellorSchema
   ),
   counsellor_availabilitySchema: contentDB.model(
-    "time_slot_posted_by_counsellors",
+    "time_slots_by_counsellors",
     cousellor_availabilitySchema
   ),
 };

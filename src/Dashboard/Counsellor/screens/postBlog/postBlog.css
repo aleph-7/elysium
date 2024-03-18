@@ -1,0 +1,89 @@
+.counsellor-post h2 {
+  display: flex;
+  justify-content: start;
+  color: black;
+}
+/* .counsellor-post button {
+  background: pink;
+  font-family: "Poppins", sans-serif;
+  padding: 7px;
+  font-weight: bold;
+  border: solid 0px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 4px gray;
+  padding-left: 20px;
+  padding-right: 15px;
+  margin: 10px;
+  color: black;
+} */
+
+.counsellor-post .added-articles {
+  background-color: rgb(241, 235, 235);
+  border-radius: 20px;
+  margin: 0px;
+  padding: 0px;
+  color: black;
+}
+
+.counsellor-post .box-1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 10px;
+  color: black;
+}
+
+.counsellor-post .box-1 h3 {
+  width: 70px;
+  color: black;
+}
+
+.counsellor-post .box-1 input {
+  width: 35%;
+  border-radius: 20px;
+  border: rgb(241, 235, 235) solid 5px;
+  background-color: rgb(241, 235, 235);
+  position: relative;
+  left: -40vw;
+  color: black;
+}
+
+.counsellor-post .content-heading h3 {
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 10px;
+}
+
+.counsellor-post .content textarea {
+  font-family: "Poppins";
+  width: 35%;
+  width: 95%;
+  text-align: start; /* Align text to the top of the textarea */
+  height: 20vh;
+  text-align: top;
+  border-radius: 20px;
+  border: rgb(241, 235, 235) solid 5px;
+  background-color: rgb(241, 235, 235);
+}
+
+.counsellor-post .post-button button {
+  float: right;
+  margin: 20px;
+  background: green;
+  font-family: "Poppins", sans-serif;
+  padding: 7px;
+  font-weight: bold;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 2px 2px 4px gray;
+  padding-left: 20px;
+  padding-right: 15px;
+  margin: 10px;
+  color: white;
+  width: 10vw;
+}
+
+.counsellor-post {
+  padding: 30px;
+  color: black;
+}

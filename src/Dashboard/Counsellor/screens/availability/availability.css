@@ -1,0 +1,193 @@
+.counsellor-availability {
+  font-family: "Poppins", sans-serif;
+}
+
+.counsellor-availability .day-availablity,.date-availablity {
+  width: 70vw;
+  margin-left: 4vw;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+.counsellor-availability .date {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+.counsellor-availability .date-lelebhai {
+  width: 3vw;
+}
+.counsellor-availability .datepicker {
+  width: 12vw;
+  position: relative;
+  top: 5vh;
+  left: 2vw;
+}
+
+.counsellor-availability .start {
+  display: flex;
+  align-items: flex-start;
+  align-items: center;
+}
+
+.counsellor-availability .daypicker,.timepicker {
+  margin-right: 5%;
+  margin-left: 5%;
+  width: 12vw;
+  background: rgb(241, 235, 235);
+  border: 5px solid rgb(241, 235, 235);
+  border-radius: 10px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  max-height: 9vh;
+  /* overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; */
+}
+.counsellor-availability .datepicker input{
+  margin-right: 5%;
+  margin-left: 5%;
+  width: 12vw;
+  background: rgb(241, 235, 235);
+  border: 5px solid rgb(241, 235, 235);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  /* overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; */
+}
+
+.counsellor-availability .date .contents {
+  text-align: start;
+  width: 100px;
+}
+
+.counsellor-availability button:hover {
+  cursor: pointer;
+}
+
+.counsellor-availability .day-availablity button {
+  margin-right: 5%;
+  margin-left: 5%;
+  padding-top: 4px;
+  margin-top: 3vh;
+  padding-bottom: 4px;
+  height: 4vh;
+  background-color: orangered !important;
+}
+.counsellor-availability .date-availablity button {
+  margin-right: 5%;
+  margin-left: 5%;
+  padding-top: 4px;
+  margin-top: 3vh;
+  padding-bottom: 4px;
+  height: 4vh;
+  background-color: orangered !important;
+}
+
+.counsellor-availability .added-dates {
+  min-width: 60vw;
+  max-height: 15vh;
+  padding: -20vw;
+  background-color: rgb(241, 235, 235);
+  border-radius: 40px;
+  padding-top: 1vh;
+  height: 25vh;
+  overflow: scroll;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.counsellor-availability button:hover {
+  /* background-color: black; */
+  color: white;
+  transform: scale(1.05);
+  transition: 250ms;
+}
+.counsellor-availability {
+  padding: 30px;
+}
+.counsellor-availability button {
+  background: pink;
+  font-family: "Poppins", sans-serif;
+  padding: 7px;
+  font-weight: bold;
+  border: solid 0px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 4px gray;
+  padding-left: 20px;
+  padding-right: 15px;
+}
+
+.counsellor-availability input{
+  background: white;
+}
+
+.counsellor-availability {
+  color: black;
+}
+
+.counsellor-availability .timefordate {
+  margin-left: 7.2vw;
+}
+.counsellor-availability .dateitem .wrapper2 {
+  display: flex;
+  gap: 25%;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 10px;
+  padding-bottom: 30px;
+  width: auto;
+  color: black;
+}
+.counsellor-availability .added-dates .wrapper1 {
+  display: flex;
+  flex-direction: row;
+  gap: 40vw;
+  margin-left: 4vw;
+  width: auto;
+  color: black;
+}
+.counsellor-availability .added-dates .wrapper1 span{
+  font-weight: 700;
+  width: auto;
+  color: black;
+}
+
+.counsellor-availability .dateitem .wrapper2 .blue {
+  /* background: blue; */
+  height: 20px;
+  width: 50%;
+  margin-left: -5vw;
+}
+
+.counsellor-availability .dateitem .wrapper2 .red {
+  /* background: red; */
+  height: 20px;
+  width: 50%;
+}
+
+.counsellor-availability .dateitem .wrapper2 .blue p {
+  display: flex;
+  /* justify-content: space-around; */
+  align-items: center;
+  padding: 0px;
+  margin: 0px;
+  gap: 5%;
+}
+
+.counsellor-availability .dateitem .wrapper2 .red p {
+  /* padding: 0px;
+  margin: 0px; */
+  display: flex;
+  /* justify-content: space-around; */
+  align-items: center;
+  padding: 0px;
+  margin: 0px;
+  gap: 5%;
+}
+
+.counsellor-availability .added-dates ul {
+  list-style: none;
+}

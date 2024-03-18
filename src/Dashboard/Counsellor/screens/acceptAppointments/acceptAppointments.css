@@ -1,0 +1,32 @@
+.Acceptappointments .table1 {
+  position: relative;
+}
+
+.Acceptappointments {
+  margin: 30px;
+  color: black;
+}
+
+.Acceptappointments button {
+  border: none;
+  height: 3vh;
+  position:relative;
+  right: -1vw;
+  font-family:Poppins;
+  border: none; /* Remove border if not needed */
+  cursor: pointer;
+  display: flex; /* Use flexbox to center align content */
+  justify-content: center; /* Horizontally center align content */
+  align-items: center; /* Vertically center align content */
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-weight: bold;
+  border-radius: 25px;
+  color: white;
+  width: 5vw;
+}
+.Acceptappointments .accept-button {
+  background-color: green;
+}
+.Acceptappointments .reject-button {
+  background-color: red;
+}
