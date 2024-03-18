@@ -26,7 +26,7 @@ import Hockey from "./user/hockey/Hockey";
 // import Yoga_Instructor from "./Dashboard/Yoga_Instructor/Yoga_Instructor.jsx";
 import Coach_Dashboard from "./Dashboard/Coach/Coach_Dashboard.jsx";
 import Yogaa from "./user/yoga/Yogaa.jsx";
-import Swimming from "./user/swim/Badminton.jsx";
+import Swimming from "./user/swimming/Swimming.jsx";
 import Self_help from "./user/self-help/self_help.jsx";
 
 // import LP1 from "./Landing_Page1/LP1.jsx";

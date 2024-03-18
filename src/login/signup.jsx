@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./login.css";
 import { Link } from "react-router-dom";
+import SERVER_ROOT_PATH from "../../config";
 
 const Signup = () => {
   const [input, setInput] = useState({
@@ -108,7 +109,7 @@ const Signup = () => {
       return;
     }
     try {
-      const response = await fetch("http://localhost:6300/signup", {
+      const response = await fetch(SERVER_ROOT_PATH + "/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

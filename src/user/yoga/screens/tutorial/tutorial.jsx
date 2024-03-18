@@ -6,7 +6,7 @@ import SERVER_ROOT_PATH from "../../../../../config.js";
 function Tutorial() {
   const [message, setMessage] = useState("");
   const fetchInfo = async () => {
-    return await fetch("http://localhost:6300/tutorials/yoga")
+    return await fetch(SERVER_ROOT_PATH + "/tutorials/yoga")
       .then((res) => res.json())
       .then((data) => setMessage(data.message));
   };

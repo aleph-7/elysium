@@ -86,7 +86,7 @@ const Login = () => {
           localStorage.setItem("category", data.category);
           localStorage.setItem("user_email:", data.email);
           localStorage.setItem("userMongoId", data.userMongoId);
-          localStorage.setItem("userMongoId", data.type_of_sport);
+          localStorage.setItem("type_of_sport", data.type_of_sport);
 
           console.log("token:", data.token);
           console.log("category:", data.category);

@@ -13,6 +13,7 @@ function Workshop() {
 
   useEffect(() => {
     fetchInfo();
+    console.log(message);
   }, []);
 
   return (

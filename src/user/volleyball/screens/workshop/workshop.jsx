@@ -13,12 +13,13 @@ function Workshop() {
 
   useEffect(() => {
     fetchInfo();
+    console.log(message);
   }, []);
 
   return (
     <div className="workshop">
       <Table_Workshop
-        sport="badminton"
+        sport="volleyball"
         noOfRows={message.length}
         noOfColumns={3}
         rowEntries={message}
