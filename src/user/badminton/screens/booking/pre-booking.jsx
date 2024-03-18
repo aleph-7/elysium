@@ -70,7 +70,7 @@ function PreBooking() {
   const handleAddUser = async () => {
     if (inputValue.trim() !== "") {
       const response = await fetch(
-        SERVER_ROOT_PATH + "/checkUser/" + `${inputValue}`
+        SERVER_ROOT_PATH + "/checkUser/${inputValue}"
       );
       const data = await response.json();
 
