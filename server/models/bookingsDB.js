@@ -3,7 +3,6 @@ mongoose.pluralize(null);
 const { connectBookingsDBs } = require("../databases/bookingsDB");
 
 const sportBookingSchema = mongoose.Schema({
-  _id: mongoose.ObjectId,
   show_up_status: Number,
   user_id: mongoose.ObjectId,
   time_slot: Number,
