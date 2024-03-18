@@ -18,10 +18,11 @@ import Cricket from "./user/cricket/Cricket";
 import Volleyball from "./user/volleyball/Volleyball.jsx";
 import Badminton from "./user/badminton/Badminton";
 import Tennis from "./user/tennis/Tennis";
-// import TableTennis from "./user/tabletennis/TableTennis.jsx";
-// import Squash from "./user/squash/Squash";
+import TableTennis from "./user/tabletennis/TableTennis.jsx";
+import Squash from "./user/squash/Squash";
 import Football from "./user/football/Football";
 import Hockey from "./user/hockey/Hockey";
+
 // import Counsellor from "./counsellor/Counsellor.jsx";
 // import Yoga_Instructor from "./Dashboard/Yoga_Instructor/Yoga_Instructor.jsx";
 import Coach_Dashboard from "./Dashboard/Coach/Coach_Dashboard.jsx";
@@ -66,10 +67,9 @@ function App() {
             <Route path="/volleyball" element={<Volleyball />} />
             <Route path="/badminton" element={<Badminton />} />
             <Route path="/tennis" element={<Tennis />} />
-            {/* 
-            <Route path="/tabletennis" element={<TableTennis />} /> */}
+            <Route path="/tabletennis" element={<TableTennis />} />
             <Route path="/swimming" element={<Swimming />} />
-            {/* <Route path="/squash" element={<Squash />} /> */}
+            <Route path="/squash" element={<Squash />} />
             <Route path="/football" element={<Football />} />
             <Route path="/hockey" element={<Hockey />} />
             <Route path="/yoga" element={<Yogaa />} />

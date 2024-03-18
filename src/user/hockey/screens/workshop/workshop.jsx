@@ -1,3 +1,4 @@
+export default Workshop;
 import { useEffect, useState } from "react";
 import "./workshop.css";
 import Table_Workshop from "../../../components/workshops/table_workshop.jsx";
@@ -18,7 +19,7 @@ function Workshop() {
   return (
     <div className="workshop">
       <Table_Workshop
-        sport="badminton"
+        sport="football"
         noOfRows={message.length}
         noOfColumns={3}
         rowEntries={message}
@@ -26,5 +27,3 @@ function Workshop() {
     </div>
   );
 }
-
-export default Workshop;

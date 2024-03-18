@@ -9,11 +9,12 @@
 .nav-hockey {
   margin-left: 10%;
   margin-right: 10%;
-  margin-top: 5%;
+  margin-top: 2%;
   position: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 .nav-hockey ul {
   display: flex;
   justify-content: space-between;
@@ -43,6 +44,7 @@
   border-radius: 10px;
   border: none;
   font-size: 16px;
+
   transition: 0.1s;
   font-family: "Poppins";
 }
