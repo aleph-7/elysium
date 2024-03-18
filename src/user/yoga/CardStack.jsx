@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Yoga1 from "../assets/yoga/Yoga1.png";
-import Yoga2 from "../assets/yoga/Yoga2.png";
+import Yoga2 from "../assets/yoga/Yoga1.png";
 import logo from "../assets/cricket/logo.jpg";
 import move from "lodash-move";
 import Workshop from "./screens/workshop/workshop";

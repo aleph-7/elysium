@@ -541,8 +541,27 @@ app.post("/badminton/active_booking", async (req, res) => {
       court_id: null,
       partners_id: mongodbIds,
       no_partners: mongodbIds.length,
-      booking_status: 0,
+      booking_status: 1,
     });
+    const bookings = await SportsBookings.find({
+      date_slot: current_date,
+      time_slot: hour,
+      type_of_sport: req.body.sport_type,
+    });
+    let length = bookings.length;
+
+    if (req.body.sport_type == "badminton" && length >= 6) {
+      return res.status(400).json({ error: "Court is full" });
+    }
+    if (req.body.sport_type == "squash" && length >= 4) {
+      return res.status(400).json({ error: "Court is full" });
+    }
+    if (req.body.sport_type == "tennis" && length >= 6) {
+      return res.status(400).json({ error: "Court is full" });
+    }
+    if (req.body.sport_type == "table_tennis" && length >= 6) {
+      return res.status(400).json({ error: "Court is full" });
+    }
     const doc = await booking.save();
     res.json(doc);
   } catch (err) {
@@ -679,8 +698,27 @@ app.post("/squash/active_booking", async (req, res) => {
       court_id: null,
       partners_id: mongodbIds,
       no_partners: mongodbIds.length,
-      booking_status: 0,
+      booking_status: 1,
     });
+    const bookings = await SportsBookings.find({
+      date_slot: current_date,
+      time_slot: hour,
+      type_of_sport: req.body.sport_type,
+    });
+    let length = bookings.length;
+
+    if (req.body.sport_type == "badminton" && length >= 6) {
+      return res.status(400).json({ error: "Court is full" });
+    }
+    if (req.body.sport_type == "squash" && length >= 4) {
+      return res.status(400).json({ error: "Court is full" });
+    }
+    if (req.body.sport_type == "tennis" && length >= 6) {
+      return res.status(400).json({ error: "Court is full" });
+    }
+    if (req.body.sport_type == "table_tennis" && length >= 6) {
+      return res.status(400).json({ error: "Court is full" });
+    }
     const doc = await booking.save();
     res.json(doc);
   } catch (err) {
@@ -839,8 +877,27 @@ app.post("/tennis/active_booking", async (req, res) => {
       court_id: null,
       partners_id: mongodbIds,
       no_partners: mongodbIds.length,
-      booking_status: 0,
+      booking_status: 1,
     });
+    const bookings = await SportsBookings.find({
+      date_slot: current_date,
+      time_slot: hour,
+      type_of_sport: req.body.sport_type,
+    });
+    let length = bookings.length;
+
+    if (req.body.sport_type == "badminton" && length >= 6) {
+      return res.status(400).json({ error: "Court is full" });
+    }
+    if (req.body.sport_type == "squash" && length >= 4) {
+      return res.status(400).json({ error: "Court is full" });
+    }
+    if (req.body.sport_type == "tennis" && length >= 6) {
+      return res.status(400).json({ error: "Court is full" });
+    }
+    if (req.body.sport_type == "table_tennis" && length >= 6) {
+      return res.status(400).json({ error: "Court is full" });
+    }
     const doc = await booking.save();
     res.json(doc);
   } catch (err) {
@@ -1065,8 +1122,27 @@ app.post("/table_tennis/active_booking", async (req, res) => {
       court_id: null,
       partners_id: mongodbIds,
       no_partners: mongodbIds.length,
-      booking_status: 0,
+      booking_status: 1,
     });
+    const bookings = await SportsBookings.find({
+      date_slot: current_date,
+      time_slot: hour,
+      type_of_sport: req.body.sport_type,
+    });
+    let length = bookings.length;
+
+    if (req.body.sport_type == "badminton" && length >= 6) {
+      return res.status(400).json({ error: "Court is full" });
+    }
+    if (req.body.sport_type == "squash" && length >= 4) {
+      return res.status(400).json({ error: "Court is full" });
+    }
+    if (req.body.sport_type == "tennis" && length >= 6) {
+      return res.status(400).json({ error: "Court is full" });
+    }
+    if (req.body.sport_type == "table_tennis" && length >= 6) {
+      return res.status(400).json({ error: "Court is full" });
+    }
     const doc = await booking.save();
     res.json(doc);
   } catch (err) {
