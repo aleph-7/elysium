@@ -19,11 +19,8 @@ cd server
 npm install
 node server.js
 ```
-- Head back to the main directory
-```bash
-cd ..
-```
-- Navigate to the directory of the repository
+- This should start the server
+- Now open another console (in the `elysium` directory) 
 - Run the following command in the terminal 
 ```bash
 npm run dev
