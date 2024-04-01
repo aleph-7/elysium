@@ -1,10 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
 import move from "lodash-move";
-import CheckEnrolment from "./pages/checkEnrollment/checkEnrolment";
-import PostWorkshop from "./pages/postWorkshop/postWorkshop";
-import ReserveCourt from "./pages/reserveCourt/reserveCourt";
-// import Statistics from "./pages/Coach_Dashboard/statistics/stats";
+import CheckEnrolment from "./screens/checkEnrollment/checkEnrolment";
+import PostWorkshop from "./screens/postWorkshop/postWorkshop";
+import Statistcs from "./screens/statistics/statistics";
 import "./CardStack.css";
 
 /* THIS CODE CONTAINS THE SWAPPABLE CARDS AND THE nav-coachIGATION BAR, ALONG WITH ALL COMPONENTS CONNECTED */
@@ -14,7 +13,7 @@ import "./CardStack.css";
 /* The rest of the code is not to be altered */
 
 const CARD_INDICES = ["1", "2", "3"];
-const BUTTON_LABELS = ["post workshop", "check enrolment", "reserve court"];
+const BUTTON_LABELS = ["post workshop", "check enrolment", "statistics"];
 
 /*INTERNAL WORKING*/
 const CARD_OFFSET = 6;
@@ -81,12 +80,7 @@ const CardStack = () => {
                 {/* //CHANGE THE PAGES HERE */}
                 {color == "1" ? <PostWorkshop /> : null}
                 {color == "2" ? <CheckEnrolment /> : null}
-                {color == "3" ? <ReserveCourt /> : null}
-                {/* {color == "4" ? <PostWorkshop /> : null} */}
-                {/* 
-                {color == "3" ? <ReserveCourt /> : null}
-                {color == "4" ? <Statistics /> : null}
-                {color == "5" ? <ValidateUsers /> : null} */}
+                {color == "3" ? <Statistcs /> : null}
                 {/* //CHANGE THE PAGES HERE */}
               </motion.li>
             );

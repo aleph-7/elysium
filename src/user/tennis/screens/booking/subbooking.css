@@ -2,7 +2,6 @@
 
 .active-booking-form-tennis {
   width: auto;
-  overflow: hidden;
   overflow-y: scroll;
   background: rgba(255, 255, 255, 0.33);
   font-family: "Poppins";
@@ -12,8 +11,8 @@
   margin-right: 5vw;
   margin-top: 4vh;
   width: 80%;
-
   border-radius: 2vw;
+  height:50vh;
 }
 
 .active-booking-form-tennis .booking-area {
@@ -21,6 +20,7 @@
 }
 
 .active-booking-form-tennis .play-area {
+  overflow-y:scroll;
   display: flex;
   justify-content: space-between;
 }
@@ -109,5 +109,24 @@
 .active-booking-form-tennis .drop-down {
   margin-bottom: 3vw;
   margin-left: 4vw;
-  height: fit-content;
+  height:40%;
+  background-color: rgb(215, 215, 215);
+  border-radius:20px;
+  font-family:"Poppins";
 }
+
+
+.active-booking-form-tennis .select{
+  display:flex;
+  /* padding-top:10%; */
+}
+.active-booking-form-tennis .show_cont{
+  height:80%;
+  background-color: rgb(215, 215, 215);
+  border-radius:20px;
+}
+
+.active-booking-form-tennis .pre-check{
+  padding-top:4%;
+}
+

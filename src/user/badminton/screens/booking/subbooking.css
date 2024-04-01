@@ -4,20 +4,23 @@
   width: auto;
   overflow: hidden;
   overflow-y: scroll;
+  overflow-x:scroll;
   background: rgba(255, 255, 255, 0.33);
   font-family: "Poppins";
   position: center;
   margin-left: 10vw;
   padding-top: 4vh;
   margin-right: 5vw;
-  margin-top: 4vh;
+  margin-top: 4%;
+  margin-top: 4%;
   width: 80%;
-
   border-radius: 2vw;
+  height:50vh;
 }
 
 .active-booking-form-badminton .booking-area {
   width: 80%;
+  height:90%;
 }
 
 .active-booking-form-badminton .play-area {
@@ -28,6 +31,7 @@
 .active-booking-form-badminton .drop {
   display: flex;
   gap: 5vw;
+  font-family: "Poppins";
 }
 
 .active-booking-form-badminton .labeeels {
@@ -40,6 +44,7 @@
 .active-booking-form-badminton .players-list {
   display: flex;
   flex-direction: row;
+  padding-top:5%;
 }
 
 .active-booking-form-badminton .show_cont {
@@ -51,8 +56,10 @@
   gap: 2vw;
   justify-content: center;
   margin-bottom: 1vw;
-  margin-top: 5vw;
-  margin-left: 2vw;
+  margin-top: 3%;
+  margin-left: 30%;
+  margin-top: 3%;
+  margin-left: 30%;
 }
 
 .active-booking-form-badminton .orangeButtonnn {
@@ -109,5 +116,23 @@
 .active-booking-form-badminton .drop-down {
   margin-bottom: 3vw;
   margin-left: 4vw;
-  height: fit-content;
+  height:40%;
+  background-color: rgb(215, 215, 215);
+  border-radius:20px;
+  font-family:"Poppins";
 }
+
+.active-booking-form-badminton .select{
+  display:flex;
+  /* padding-top:10%; */
+}
+.active-booking-form-badminton .show_cont{
+  height:80%;
+  background-color: rgb(215, 215, 215);
+  border-radius:20px;
+}
+
+.active-booking-form-badminton .pre-check{
+  padding-top:4%;
+}
+

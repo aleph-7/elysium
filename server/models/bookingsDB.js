@@ -38,6 +38,14 @@ const swim_gym_membershipsSchema = mongoose.Schema({
   time_of_booking: Date,
 });
 
+const workshopSchema = mongoose.Schema({
+  user_id: mongoose.ObjectId,
+  time_of_booking: Date,
+  booking_status: Number,
+  type_of_sport: String,
+  session_id: mongoose.ObjectId,
+});
+
 const { bookingDB } = connectBookingsDBs();
 module.exports = {
   sportBookingsSchema: bookingDB.model("sport_bookings", sportBookingSchema),
@@ -48,5 +56,9 @@ module.exports = {
   swimGymMembershipsSchema: bookingDB.model(
     "swim_gym_memberships",
     swim_gym_membershipsSchema
+  ),
+  yogaSessionsSportsWorkshops: bookingDB.model(
+    "yoga_sessions_sport_workshops",
+    workshopSchema
   ),
 };

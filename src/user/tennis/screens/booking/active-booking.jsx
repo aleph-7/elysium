@@ -1,25 +1,85 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./subbooking.css";
 import SERVER_ROOT_PATH from "../../../../../config";
 
-function ActiveBooking() {
-  const [data, setData] = useState({});
 
-  const handleChange = (e) => {
-    setData({
-      ...data,
-      [e.target.name]: e.target.value,
+function fetchAvailableSlots(date, typeOfSport,cap) {
+  return fetch(`${SERVER_ROOT_PATH}/getAvailableSlots`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ date:date, type_of_sport: typeOfSport ,capacity:cap}),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Failed to fetch available slots");
+      }
+      return response.json();
+    })
+    .then((data) => data.availableSlots)
+    .catch((error) => {
+      console.error("Error fetching available slots:", error);
+      return [];
     });
-  };
+}
 
+
+function ActiveBooking() {
+  const [availableSlots, setAvailableSlots] = useState([]);
   const userid = localStorage.getItem("userMongoId");
-  const sport = localStorage.getItem("type_of_sport");
+  const [selectedTime, setSelectedTime] = useState("");
+  const [users, setUsers] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  const [availableCourts, setAvailableCourts] = useState([]);
+  const [selectedCourt, setSelectedCourt] = useState("");
+  var date = new Date();
+  const current_date = (date.getDate() < 10 ? "0" : "") + date.getDate() + "/" + (date.getMonth() < 9 ? "0" : "") + (date.getMonth() + 1) + "/" +date.getFullYear(); 
+
+  useEffect(() => {
+    async function fetchData() {
+    const currentHour = date.getHours();
+    const slotsData = await fetchAvailableSlots(current_date, "tennis", 6);
+    const slots = slotsData.map(Number);
+    const filteredSlots = slots.filter(slot => Number(slot) > currentHour);
+    setAvailableSlots(filteredSlots);
+    }
+    fetchData();
+  }, []);
+  useEffect(() => {
+    async function fetchCourts() {
+      // Fetch available courts based on the selected time slot
+      if (selectedTime) {
+        const response = await fetch(`${SERVER_ROOT_PATH}/getAvailableCourts`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ selectedTime: selectedTime,date:current_date,sport:"tennis" }),
+        });
+        const data = await response.json();
+        setAvailableCourts(data.availableCourts);
+      }
+    }
+    fetchCourts();
+  }, [selectedTime]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Check if users list is empty
     if (users.length === 0) {
       alert("Please add at least one playmate!");
+      return;
+    }
+
+    if (!selectedTime) {
+      alert("Please select a time slot!");
+      return;
+    }
+
+    if (!selectedCourt) {
+      alert("Please select a court!");
       return;
     }
 
@@ -42,7 +102,7 @@ function ActiveBooking() {
     }
 
     const bookingRes = await fetch(
-      SERVER_ROOT_PATH + "/tennis/active_booking",
+      SERVER_ROOT_PATH + "/active_booking",
       {
         method: "POST",
         headers: {
@@ -54,6 +114,7 @@ function ActiveBooking() {
           players: users,
           user_id: userid,
           sport_type: "tennis",
+          court_id: selectedCourt,
         }),
       }
     );
@@ -64,41 +125,60 @@ function ActiveBooking() {
       setSelectedTime("");
       setUsers([]);
       setInputValue("");
-      setAllowPlayerSelection(false);
       setShowWarning(false);
-      // Reset form after successful submission
-
-      // Show alert for successful booking
     } else {
       const errorMessage = await bookingRes.json();
       if (errorMessage.error === "Court is full") {
         alert("Court is full. Please select another timeslot.");
-      } else {
+      } else if(errorMessage.error === "You have applied for some other booking at this time."){
+        alert("You have applied for some other booking at this time.");
+      }
+      else{
         alert("Booking failed. Please try again.");
       }
       setSelectedTime("");
       setUsers([]);
       setInputValue("");
-      setAllowPlayerSelection(false);
       setShowWarning(false);
     }
   };
 
-  const [selectedTime, setSelectedTime] = useState("");
 
-  const handleSelectChange = (event) => {
-    setSelectedTime(event.target.value);
+  const handleSelectChange = async (event) => {
+    const selectedValue = event.target.value;
+    setSelectedTime(selectedValue);
+    setSelectedCourt("");
+    
+    if (selectedValue === "") {
+      const current_date = getFormattedDate();
+      const slots = await fetchAvailableSlots(current_date, "tennis",6);
+      setAvailableSlots(slots);
+    }else {
+      // Clear the previous court list
+      setAvailableCourts([]);
+    }
   };
 
-  const [users, setUsers] = useState([]);
-  const [inputValue, setInputValue] = useState("");
-  const [showWarning, setShowWarning] = useState(false);
+  const handleCourtChange = (event) => {
+    setSelectedCourt(event.target.value);
+  };
 
+
+  
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
   };
 
   const handleAddUser = async () => {
+    if (!selectedTime) {
+      alert("Please select a time slot!");
+      return;
+    }
+
+    if (!selectedCourt) {
+      alert("Please select a court!");
+      return;
+    }
     const loggedInUsername = localStorage.getItem("userId");
 
     if (inputValue === loggedInUsername) {
@@ -110,28 +190,45 @@ function ActiveBooking() {
 
     if (inputValue.trim() !== "") {
       const response = await fetch(
-        `${SERVER_ROOT_PATH}/checkUser/${inputValue}`
+        SERVER_ROOT_PATH +"/checkUser",
+        {
+          method: "POST",
+          headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user_name: inputValue,
+          date : current_date,
+          time_slot: selectedTime,
+          type: 1
+        })
+        }
       );
       const data = await response.json();
 
-      if (data.exists) {
-        if (users.length < 4) {
+      if (data.message==="User is available for booking") {
+        if (users.length < 3) {
           setUsers([...users, inputValue]);
           setInputValue("");
         } else {
-          setShowWarning(true);
+          alert("Maximum number of entries reached!");
         }
-      } else {
+      } else if(data.message==="User is already booked for this slot"){
         setInputValue("");
-        alert("User doesn't exist!");
+        alert("He/she has some other booking at this slot.");
+      }
+      else if(data.message === "User not found"){
+        setInputValue("");
+        alert("This user doesn't exist.");
+      }
+      else {
+        setInputValue("");
+        alert("Something went wrong..");
       }
     }
   };
 
-  const handleCloseWarning = () => {
-    setShowWarning(false);
-  };
-
+  
   return (
     <form
       className="active-booking-form-tennis"
@@ -146,21 +243,37 @@ function ActiveBooking() {
             <p className="labeeels">Time-Slot</p>
             <select
               className="drop-down"
-              style={{ width: "200px" }}
+              style={{ width: "200px",marginTop:"2vh" }}
               value={selectedTime}
               onChange={handleSelectChange}
             >
-              <option value="6:00 - 7:00">6:00 - 7:00</option>
-              <option value="7:00 - 8:00">7:00 - 8:00</option>
-              <option value="8:00 - 9:00">8:00 - 9:00</option>
-              <option value="16:00 - 17:00">16:00 - 17:00</option>
-              <option value="17:00 - 18:00">17:00 - 18:00</option>
-              <option value="18:00 - 19:00">18:00 - 19:00</option>
-              <option value="19:00 - 20:00">19:00 - 20:00</option>
-              <option value="20:00 - 21:00">20:00 - 21:00</option>
+              <option value="">select a time slot</option>
+              {availableSlots.map((slot) => (
+                <option key={slot} value={slot}>
+                  {slot}:00 - {parseInt(slot) + 1}:00
+                </option>
+              ))}
             </select>
           </div>
         </div>
+        <div className="play-area">
+        <div className="drop">
+          <p className="labeeels">Select Court</p>
+          <select
+            className="drop-down"
+            style={{ width: "200px",marginTop:"2vh"}}
+            value={selectedCourt}
+            onChange={handleCourtChange}
+          >
+            <option value="">select a court</option>
+            {selectedTime && availableCourts.map((court) => (
+              <option key={court._id} value={court._id}>
+                {court.court_name}
+              </option>
+            ))}
+          </select>
+        </div>
+    </div>
         <div className="select">
           <p className="labeeels">Select Playmate(s)</p>
 
@@ -173,6 +286,7 @@ function ActiveBooking() {
                   value={inputValue}
                   onChange={handleInputChange}
                   placeholder="Enter username"
+                
                 />
               </div>
               <div>
@@ -180,6 +294,7 @@ function ActiveBooking() {
                   onClick={handleAddUser}
                   className="redButton"
                   type="button"
+                 
                 >
                   Add User
                 </button>
@@ -190,16 +305,7 @@ function ActiveBooking() {
                 <li key={index}>{user}</li>
               ))}
             </ul>
-            {showWarning && (
-              <div className="modal">
-                <div className="modal-content">
-                  <span className="close" onClick={handleCloseWarning}>
-                    &times;
-                  </span>
-                  <p>Maximum number of entries reached!</p>
-                </div>
-              </div>
-            )}
+
           </div>
         </div>
 

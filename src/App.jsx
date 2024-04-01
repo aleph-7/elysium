@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Route,
   Routes,
@@ -28,6 +28,7 @@ import Gym from "./user/gym/Gym.jsx";
 import Counsellor from "./user/counsellor/Counsellor.jsx";
 import Self_help from "./user/self-help/self_help.jsx";
 import History from "./user/history/History.jsx";
+import Landing_Page from "./user/landing_page/landing_page.jsx";
 
 //Coach Pages
 import ProtectedRoute_Coach from "./protected_routes_coach.jsx";
@@ -38,31 +39,44 @@ import ProtectedRoute_Admin from "./protected_routes_admin.jsx";
 import Attendance from "./admin/attendance.jsx";
 
 //Yoga Instructor
+import Yoga_Instructor from "./Dashboard/yoga_instructor/Yoga_Instructor.jsx";
+import ProtectedRoute_Yoga from "./protected_routes_yoga.jsx";
 
 //Gym/Swimiming Instructor
+import Gym_Instructor from "./Dashboard/gym_instructor/Gym_Instructor.jsx";
+import Swimming_Instructor from "./Dashboard/swimming_instructor/Swimming_Instructor.jsx";
+import ProtectedRoute_Gym from "./protected_routes_gym.jsx";
+import ProtectedRoute_Swimming from "./protected_routes_swim.jsx";
 
 //Counsellor page
 import ProtectedRoute_Counsellor from "./protected_routes_counsellor.jsx";
 import Counsellor_Dashboard from "./Dashboard/Counsellor/Counsellor_Dashboard.jsx";
 
+//Superadmin Pages
+import Superadmin from "./Dashboard/Super_admin/superadmin.jsx";
+
+import Redirect from "./redirect.jsx";
+
 import Error from "./error/Error.jsx";
-
-// import Gym_Instructor from "./Dashboard/Gym_Instructor/Gym_Instructor.jsx";
-
-// import Coach from "./Dashboard/Coach/Coach.jsx";
+import ProtectedRoute_SuperAdmin from "./protected_routes_super.jsx";
 
 function App() {
+  useEffect(() => {
+    document.title = "Elysium";
+  }, []);
+
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route index element={<Login />} />
+          <Route index element={<Redirect />} />
           <Route path="*" element={<Error />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+
           <Route element={<ProtectedRoute_User />}>
             <Route path="/history" element={<History />} />
-            <Route path="/home" element={<Badminton />} />
+            <Route path="/home" element={<Landing_Page />} />
             <Route path="/basketball" element={<Basketball />} />
             <Route path="/cricket" element={<Cricket />} />
             <Route path="/volleyball" element={<Volleyball />} />
@@ -83,11 +97,30 @@ function App() {
             <Route path="/admin/coach" element={<Coach_Dashboard />} />
           </Route>
 
+          <Route element={<ProtectedRoute_Gym />}>
+            <Route path="/admin/gyminstructor" element={<Gym_Instructor />} />
+          </Route>
+
+          <Route element={<ProtectedRoute_Swimming />}>
+            <Route
+              path="/admin/swiminstructor"
+              element={<Swimming_Instructor />}
+            />
+          </Route>
+
+          <Route element={<ProtectedRoute_Yoga />}>
+            <Route path="/admin/yoga" element={<Yoga_Instructor />} />
+          </Route>
+
           <Route element={<ProtectedRoute_Counsellor />}>
             <Route
               path="/admin/counsellor"
               element={<Counsellor_Dashboard />}
             />
+          </Route>
+
+          <Route element={<ProtectedRoute_SuperAdmin />}>
+            <Route path="/admin/dashboard" element={<Superadmin />} />
           </Route>
 
           <Route element={<ProtectedRoute_Admin />}>

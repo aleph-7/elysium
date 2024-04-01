@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "./attendance.css";
 import { Link } from "react-router-dom";
+import SERVER_ROOT_PATH from "../../config";
+function logout() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("userId");
+  localStorage.removeItem("category");
+  localStorage.removeItem("user_email");
+  localStorage.removeItem("userMongoId");
+  localStorage.removeItem("type_of_sport");
+  window.location.pathname = "/";
+}
 
 const Attendance = (type_of_sport) => {
   let userone = "username";
@@ -89,7 +99,7 @@ const Attendance = (type_of_sport) => {
   // Fill the usernames
 
   const fill_Entries = async () => {
-    const response = await fetch("http://localhost:6300/fill_entries", {
+    const response = await fetch(SERVER_ROOT_PATH + "/fill_entries", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -147,10 +157,13 @@ const Attendance = (type_of_sport) => {
   };
 
   const sendCourtNameToServer = async () => {
+    if (input.court_name === "") {
+      return;
+    }
     console.log(input.court_name);
     console.log(type_of_sport.type_of_sport);
     try {
-      const response = await fetch("http://localhost:6300/court_name_entry", {
+      const response = await fetch(SERVER_ROOT_PATH + "/court_name_entry", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -190,7 +203,7 @@ const Attendance = (type_of_sport) => {
       setError((prev) => ({ ...prev, password: "Password is required." }));
     }
     try {
-      const response = await fetch("http://localhost:5090/login", {
+      const response = await fetch(SERVER_ROOT_PATH + "/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -318,8 +331,8 @@ const Attendance = (type_of_sport) => {
     }
     position_min = Math.min(...valid_positions);
     position_max = Math.max(...valid_positions);
-    if (no_present != position_max) {
-      alert("positions should be continuous");
+    if (position_min != 1) {
+      alert("positions should start from 1");
       setError((prev) => ({
         ...prev,
         position_1: "",
@@ -327,8 +340,8 @@ const Attendance = (type_of_sport) => {
         position_3: "",
         position_4: "",
       }));
-    } else if (position_min != 1) {
-      alert("positions should start from 1");
+    } else if (no_present != position_max) {
+      alert("positions should be continuous");
       setError((prev) => ({
         ...prev,
         position_1: "",
@@ -339,7 +352,7 @@ const Attendance = (type_of_sport) => {
     } else if (no_present === 2) {
       try {
         const response = await fetch(
-          "http://localhost:6300/match_metric_marking",
+          SERVER_ROOT_PATH + "/match_metric_marking",
           {
             method: "POST",
             headers: {
@@ -366,15 +379,15 @@ const Attendance = (type_of_sport) => {
         );
 
         if (response.ok) {
-          alert("Attendance marked successfully");
+          alert("Leaderboard updated successfully");
         } else {
-          console.error("Failed to mark attendance");
+          console.error("Failed to update leaderboard");
         }
       } catch (error) {
         console.error("Error during signup:", error);
       }
       try {
-        const response = await fetch("http://localhost:6300/mark_attendance", {
+        const response = await fetch(SERVER_ROOT_PATH + "/mark_attendance", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -407,7 +420,7 @@ const Attendance = (type_of_sport) => {
       }
     } else {
       try {
-        const response = await fetch("http://localhost:6300/mark_attendance", {
+        const response = await fetch(SERVER_ROOT_PATH + "/mark_attendance", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -450,6 +463,7 @@ const Attendance = (type_of_sport) => {
           <div className="inputs_ad">
             <div className="input2_ad">
               <form>
+                <p>time slot:</p>
                 <input
                   type="text"
                   name="time_slot"
@@ -457,6 +471,8 @@ const Attendance = (type_of_sport) => {
                   value={input.time_slot}
                   onChange={onInputChange}
                   onBlur={validateInput}
+                  readOnly={true}
+                  style={{ height: "40px" }}
                 />
                 {error.time_slot && (
                   <span className="err_ad">{error.time_slot}</span>
@@ -470,7 +486,7 @@ const Attendance = (type_of_sport) => {
                 onBlur={validateInput}
                 className="courtNameDropDown_ad"
               >
-                <option value="" disabled selected>
+                <option value="" selected>
                   court name
                 </option>
                 <option value="Court_1_New_SAC">court 1 new sac</option>
@@ -682,6 +698,9 @@ const Attendance = (type_of_sport) => {
           <div className="submit-container_ad">
             <button className="submit_ad" onClick={onClickSubmit}>
               submit
+            </button>
+            <button className="submit_ad" onClick={logout}>
+              log out
             </button>
           </div>
         </div>

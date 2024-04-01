@@ -62,10 +62,8 @@ router.get("/tennis/attendance", async (req, res) => {
 
 router.post("/court_name_entry", async (req, res) => {
   const { court_name, type_of_sport } = req.body;
-  console.log(court_name);
-  console.log(type_of_sport);
+  console.log("Request to find ", court_name, " for ", type_of_sport);
   let doc;
-
   if (type_of_sport === "badminton") {
     doc = await BadmintonCourt.findOne({ court_name: court_name });
   } else if (type_of_sport === "squash") {
@@ -86,8 +84,12 @@ router.post("/court_name_entry", async (req, res) => {
 
 router.post("/fill_entries", async (req, res) => {
   const { court_name, type_of_sport } = req.body;
-  console.log(court_name);
-  console.log(type_of_sport);
+  console.log(
+    "Request to fill entries at ",
+    court_name,
+    " for ",
+    type_of_sport
+  );
   let doc;
   if (type_of_sport === "badminton") {
     doc = await BadmintonCourt.findOne({ court_name: court_name });
@@ -99,18 +101,20 @@ router.post("/fill_entries", async (req, res) => {
     doc = await TennisCourt.findOne({ court_name: court_name });
   }
   court_id = doc._id;
+
   const currentTime = new Date().getHours();
   const currentDate = new Date().toISOString().slice(0, 10);
   const currentDay = currentDate.slice(8, 10);
   const currentMonth = currentDate.slice(5, 7);
   const currentYear = currentDate.slice(0, 4);
-  const TodayDate = currentDay + "-" + currentMonth + "-" + currentYear;
+  const TodayDate = currentDay + "/" + currentMonth + "/" + currentYear;
   let booking_doc;
   try {
     booking_doc = await SportsBookings.find({
       court_id: court_id,
       time_slot: currentTime,
       date_slot: TodayDate,
+      booking_status: 1,
     });
     if (booking_doc.length == 0) {
       res.status(400).json({ user_1: "", user_2: "", user_3: "", user_4: "" });
@@ -172,6 +176,7 @@ router.post("/match_metric_marking", async (req, res) => {
   position_3 = req.body.position_3;
   position_4 = req.body.position_4;
   type_of_sport = req.body.type_of_sport;
+  console.log("Leaderboard Updation Request.");
   let attributeList;
   if (type_of_sport === "badminton") {
     await BadmintonLeaderboard.find({}).then((results) => {
@@ -236,23 +241,17 @@ router.post("/match_metric_marking", async (req, res) => {
     present_user_2 = user_4;
     present_user_position_2 = position_4;
   }
-  console.log(present_user_1);
-  console.log(present_user_2);
   let temp = await User.findOne({ username: present_user_1 });
   present_user_1_id = temp.id;
   temp = await User.findOne({ username: present_user_2 });
   present_user_2_id = temp.id;
-  console.log(present_user_1_id);
-  console.log(present_user_2_id);
   present_user_1_leaderboard_position = attributeList.find(
     (doc) => doc[1] == present_user_1_id
   )[2];
   present_user_2_leaderboard_position = attributeList.find(
     (doc) => doc[1] == present_user_2_id
   )[2];
-  console.log(attributeList);
   attributeList.sort((a, b) => a[2] - b[2]);
-  console.log(attributeList);
   if (
     (present_user_1_leaderboard_position <
       present_user_2_leaderboard_position &&
@@ -344,7 +343,7 @@ router.post("/match_metric_marking", async (req, res) => {
         });
     }
   }
-  console.log(attributeList);
+  console.log("Leaderboard Updated.");
   res.json({ message: attributeList });
 });
 
@@ -378,15 +377,15 @@ router.post("/mark_attendance", async (req, res) => {
   position_3 = req.body.position_3;
   position_4 = req.body.position_4;
   type_of_sport = req.body.type_of_sport;
+  console.log("Marking Attendance for ", type_of_sport);
   const currentTime = new Date().getHours();
   const currentDate = new Date().toISOString().slice(0, 10);
   const currentDay = currentDate.slice(8, 10);
   const currentMonth = currentDate.slice(5, 7);
   const currentYear = currentDate.slice(0, 4);
-  const TodayDate = currentDay + "-" + currentMonth + "-" + currentYear;
+  const TodayDate = currentDay + "/" + currentMonth + "/" + currentYear;
   let user_id_1;
   user_id_1 = (await User.findOne({ username: user_1 }))._id;
-  console.log(user_id_1);
   let bookingDoc;
   bookingDoc = await SportsBookings.findOne({
     user_id: user_id_1,
@@ -400,7 +399,6 @@ router.post("/mark_attendance", async (req, res) => {
     (attendance_3 === "present" ? 1 : 0) +
     (attendance_4 === "present" ? 1 : 0);
   if (totalPresent >= totalPlayers / 2) {
-    console.log(bookingDoc);
     console.log("Attendance Marked");
     bookingDoc.show_up_status = 1;
   } else {
