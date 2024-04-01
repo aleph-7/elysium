@@ -136,10 +136,8 @@ function page2() {
           }
         );
         const data = await response.json();
-        console.log(data);
-        alert(
-          "Appointment booked successfully. Please await confirmation of booking from the counsellor."
-        );
+        console.log(data.message);
+        alert(data.message);
       } catch (error) {
         console.error("Error occurred:", error);
         throw error;
@@ -234,9 +232,7 @@ function page2() {
         </select>
       </div>
       <div className="sec">
-        <p className="labelsCounsellorPage" >
-          department:
-        </p>
+        <p className="labelsCounsellorPage">department:</p>
         <select
           value={department}
           onChange={(e) => {
@@ -263,11 +259,9 @@ function page2() {
           <option key="HSS">Humanities and Social Sciences</option>
           <option key="CHEM">Chemical</option>
         </select>
-        </div>
-        <div className="sec">
-        <p className="labelsCounsellorPage">
-          hall:
-        </p>
+      </div>
+      <div className="sec">
+        <p className="labelsCounsellorPage">hall:</p>
         <select
           value={selectedHall}
           onChange={(e) => {

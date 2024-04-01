@@ -446,21 +446,33 @@ router.post("/book_counsellor_appointment", async (req, res) => {
   )._id;
   const time_of_booking = new Date();
   const booking_status = 0;
-  const doc = new Counsellor_Appointments({
+  const doc_check = await Counsellor_Appointments.find({
     user_id: user_id,
     time_slot: time,
     date_slot: date,
-    counsellor_user_id: counsellor_user_id,
-    booking_status: booking_status,
-    time_of_booking: time_of_booking,
-    program: program,
-    department: department,
-    hall: hall,
-    contact_number: final_contact_number,
   });
-  doc.save();
-  res.json({ message: "Appointment booked successfully" });
-  console.log("Appointment booked successfully");
+  if (doc_check.length > 0) {
+    console.log(doc_check);
+    res.json({
+      message: "An appointment has already been applied for in this time slot.",
+    });
+  } else {
+    const doc = new Counsellor_Appointments({
+      user_id: user_id,
+      time_slot: time,
+      date_slot: date,
+      counsellor_user_id: counsellor_user_id,
+      booking_status: booking_status,
+      time_of_booking: time_of_booking,
+      program: program,
+      department: department,
+      hall: hall,
+      contact_number: final_contact_number,
+    });
+    doc.save();
+    res.json({ message: "Appointment booked successfully" });
+    console.log("Appointment booked successfully");
+  }
 });
 
 // =====================================
