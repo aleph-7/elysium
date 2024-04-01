@@ -13,7 +13,7 @@ Elysium is an integrated booking application wherein the users are classified in
 * Sport Admins 
 * Super User  
 
-The interface of the app is simple and intuitive ensuring that users will not face any difficulties while using the application and will have a seamless experience. However, if the user is facing some issues, it is recommended that they go through the user manual to help them efficiently utilise the app. 
+The interface of the app is simple and intuitive ensuring that users will not face any difficulties while using the application and will have a seamless experience. However, if the user is facing some issues, it is recommended that they go through the user manual to help them efficiently utilize the app. 
 
 ## Group Details
 
@@ -36,7 +36,7 @@ The web app is deployed at: https://elysium-iitk.vercel.app/
 
 ## How to run the software locally?
 
-* Make sure you have python and pip installed in your system.
+* Make sure you have Python and pip installed in your system.
 
 Clone the repository-
 
@@ -44,7 +44,7 @@ Clone the repository-
 git clone https://github.com/aleph-7/elysium/
 ```
 
-Run following commands to start the backend server-
+Run the following commands to start the backend server-
 
 ```
 cd elysium
@@ -55,7 +55,7 @@ cd server
 npm install
 node server.js
 ```
-Following this the server should start functioning on `http://localhost:6300`
+Following this, the server should start functioning on `http://localhost:6300`
 
 Now, on the original tab,
 ```
@@ -63,7 +63,7 @@ npm install
 npm run dev
 ```
 
-Go on the localhost web address which must have been printed on the terminal.
+Go to the localhost web address which must have been printed on the terminal.
 
 ## Software Requirement Specification Document
 
