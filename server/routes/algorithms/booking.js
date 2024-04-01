@@ -20,16 +20,11 @@ const Workshops = require("../../models/contentDB").sport_workshopSchema;
 router.get("/sport_booking", async (req, res) => {
   let attributeList;
   let workshopslist;
-  //get bookings of a specific day!!! TO DO!!!
-  // let currentDate = new Date().toLocaleDateString("en-GB");
-  // console.log(currentDate);
-  // let formattedDate = currentDate;
-  // console.log(formattedDate);
 
   let currentDate = new Date();
   currentDate.setDate(currentDate.getDate());
   let formattedDate = currentDate.toLocaleDateString("en-GB");
-  console.log(formattedDate);
+  // console.log(formattedDate);
 
   await sportBooking
     .find({ booking_status: 0, type_of_booking: 0, date_slot: formattedDate })
@@ -54,7 +49,7 @@ router.get("/sport_booking", async (req, res) => {
     await Record.findOne({ user_id: attributeList[i][3] })
       .then((foundDocument) => {
         if (foundDocument) {
-          console.log("Found document:", foundDocument);
+          // console.log("Found document:", foundDocument);
           if (foundDocument.acceptances + foundDocument.rejections === 0) {
             attributeList[i].push(0.5);
           } else {
@@ -64,7 +59,7 @@ router.get("/sport_booking", async (req, res) => {
             );
           }
         } else {
-          console.log("Document not found");
+          // console.log("Document not found");
         }
       })
       .catch((error) => {
@@ -72,7 +67,7 @@ router.get("/sport_booking", async (req, res) => {
       });
   }
 
-  console.log(attributeList);
+  // console.log(attributeList);
 
   let temp_pairing = [];
   let temp_rest = [];
@@ -87,21 +82,41 @@ router.get("/sport_booking", async (req, res) => {
       }
     }
 
-    //sorting based on leaderboard position
-    temp_pairing.sort(async (a, b) => {
-      await badmintonLeaderboard.findOne({ user_id: a[3] }).then(async (A) => {
-        console.log(A);
-        await badmintonLeaderboard.findOne({ user_id: b[3] }).then((B) => {
-          console.log(B);
-
-          if (A === null) a_pos = 1000000;
-          else a_pos = A.position;
-          if (B === null) b_pos = 1000000;
-          else b_pos = B.position;
-          return a_pos - b_pos;
+    for (let j = 0; j < temp_pairing.length; j++) {
+      temp_pairing[j].push(0);
+    }
+    let badminton_leaderboard = [];
+    const results = await badmintonLeaderboard
+      .find({})
+      .sort({ position: 1 })
+      .then((results) => {
+        badminton_leaderboard = results.map((doc) => [
+          doc.user_id,
+          doc.position,
+        ]);
+      })
+      .then(() => {
+        for (let k = 0; k < temp_pairing.length; k++) {
+          for (let l = 0; l < badminton_leaderboard.length; l++) {
+            if (
+              temp_pairing[k][3].toString() ===
+              badminton_leaderboard[l][0].toString()
+            ) {
+              // console.log("Found Document");
+              temp_pairing[k][13] = Number(badminton_leaderboard[l][1]);
+              break;
+            }
+          }
+        }
+      })
+      .then(() => {
+        temp_pairing.sort((a, b) => {
+          return a[13] - b[13];
         });
+      })
+      .then(() => {
+        // console.log(temp_pairing);
       });
-    });
 
     //to refer to indices of unpaired users later in temp_pairing
     var dict = {};
@@ -191,9 +206,9 @@ router.get("/sport_booking", async (req, res) => {
       Workshops.findOneAndUpdate(conditions, update, options)
         .then((updatedDocument) => {
           if (updatedDocument) {
-            console.log("Updated document:", updatedDocument);
+            // console.log("Updated document:", updatedDocument);
           } else {
-            console.log("Document not found");
+            // console.log("Document not found");
           }
         })
         .catch((error) => {
@@ -218,9 +233,9 @@ router.get("/sport_booking", async (req, res) => {
       Workshops.findOneAndUpdate(conditions, update, options)
         .then((updatedDocument) => {
           if (updatedDocument) {
-            console.log("Updated document:", updatedDocument);
+            // console.log("Updated document:", updatedDocument);
           } else {
-            console.log("Document not found");
+            // console.log("Document not found");
           }
         })
         .catch((error) => {
@@ -264,7 +279,7 @@ router.get("/sport_booking", async (req, res) => {
       temp_rest.push(temp_pairing[temp_pairing.length - 1]);
     }
 
-    console.log(temp_rest);
+    // console.log(temp_rest);
     size = temp_rest.length;
 
     //updating the sport_booking database
@@ -287,9 +302,9 @@ router.get("/sport_booking", async (req, res) => {
         .findOneAndUpdate(conditions, update, options)
         .then((updatedDocument) => {
           if (updatedDocument) {
-            console.log("Updated document:", updatedDocument);
+            // console.log("Updated document:", updatedDocument);
           } else {
-            console.log("Document not found");
+            // console.log("Document not found");
           }
         })
         .catch((error) => {
@@ -312,9 +327,9 @@ router.get("/sport_booking", async (req, res) => {
         Record.findOneAndUpdate(conditions, update, options)
           .then((updatedDocument) => {
             if (updatedDocument) {
-              console.log("Updated document:", updatedDocument);
+              // console.log("Updated document:", updatedDocument);
             } else {
-              console.log("Document not found");
+              // console.log("Document not found");
             }
           })
           .catch((error) => {
@@ -334,9 +349,9 @@ router.get("/sport_booking", async (req, res) => {
         Record.findOneAndUpdate(conditions, update, options)
           .then((updatedDocument) => {
             if (updatedDocument) {
-              console.log("Updated document:", updatedDocument);
+              // console.log("Updated document:", updatedDocument);
             } else {
-              console.log("Document not found");
+              // console.log("Document not found");
             }
           })
           .catch((error) => {
@@ -362,21 +377,41 @@ router.get("/sport_booking", async (req, res) => {
     }
 
     //sorting based on leaderboard position
-    temp_pairing.sort(async (a, b) => {
-      await tennisLeaderboard.findOne({ user_id: a[3] }).then(async (A) => {
-        console.log(A);
-        await tennisLeaderboard.findOne({ user_id: b[3] }).then((B) => {
-          console.log(B);
-
-          if (A === null) a_pos = 1000000;
-          else a_pos = A.position;
-          if (B === null) b_pos = 1000000;
-          else b_pos = B.position;
-          return a_pos - b_pos;
+    for (let j = 0; j < temp_pairing.length; j++) {
+      temp_pairing[j].push(0);
+    }
+    let tennis_leaderboard = [];
+    const results = await tennisLeaderboard
+      .find({})
+      .sort({ position: 1 })
+      .then((results) => {
+        tennis_leaderboard = results.map((doc) => [
+          doc.user_id,
+          doc.position,
+        ]);
+      })
+      .then(() => {
+        for (let k = 0; k < temp_pairing.length; k++) {
+          for (let l = 0; l < tennis_leaderboard.length; l++) {
+            if (
+              temp_pairing[k][3].toString() ===
+              tennis_leaderboard[l][0].toString()
+            ) {
+              // console.log("Found Document");
+              temp_pairing[k][13] = Number(tennis_leaderboard[l][1]);
+              break;
+            }
+          }
+        }
+      })
+      .then(() => {
+        temp_pairing.sort((a, b) => {
+          return a[13] - b[13];
         });
+      })
+      .then(() => {
+        // console.log(temp_pairing);
       });
-    });
-    console.log(temp_pairing);
 
     //to refer to indices of unpaired users later in temp_pairing
     var dict = {};
@@ -419,7 +454,7 @@ router.get("/sport_booking", async (req, res) => {
       //record/history of rejections
       return a[12] - showup_record_a - b[12] + showup_record_b;
     });
-    console.log(temp_rest);
+    // console.log(temp_rest);
 
     //list of workshops
     await Workshops.find({
@@ -451,7 +486,7 @@ router.get("/sport_booking", async (req, res) => {
     let num_courts = courts.length;
     let counter = 0;
 
-    console.log(courts);
+    // console.log(courts);
 
     //assigning courts to workshops
     while (counter < num_courts && counter < workshopslist.length) {
@@ -469,9 +504,9 @@ router.get("/sport_booking", async (req, res) => {
       Workshops.findOneAndUpdate(conditions, update, options)
         .then((updatedDocument) => {
           if (updatedDocument) {
-            console.log("Updated document:", updatedDocument);
+            // console.log("Updated document:", updatedDocument);
           } else {
-            console.log("Document not found");
+            // console.log("Document not found");
           }
         })
         .catch((error) => {
@@ -496,9 +531,9 @@ router.get("/sport_booking", async (req, res) => {
       Workshops.findOneAndUpdate(conditions, update, options)
         .then((updatedDocument) => {
           if (updatedDocument) {
-            console.log("Updated document:", updatedDocument);
+            // console.log("Updated document:", updatedDocument);
           } else {
-            console.log("Document not found");
+            // console.log("Document not found");
           }
         })
         .catch((error) => {
@@ -507,12 +542,12 @@ router.get("/sport_booking", async (req, res) => {
     }
 
     let size = temp_rest.length;
-    console.log("temp_rest=");
-    console.log(size);
-    console.log("counter=");
-    console.log(counter);
-    console.log("threshold=");
-    console.log(size - courts.length + counter);
+    // console.log("temp_rest=");
+    // console.log(size);
+    // console.log("counter=");
+    // console.log(counter);
+    // console.log("threshold=");
+    // console.log(size - courts.length + counter);
 
     //changing attributes of temp_rest list and adding other bookings to the list
     for (let i = 0; i < size; i++) {
@@ -548,7 +583,7 @@ router.get("/sport_booking", async (req, res) => {
       temp_rest.push(temp_pairing[temp_pairing.length - 1]);
     }
 
-    //console.log(temp_rest);
+    //// console.log(temp_rest);
     size = temp_rest.length;
 
     //updating the sport_booking database
@@ -571,9 +606,9 @@ router.get("/sport_booking", async (req, res) => {
         .findOneAndUpdate(conditions, update, options)
         .then((updatedDocument) => {
           if (updatedDocument) {
-            console.log("Updated document:", updatedDocument);
+            // console.log("Updated document:", updatedDocument);
           } else {
-            console.log("Document not found");
+            // console.log("Document not found");
           }
         })
         .catch((error) => {
@@ -596,9 +631,9 @@ router.get("/sport_booking", async (req, res) => {
         Record.findOneAndUpdate(conditions, update, options)
           .then((updatedDocument) => {
             if (updatedDocument) {
-              console.log("Updated document:", updatedDocument);
+              // console.log("Updated document:", updatedDocument);
             } else {
-              console.log("Document not found");
+              // console.log("Document not found");
             }
           })
           .catch((error) => {
@@ -618,9 +653,9 @@ router.get("/sport_booking", async (req, res) => {
         Record.findOneAndUpdate(conditions, update, options)
           .then((updatedDocument) => {
             if (updatedDocument) {
-              console.log("Updated document:", updatedDocument);
+              // console.log("Updated document:", updatedDocument);
             } else {
-              console.log("Document not found");
+              // console.log("Document not found");
             }
           })
           .catch((error) => {
@@ -646,20 +681,41 @@ router.get("/sport_booking", async (req, res) => {
     }
 
     //sorting based on leaderboard position
-    temp_pairing.sort(async (a, b) => {
-      await squashLeaderboard.findOne({ user_id: a[3] }).then(async (A) => {
-        console.log(A);
-        await squashLeaderboard.findOne({ user_id: b[3] }).then((B) => {
-          console.log(B);
-
-          if (A === null) a_pos = 1000000;
-          else a_pos = A.position;
-          if (B === null) b_pos = 1000000;
-          else b_pos = B.position;
-          return a_pos - b_pos;
+    for (let j = 0; j < temp_pairing.length; j++) {
+      temp_pairing[j].push(0);
+    }
+    let squash_leaderboard = [];
+    const results = await squashLeaderboard
+      .find({})
+      .sort({ position: 1 })
+      .then((results) => {
+        squash_leaderboard = results.map((doc) => [
+          doc.user_id,
+          doc.position,
+        ]);
+      })
+      .then(() => {
+        for (let k = 0; k < temp_pairing.length; k++) {
+          for (let l = 0; l < squash_leaderboard.length; l++) {
+            if (
+              temp_pairing[k][3].toString() ===
+              squash_leaderboard[l][0].toString()
+            ) {
+              // console.log("Found Document");
+              temp_pairing[k][13] = Number(squash_leaderboard[l][1]);
+              break;
+            }
+          }
+        }
+      })
+      .then(() => {
+        temp_pairing.sort((a, b) => {
+          return a[13] - b[13];
         });
+      })
+      .then(() => {
+        // console.log(temp_pairing);
       });
-    });
 
     //to refer to indices of unpaired users later in temp_pairing
     var dict = {};
@@ -749,9 +805,9 @@ router.get("/sport_booking", async (req, res) => {
       Workshops.findOneAndUpdate(conditions, update, options)
         .then((updatedDocument) => {
           if (updatedDocument) {
-            console.log("Updated document:", updatedDocument);
+            // console.log("Updated document:", updatedDocument);
           } else {
-            console.log("Document not found");
+            // console.log("Document not found");
           }
         })
         .catch((error) => {
@@ -776,9 +832,9 @@ router.get("/sport_booking", async (req, res) => {
       Workshops.findOneAndUpdate(conditions, update, options)
         .then((updatedDocument) => {
           if (updatedDocument) {
-            console.log("Updated document:", updatedDocument);
+            // console.log("Updated document:", updatedDocument);
           } else {
-            console.log("Document not found");
+            // console.log("Document not found");
           }
         })
         .catch((error) => {
@@ -822,7 +878,7 @@ router.get("/sport_booking", async (req, res) => {
       temp_rest.push(temp_pairing[temp_pairing.length - 1]);
     }
 
-    //console.log(temp_rest);
+    //// console.log(temp_rest);
     size = temp_rest.length;
 
     //updating the sport_booking database
@@ -845,9 +901,9 @@ router.get("/sport_booking", async (req, res) => {
         .findOneAndUpdate(conditions, update, options)
         .then((updatedDocument) => {
           if (updatedDocument) {
-            console.log("Updated document:", updatedDocument);
+            // console.log("Updated document:", updatedDocument);
           } else {
-            console.log("Document not found");
+            // console.log("Document not found");
           }
         })
         .catch((error) => {
@@ -870,9 +926,9 @@ router.get("/sport_booking", async (req, res) => {
         Record.findOneAndUpdate(conditions, update, options)
           .then((updatedDocument) => {
             if (updatedDocument) {
-              console.log("Updated document:", updatedDocument);
+              // console.log("Updated document:", updatedDocument);
             } else {
-              console.log("Document not found");
+              // console.log("Document not found");
             }
           })
           .catch((error) => {
@@ -892,9 +948,9 @@ router.get("/sport_booking", async (req, res) => {
         Record.findOneAndUpdate(conditions, update, options)
           .then((updatedDocument) => {
             if (updatedDocument) {
-              console.log("Updated document:", updatedDocument);
+              // console.log("Updated document:", updatedDocument);
             } else {
-              console.log("Document not found");
+              // console.log("Document not found");
             }
           })
           .catch((error) => {
@@ -920,22 +976,41 @@ router.get("/sport_booking", async (req, res) => {
     }
 
     //sorting based on leaderboard position
-    temp_pairing.sort(async (a, b) => {
-      await tabletennisLeaderboard
-        .findOne({ user_id: a[3] })
-        .then(async (A) => {
-          console.log(A);
-          await tabletennisLeaderboard.findOne({ user_id: b[3] }).then((B) => {
-            console.log(B);
-
-            if (A === null) a_pos = 1000000;
-            else a_pos = A.position;
-            if (B === null) b_pos = 1000000;
-            else b_pos = B.position;
-            return a_pos - b_pos;
-          });
+    for (let j = 0; j < temp_pairing.length; j++) {
+      temp_pairing[j].push(0);
+    }
+    let tabletennis_leaderboard = [];
+    const results = await tabletennisLeaderboard
+      .find({})
+      .sort({ position: 1 })
+      .then((results) => {
+        tabletennis_leaderboard = results.map((doc) => [
+          doc.user_id,
+          doc.position,
+        ]);
+      })
+      .then(() => {
+        for (let k = 0; k < temp_pairing.length; k++) {
+          for (let l = 0; l < tabletennis_leaderboard.length; l++) {
+            if (
+              temp_pairing[k][3].toString() ===
+              tabletennis_leaderboard[l][0].toString()
+            ) {
+              // console.log("Found Document");
+              temp_pairing[k][13] = Number(tabletennis_leaderboard[l][1]);
+              break;
+            }
+          }
+        }
+      })
+      .then(() => {
+        temp_pairing.sort((a, b) => {
+          return a[13] - b[13];
         });
-    });
+      })
+      .then(() => {
+        // console.log(temp_pairing);
+      });
 
     //to refer to indices of unpaired users later in temp_pairing
     var dict = {};
@@ -1025,9 +1100,9 @@ router.get("/sport_booking", async (req, res) => {
       Workshops.findOneAndUpdate(conditions, update, options)
         .then((updatedDocument) => {
           if (updatedDocument) {
-            console.log("Updated document:", updatedDocument);
+            // console.log("Updated document:", updatedDocument);
           } else {
-            console.log("Document not found");
+            // console.log("Document not found");
           }
         })
         .catch((error) => {
@@ -1052,9 +1127,9 @@ router.get("/sport_booking", async (req, res) => {
       Workshops.findOneAndUpdate(conditions, update, options)
         .then((updatedDocument) => {
           if (updatedDocument) {
-            console.log("Updated document:", updatedDocument);
+            // console.log("Updated document:", updatedDocument);
           } else {
-            console.log("Document not found");
+            // console.log("Document not found");
           }
         })
         .catch((error) => {
@@ -1098,7 +1173,7 @@ router.get("/sport_booking", async (req, res) => {
       temp_rest.push(temp_pairing[temp_pairing.length - 1]);
     }
 
-    //console.log(temp_rest);
+    //// console.log(temp_rest);
     size = temp_rest.length;
 
     //updating the sport_booking database
@@ -1121,9 +1196,9 @@ router.get("/sport_booking", async (req, res) => {
         .findOneAndUpdate(conditions, update, options)
         .then((updatedDocument) => {
           if (updatedDocument) {
-            console.log("Updated document:", updatedDocument);
+            // console.log("Updated document:", updatedDocument);
           } else {
-            console.log("Document not found");
+            // console.log("Document not found");
           }
         })
         .catch((error) => {
@@ -1146,9 +1221,9 @@ router.get("/sport_booking", async (req, res) => {
         Record.findOneAndUpdate(conditions, update, options)
           .then((updatedDocument) => {
             if (updatedDocument) {
-              console.log("Updated document:", updatedDocument);
+              // console.log("Updated document:", updatedDocument);
             } else {
-              console.log("Document not found");
+              // console.log("Document not found");
             }
           })
           .catch((error) => {
@@ -1168,9 +1243,9 @@ router.get("/sport_booking", async (req, res) => {
         Record.findOneAndUpdate(conditions, update, options)
           .then((updatedDocument) => {
             if (updatedDocument) {
-              console.log("Updated document:", updatedDocument);
+              // console.log("Updated document:", updatedDocument);
             } else {
-              console.log("Document not found");
+              // console.log("Document not found");
             }
           })
           .catch((error) => {
