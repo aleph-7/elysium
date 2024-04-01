@@ -130,7 +130,7 @@ const cardWrapStyle = {
 const cardStyle = {
   position: "absolute",
   width: "80vw",
-  height: "600px",
+  height: "80vh",
   borderRadius: "25px",
   transformOrigin: "top center",
   listStyle: "none",

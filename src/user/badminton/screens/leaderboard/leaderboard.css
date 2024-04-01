@@ -67,24 +67,21 @@
   bottom: 0%;
 }
 
-.BadmintonLeaderboardSearch
-{
-  display:flex;
-  flex-direction:row;
-  justify-content:center;
-  gap:20px;
-  height:4vh;
+.BadmintonLeaderboardSearch {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+  height: 4vh;
 }
 
-.BadmintonLeaderboardSearch h3
-{
+.BadmintonLeaderboardSearch h3 {
   font-size: 20px;
   font-weight: bold;
-  margin-top:-1px;
+  margin-top: -1px;
 }
 
-.BadmintonLeaderboardSearch input
-{
+.BadmintonLeaderboardSearch input {
   width: 20%;
   height: 4vh;
   border-radius: 25px;
@@ -93,8 +90,7 @@
   font-size: 20px;
 }
 
-.BadmintonLeaderboardSearch button
-{
+.BadmintonLeaderboardSearch button {
   width: 20%;
   height: 4vh;
   border-radius: 25px;

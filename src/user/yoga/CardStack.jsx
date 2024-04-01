@@ -111,8 +111,13 @@ const CardStack = () => {
                       {/* click image functionality */}
                     </div>
                     <div class="booknow-line1">avail all facilities!</div>
-                    
-                    <div class="workshops-line1" style={{width:"25%",marginLeft:"70%"}}>instructors teach!</div>
+
+                    <div
+                      class="workshops-line1"
+                      style={{ width: "25%", marginLeft: "70%" }}
+                    >
+                      instructors teach!
+                    </div>
                     <div class="workshops-line2">sessions</div>
                     <div class="tutorials-line1">tutorials</div>
                     <div class="tutorials-line2">you can learn too!</div>
@@ -139,7 +144,7 @@ const cardWrapStyle = {
 const cardStyle = {
   position: "absolute",
   width: "80vw",
-  height: "600px",
+  height: "80vh",
   borderRadius: "25px",
   transformOrigin: "top center",
   listStyle: "none",
