@@ -66,6 +66,7 @@
   background-color: rgb(43, 38, 38);
   padding-left: 1px;
   z-index: 30;
+  overflow-y: scroll;
 }
 .mainlist {
   padding-left: 20px;
