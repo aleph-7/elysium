@@ -138,7 +138,7 @@ setInterval(() => {
   console.log(`Current time: ${currentTime}`);
   console.log(`Current date: ${strings}`);
   console.log(`Current hours: ${hours}`);
-}, 1 * 60 * 1000);
+}, 5 * 60 * 1000);
 // Define the URL of your endpoint
 const endpointUrl = "http://localhost:6300/booking/sport_booking";
 // Define the cron schedule (runs every day at 12:01 AM)

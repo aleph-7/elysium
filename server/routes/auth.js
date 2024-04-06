@@ -82,10 +82,7 @@ router.post("/signup", async (req, res) => {
           category: new_user.user_category,
           type_of_sport: new_user.type_of_sport,
         },
-        secretKey,
-        {
-          expiresIn: "1 hour",
-        }
+        secretKey
       );
       const mailOptions = {
         from: "elysium.253@gmail.com",
@@ -177,10 +174,7 @@ router.post("/login", async (req, res) => {
             category: user.user_category,
             type_of_sport: user.type_of_sport,
           },
-          secretKey,
-          {
-            expiresIn: "1 hour",
-          }
+          secretKey
         );
         if (user.validity == "false") {
           console.log("User is not verified");
