@@ -10,17 +10,12 @@ function page2() {
   let [counsellorOptions, setCounsellorOptions] = useState([]);
   let [selectedDate, setSelectedDate] = useState("");
   let [daysDates, setDaysDates] = useState([]);
-  let [selectedTime, setSelectedTime] = useState();
+  let [selectedTime, setSelectedTime] = useState(-1);
   let [timeSlots, setTimeSlots] = useState([]);
   let [selectedProgram, setSelectedProgram] = useState("");
   let [selectedHall, setSelectedHall] = useState();
   let [department, setDepartment] = useState("");
   let [contactNumber, setContactNumber] = useState("");
-
-  // selectedProgram = "Btech";
-  // selectedHall = 1;
-  // department = "CSE";
-  // contactNumber = 0;
 
   useEffect(() => {
     async function fetchData() {
@@ -100,7 +95,7 @@ function page2() {
     if (
       counsellorUsername === "" ||
       selectedDate === "" ||
-      selectedTime === "" ||
+      selectedTime == -1 ||
       selectedProgram === "" ||
       department === "" ||
       selectedHall === "" ||
@@ -115,6 +110,13 @@ function page2() {
     ) {
       alert("Please enter a valid contact number.");
     } else {
+      console.log(counsellorUsername);
+      console.log(selectedDate);
+      console.log(selectedTime);
+      console.log(selectedProgram);
+      console.log(department);
+      console.log(selectedHall);
+      console.log(contactNumber);
       try {
         const response = await fetch(
           SERVER_ROOT_PATH + "/user/book_counsellor_appointment",
@@ -200,9 +202,9 @@ function page2() {
             setSelectedTime(e.target.value);
           }}
           className="inputCounsellorPage"
-          defaultValue="3pm"
+          defaultValue={-1}
         >
-          <option value="" selected>
+          <option value={-1} selected>
             Select time slot
           </option>
           {timeSlots.map((timeSlot) => (
