@@ -33,7 +33,11 @@ router.get("/get_booking_history", async (req, res) => {
   let attributeList = [];
   console.log("Booking History Fetch Request for user_id: " + user_id);
   doc = await SportsBookings.find({ user_id: user_id });
-  await SportsBookings.find({ user_id: user_id }).then((results) => {
+  // Find user_id in user_id or participants_id
+
+  await SportsBookings.find({
+    $or: [{ partners_id: user_id }, { user_id: user_id }],
+  }).then((results) => {
     attributeList = results.map((doc) => [
       doc.type_of_sport == "table_tennis" ? "table tennis" : doc.type_of_sport,
       doc.date_slot,
@@ -42,6 +46,7 @@ router.get("/get_booking_history", async (req, res) => {
       doc.court_id,
       doc.partners_id,
       0,
+      doc.user_id,
     ]);
   });
 
@@ -93,6 +98,11 @@ router.get("/get_booking_history", async (req, res) => {
   }
 
   for (let i = 0; i < attributeList.length; i++) {
+    // if (attributeList[i][].length > 0) {
+    //   console.log("User ID", attributeList[i][7]);
+    //   let user = await User.findOne({ _id: attributeList[i][7] });
+    //   if (user != null) attributeList[i][7] = user.username;
+    // }
     if (attributeList[i][5].length > 0) {
       let partners = [];
       for (let j = 0; j < attributeList[i][5].length; j++) {
@@ -104,6 +114,8 @@ router.get("/get_booking_history", async (req, res) => {
           let partner = await User.findOne({ _id: attributeList[i][5][j] });
           if (partner != null) partners.push(partner.username);
           if (partner != null) console.log("Partner Name", partner.username);
+          partner = await User.findOne({ _id: attributeList[i][7] });
+          if (partner != null) attributeList[i][7] = partner.username;
         }
       }
       attributeList[i][5] = partners;
