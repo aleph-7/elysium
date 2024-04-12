@@ -544,7 +544,6 @@ app.post("/gym/swim_booking", async (req, res) => {
       month: month,
       user_id: user_id,
       year: year,
-      type: type,
       booking_status: 1,
     });
 

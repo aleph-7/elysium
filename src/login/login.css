@@ -146,6 +146,25 @@ form {
   padding-right: 5%;
 }
 
+.login-submit-container button:hover {
+  background-color: #c14ede;
+}
+
+.login-submit-container .login-submit-forgot {
+  background-color: #d292e2;
+  border: none;
+  font-weight: 700;
+  font-family: "Poppins";
+  font-style: normal;
+  font-size: 17px;
+  border-radius: 25px;
+  width: 80%;
+  padding-left: 2%;
+  transition: 0.5s;
+  cursor: pointer;
+  padding-right: 2%;
+}
+
 .login-submit-container .login-submit-2 button {
   font-size: 20px;
 }

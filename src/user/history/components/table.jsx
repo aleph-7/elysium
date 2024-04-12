@@ -79,6 +79,9 @@ const Table_History = ({ noOfRows, noOfColumns, rowEntries }) => {
               position="right center"
             >
               <div className="popup">
+                {rowEntries[rowIndex][7] ? (
+                  <h3>Booked By : {rowEntries[rowIndex][7]}</h3>
+                ) : null}
                 {rowEntries[rowIndex][4] ? (
                   <h3>{rowEntries[rowIndex][4]}</h3>
                 ) : null}
@@ -93,7 +96,24 @@ const Table_History = ({ noOfRows, noOfColumns, rowEntries }) => {
               </div>
             </Popup>
           ) : rowEntries[rowIndex][2] == 0 ? (
-            <button id="pending">pending</button>
+            <Popup
+              trigger={<button id="pending">pending</button>}
+              position="right center"
+            >
+              <div className="popup">
+                {rowEntries[rowIndex][7] ? (
+                  <h3>Booked By : {rowEntries[rowIndex][7]}</h3>
+                ) : null}
+                {rowEntries[rowIndex][3] ? (
+                  <h3> time : {rowEntries[rowIndex][3]}:00 hrs</h3>
+                ) : null}
+                <div>
+                  {rowEntries[rowIndex][6] > 0
+                    ? getPlayerList(rowEntries[rowIndex][5])
+                    : null}
+                </div>
+              </div>
+            </Popup>
           ) : rowEntries[rowIndex][2] == "status" ? (
             "status"
           ) : (

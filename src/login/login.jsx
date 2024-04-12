@@ -180,6 +180,14 @@ const Login = () => {
                 signup?
               </Link>
             </button>
+            <button className="login-submit-forgot">
+              <Link
+                to="/forgotpassword"
+                style={{ color: "inherit", textDecoration: "inherit" }}
+              >
+                forgot password?
+              </Link>
+            </button>
           </div>
         </div>
       </div>
