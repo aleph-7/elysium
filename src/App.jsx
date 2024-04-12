@@ -10,6 +10,8 @@ import {
 
 import Signup from "./login/signup.jsx";
 import Login from "./login/login";
+import ForgotPassword from "./login/forgot_pasword.jsx";
+import ResetPassword from "./login/reset_password.jsx";
 
 //User Pages
 import ProtectedRoute_User from "./protected_routes_user.jsx";
@@ -72,6 +74,8 @@ function App() {
           <Route index element={<Redirect />} />
           <Route path="*" element={<Error />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/forgotpassword" element={<ForgotPassword />} />
+          <Route path="/resetpassword" element={<ResetPassword />} />
           <Route path="/login" element={<Login />} />
 
           <Route element={<ProtectedRoute_User />}>

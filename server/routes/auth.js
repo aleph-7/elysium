@@ -28,6 +28,83 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+router.post("/reset_password", async (req, res) => {
+  console.log("Reset Password Request for " + req.body.token);
+  try {
+    const decoded = jsw.verify(req.body.token, secretKey);
+    const user = await User.findOne({ _id: decoded.userMongoId });
+    if (user) {
+      const hashed_password = await bcrypt.hash(req.body.password, 10);
+      user.password = hashed_password;
+      await user.save();
+      res.status(200).json({ message: "Password reset successful" });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Password reset failed" });
+  }
+});
+
+router.post("/forgotpassword", async (req, res) => {
+  console.log("Forgot Password Request for " + req.body.email);
+  try {
+    const user = await User.findOne({ email_id: req.body.email });
+    if (user) {
+      const token = jsw.sign(
+        {
+          username: user.username,
+          userMongoId: user._id,
+          category: user.user_category,
+          type_of_sport: user.type_of_sport,
+        },
+        secretKey
+      );
+      const mailOptions = {
+        from: "elysium.253@gmail.com",
+        to: req.body.email,
+        subject: "[elysium] email verification",
+        text: `Hi, ${user.username}! Please click on the link to reset your password: http://elysium-iitk.vercel.app/resetpassword?token=${token}`,
+      };
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.error("Error sending email: ", error);
+        } else {
+          console.log("Email sent: ", info.response);
+        }
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "User not found" });
+  }
+  // const user = await User.findOne({ email_id: req.body.email });
+  // if (user) {
+  //   const token = jsw.sign(
+  //     {
+  //       username: user.username,
+  //       userMongoId: user._id,
+  //       category: user.user_category,
+  //       type_of_sport: user.type_of_sport,
+  //     },
+  //     secretKey
+  //   );
+  //   const mailOptions = {
+  //     from: "elysium.253@gmail.com",
+  //     to: req.body.email_id,
+  //     subject: "[elysium] email verification",
+  //     text: `Hi, ${user.username}! Please click on the link to reset your password: https://localhost:5137/resetpassword?token=${token}`,
+  //   };
+  //   transporter.sendMail(mailOptions, (error, info) => {
+  //     if (error) {
+  //       console.error("Error sending email: ", error);
+  //     } else {
+  //       console.log("Email sent: ", info.response);
+  //     }
+  //   });
+  //   console.log("Signup Successful");
+  //   res.status(201).json({ message: "Registration successful." });
+  // }
+});
 router.post("/signup", async (req, res) => {
   try {
     // Check if the username or email ID already exists in the database
