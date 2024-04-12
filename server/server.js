@@ -160,6 +160,44 @@ cron.schedule(
   }
 );
 
+router.get("/counsellor/refresh_appointments", async (req, res) => {
+  console.log("function called");
+  const currentDate = new Date().toLocaleDateString('en-GB'); // Get the current date in DD/MM/YYYY format
+  // Update the booking status based on the condition and exclude a specific appointment
+  Counsellor_Appointments.updateMany(
+    { date_slot: currentDate, booking_status: 0 },
+    { $set: { booking_status: -1 } }
+  )
+  .then((result) => {
+    console.log(`Updated ${result.modifiedCount} documents`);
+  })
+  .catch((error) => {
+    console.error(`Error updating documents: ${error}`);
+  });
+});
+
+// Define the URL of your endpoint
+const counsellorUrl = "http://localhost:6300/counsellor/refresh_appointments"; // pending appointments on this day must be auto rejected 
+// Define the cron schedule (runs every day at 12:15 AM)
+cron.schedule(
+  "39 19 * * *",
+  () => {
+    // Make an HTTP GET request to your endpoint
+    console.log("running the refresh schedule ....")
+    request.get(counsellorUrl, (error, response, body) => {
+      if (error) {
+        console.error("Error:", error);
+      } else {
+        console.log("Request sent successfully.");
+      }
+    });
+  },
+  {
+    scheduled: true,
+    timezone: "Asia/Kolkata",
+  }
+);
+
 // Protected route
 app.get("/protected", verifyToken, (req, res) => {
   res.json({ message: req.user });
