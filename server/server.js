@@ -160,8 +160,7 @@ cron.schedule(
   }
 );
 
-router.get("/counsellor/refresh_appointments", async (req, res) => {
-  console.log("function called");
+app.get("/counsellor/refresh_appointments", async (req, res) => {
   const currentDate = new Date().toLocaleDateString('en-GB'); // Get the current date in DD/MM/YYYY format
   // Update the booking status based on the condition and exclude a specific appointment
   Counsellor_Appointments.updateMany(
@@ -180,7 +179,7 @@ router.get("/counsellor/refresh_appointments", async (req, res) => {
 const counsellorUrl = "http://localhost:6300/counsellor/refresh_appointments"; // pending appointments on this day must be auto rejected 
 // Define the cron schedule (runs every day at 12:15 AM)
 cron.schedule(
-  "39 19 * * *",
+  "45 23 * * *",
   () => {
     // Make an HTTP GET request to your endpoint
     console.log("running the refresh schedule ....")
