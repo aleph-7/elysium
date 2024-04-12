@@ -53,6 +53,8 @@ const get_slots = () => {
       // Reset form
       setRefId("");
       setSelectedTimeSlot("");
+      window.location.href = window;
+      window.location.reload();
       // Reset form after successful submission
 
       // Show alert for successful booking
