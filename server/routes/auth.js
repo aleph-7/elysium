@@ -72,6 +72,8 @@ router.post("/forgotpassword", async (req, res) => {
           console.log("Email sent: ", info.response);
         }
       });
+    } else {
+      res.status(500).json({ error: "User not found" });
     }
   } catch (err) {
     console.log(err);

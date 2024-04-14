@@ -106,7 +106,8 @@ const ResetPassword = () => {
           if (response.status == 200) {
             return response.json(); // Parse JSON response on success
           } else if (response.status == 401) {
-            alert("Invalid token");
+            alert("Invalid Link");
+            setLoading(false);
           } else {
             throw new Error("Login failed"); // Handle errors
           }
@@ -118,6 +119,7 @@ const ResetPassword = () => {
           setLoading(false);
         })
         .catch((error) => {
+          alert("Invalid Link");
           setLoading(false);
           // Handle errors (401, 400, 500, network errors, etc.)
           console.error("Login error:", error);
@@ -163,7 +165,7 @@ const ResetPassword = () => {
           </div>
           <div className="login-submit-container">
             <button className="login-submit" onClick={onClickLogin}>
-              send mail
+              reset
             </button>
           </div>
         </div>

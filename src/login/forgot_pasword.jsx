@@ -63,7 +63,7 @@ const ForgotPassword = () => {
           // Check status code
           if (response.status == 200) {
             return response.json(); // Parse JSON response on success
-          } else if (response.status == 401) {
+          } else if (response.status == 500) {
             alert("Invalid email address. Please enter a valid email address.");
           } else {
             throw new Error("Login failed"); // Handle errors
