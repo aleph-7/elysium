@@ -577,6 +577,7 @@ app.post("/gym/swim_booking", async (req, res) => {
       user_id: user_id,
       year: year,
       booking_status: 1,
+      time_slot: time_slot,
     });
 
     if (existingBooking) {
