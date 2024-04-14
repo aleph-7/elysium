@@ -588,6 +588,22 @@ app.post("/gym/swim_booking", async (req, res) => {
         .json({ error: "You have already booked this slot." });
     }
 
+    const monthlyBooking = await Gymbook.findOne({
+      month: month,
+      user_id: user_id,
+      year: year,
+      booking_status: 1,
+      type: type,
+    });
+
+    if (monthlyBooking) {
+      // User has already booked the slot
+      console.log("booked");
+      return res
+        .status(400)
+        .json({ error: "Only one slot is allowed for each month and you have already booked it." });
+    }
+
     // Check if the maximum capacity for the slot has been reached
     const countBookings = await Gymbook.countDocuments({
       month: month,
