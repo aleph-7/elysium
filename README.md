@@ -1,7 +1,7 @@
 Elysium
 ==================================
 
-This application was made as a course project of [CS253](https://www.cse.iitk.ac.in/users/isaha/Courses/sdo24.shtml/): Software Development and Operations in spring 2022 under the guidance of [Prof. Indranil Saha](https://www.cse.iitk.ac.in/users/isaha/).
+This application was made as a course project of [CS253](https://www.cse.iitk.ac.in/users/isaha/Courses/sdo24.shtml/): Software Development and Operations in spring 2024 under the guidance of [Prof. Indranil Saha](https://www.cse.iitk.ac.in/users/isaha/).
 
 Elysium is an integrated booking application wherein the users are classified into 7 different categories. 
 
