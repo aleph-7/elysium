@@ -69,29 +69,29 @@ Go to the localhost web address which must have been printed on the terminal.
 
 A software requirements specification (SRS) is a document that describes what the software will do and how it will be expected to perform. It also describes the product's functionality to fulfill all stakeholders needs.
 
-Link to SRS: [elysium SRS v1.0 | alpeh-7](https://github.com/aleph-7/elysium-documents/blob/main/SRS_Document.pdf)
+Link to SRS: [elysium SRS v1.0 | aleph-7](https://github.com/aleph-7/elysium-documents/blob/main/SRS_Document.pdf)
 
 ## Software Design Document
 
 A software design document (SDD) describes software created to facilitate analysis, planning, implementation, and decision-making. This explains how a software product or a feature will be built to meet a set of technical requirements. If the requirements document describes the "what" of your project, the design document focuses on the "how".
 
-Link to SDD: [elysium v1.0 | alpeh-7](https://github.com/aleph-7/elysium-documents/blob/main/Design_Document.pdf)
+Link to SDD: [elysium v1.0 | aleph-7](https://github.com/aleph-7/elysium-documents/blob/main/Design_Document.pdf)
 
 ## Software Implementation Document
 
 A software implementation document (SID) is a document that describes how a software product is built to meet a set of technical requirements. This document talks about implementation details like integration, CI/CD, hosting, VCS; it provides a surface-level overview of codebases and completeness of the application.
 
-Link to SID: [elysium v1.0 | alpeh-7](https://github.com/aleph-7/elysium-documents/blob/main/Implementation_Document.pdf)
+Link to SID: [elysium v1.0 | aleph-7](https://github.com/aleph-7/elysium-documents/blob/main/Implementation_Document.pdf)
 
 ## Testing Document
 
 Test documentation includes all files that contain information on the testing team's strategy, progress, metrics, and achieved results. The combination of all available data serves to measure the testing effort, control test coverage, and track future project requirements.
 
-Link to Test Doc: [elysium v1.0 | alpeh-7](https://github.com/aleph-7/elysium-documents/blob/main/Test_Document.pdf)
+Link to Test Doc: [elysium v1.0 | aleph-7](https://github.com/aleph-7/elysium-documents/blob/main/Test_Document.pdf)
 
 ## User Manual Document
 
 A manual is a document that provides instructions or guidelines on how to perform an activity and serves as a reference book on the activity.
 
-Link to User Manual: [elysium v1.0 | alpeh-7](https://github.com/aleph-7/elysium-documents/blob/main/User_Manual.pdf)
+Link to User Manual: [elysium v1.0 | aleph-7](https://github.com/aleph-7/elysium-documents/blob/main/User_Manual.pdf)
 
